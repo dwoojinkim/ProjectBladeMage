@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerInput();
+
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)
         {
@@ -58,6 +60,11 @@ public class GameManager : MonoBehaviour
             if (enemy.transform.position.x < -10)
                 ResetEnemy(enemy);
         }
+    }
+
+    private void PlayerInput()
+    {
+        
     }
 
     private void SpawnEnemy()
