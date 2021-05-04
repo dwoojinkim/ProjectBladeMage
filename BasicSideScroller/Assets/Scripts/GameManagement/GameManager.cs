@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public int InitialEnemySpeed = 2;
     public int EnemyAcceleration = 2;
 
-    private Queue<GameObject> activeEnemies = new Queue<GameObject>();
-    private Queue<GameObject> inactiveEnemies = new Queue<GameObject>();
+    private List<GameObject> activeEnemies = new List<GameObject>();
+    private List<GameObject> inactiveEnemies = new List<GameObject>();
 
     private int enemySpeed;
     private float spawnTimer = 0.0f;
@@ -29,11 +29,11 @@ public class GameManager : MonoBehaviour
 
         //Create a pool of enemies
         enemy = Instantiate(Minion, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Enqueue(enemy);
+        inactiveEnemies.Add(enemy);
         enemy = Instantiate(Box, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Enqueue(enemy);
+        inactiveEnemies.Add(enemy);
         enemy = Instantiate(Log, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Enqueue(enemy);
+        inactiveEnemies.Add(enemy);
     }
 
     // Update is called once per frame
@@ -52,27 +52,38 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         //Move all enemies to the left a certain speed
+        /*
         foreach (GameObject enemy in activeEnemies)
         {
             enemy.transform.position -= transform.right * Time.fixedDeltaTime * enemySpeed;
 
             if (enemy.transform.position.x < -10)
                 ResetEnemy(enemy);
+        }*/
+
+        for (int i = 0; i < activeEnemies.Count; i++)
+        {
+            activeEnemies[i].transform.position -= transform.right * Time.fixedDeltaTime * enemySpeed;
+
+            if (activeEnemies[i].transform.position.x < -10)
+                ResetEnemy(activeEnemies[i]);
         }
     }
 
     private void PlayerInput()
     {
-        
+
     }
 
     private void SpawnEnemy()
     {
         GameObject enemy;
 
-        enemy = inactiveEnemies.Dequeue();
-        activeEnemies.Enqueue(enemy);
+        enemy = inactiveEnemies[0];
+        inactiveEnemies.RemoveAt(0);
+        activeEnemies.Add(enemy);
     }
 
     private void ResetEnemy(GameObject enemy)
@@ -80,7 +91,9 @@ public class GameManager : MonoBehaviour
         GameObject resetEnemy;
 
         enemy.transform.position = EnemySpawn;
-        resetEnemy = activeEnemies.Dequeue();
-        inactiveEnemies.Enqueue(resetEnemy);
+
+        resetEnemy = activeEnemies[0];
+        activeEnemies.RemoveAt(0);
+        inactiveEnemies.Add(resetEnemy);
     }
 }
