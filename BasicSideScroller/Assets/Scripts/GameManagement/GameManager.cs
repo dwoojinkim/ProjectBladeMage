@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> activeEnemies = new List<GameObject>();
     private List<GameObject> inactiveEnemies = new List<GameObject>();
 
+    private float gameTime = 0.0f;
     private int enemySpeed;
     private float spawnTimer = 0.0f;
     private float timeToSpawn = 2.0f;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        gameTime += Time.deltaTime;
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)
         {

@@ -14,11 +14,26 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Jump
-
+        if (Input.GetButtonDown("Jump"))
+        {
+            Debug.Log("Jump is pressed.");
+        }
         //Fast fall / crouch
+        if (Input.GetButton("Down"))
+        {
+            Debug.Log("Down is pressed.");
+        }
 
-        //Slice
         
-        //Hammer
+        //Slash
+        if (Input.GetButtonDown("Slash"))
+        {
+            Debug.Log("Slash is pressed.");
+        }
+        //Smash
+        if (Input.GetButtonDown("Smash"))
+        {
+            Debug.Log("Smash is pressed.");
+        }
     }
 }
