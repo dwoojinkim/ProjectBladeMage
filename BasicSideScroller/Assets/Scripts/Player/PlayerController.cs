@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("PlayerController update loop");
         //Jump
         if (Input.GetButtonDown("Jump"))
         {
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Down is pressed.");
         }
 
-        
+
         //Slash
         if (Input.GetButtonDown("Slash"))
         {
