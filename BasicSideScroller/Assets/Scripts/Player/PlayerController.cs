@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Slash"))
         {
             playerComponent.SetDebugText("Slashing");
+            playerComponent.Slash();
         }
         //Smash
         if (Input.GetButtonDown("Smash"))

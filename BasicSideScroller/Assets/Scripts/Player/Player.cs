@@ -6,6 +6,8 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 public class Player : MonoBehaviour
 {
     public GameObject DebugTextObj;
+    public GameObject Hitbox;
+
     public float jumpVelocity = 5f;
     public float jumpGravity = 1f;
     public float normalGravity = 10f;
@@ -14,6 +16,14 @@ public class Player : MonoBehaviour
 
     private Text debugText;
     private bool jumping = false;
+    private bool slashRequest = false;
+    private bool slashing = false;
+    private bool smashRequest = false;
+    private bool smashing = false;
+    private float hitboxStartup = 0.05f;
+    private float hitboxDuration = 0.15f;
+    private float attackCooldown = 1f;
+    private float attackTimer = 0f;
 
 
     // Start is called before the first frame update
@@ -30,7 +40,30 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (slashRequest)
+        {  
+            if (attackTimer >= hitboxStartup)
+            {
+                slashing = true;
+                slashRequest = false;
+
+                Hitbox.GetComponent<SpriteRenderer>().enabled = true;
+                attackTimer = 0f;
+            }
+            attackTimer += Time.deltaTime;
+        }
+        if (slashing)
+        {
+            if (attackTimer >= hitboxDuration)
+            {
+                slashing = false;
+                Hitbox.GetComponent<SpriteRenderer>().enabled = false;
+                attackTimer = 0f;
+            }
+
+            attackTimer += Time.deltaTime;
+        }
+
     }
 
     void FixedUpdate()
@@ -49,10 +82,8 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("ONCollision2D");
         if (col.gameObject.tag == "Ground")
         {
-            Debug.Log("Touched ground");
             jumping = false;
         }
     }
@@ -80,5 +111,16 @@ public class Player : MonoBehaviour
     public void ReleaseJump()
     {
         playerRigidbody.gravityScale = normalGravity;
+    }
+
+    public void Slash()
+    {
+        if (!slashing)
+            slashRequest = true;
+    }
+
+    public void Smash()
+    {
+        smashRequest = true;
     }
 }
