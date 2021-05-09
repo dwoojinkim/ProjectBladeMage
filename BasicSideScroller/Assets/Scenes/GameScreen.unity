@@ -246,8 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugTextObj: {fileID: 2119173353}
-  jumpForce: 15
-  jumpGravity: 1
+  jumpVelocity: 12
+  jumpGravity: 2.5
   normalGravity: 5
 --- !u!114 &357309448
 MonoBehaviour:
@@ -674,7 +674,7 @@ GameObject:
   - component: {fileID: 1357609703}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

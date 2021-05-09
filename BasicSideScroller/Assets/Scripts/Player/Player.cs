@@ -6,13 +6,14 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 public class Player : MonoBehaviour
 {
     public GameObject DebugTextObj;
-    public float jumpForce = 5f;
+    public float jumpVelocity = 5f;
     public float jumpGravity = 1f;
     public float normalGravity = 10f;
 
     private Rigidbody2D playerRigidbody;
 
     private Text debugText;
+    private bool jumping = false;
 
 
     // Start is called before the first frame update
@@ -32,14 +33,30 @@ public class Player : MonoBehaviour
         
     }
 
+    void FixedUpdate()
+    {
+
+    }
+
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.gameObject.tag == "Obstacle");
+        if (obj.gameObject.tag == "Obstacle")
         {
             Debug.Log("Game Over");
             //Reset game logic here
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("ONCollision2D");
+        if (col.gameObject.tag == "Ground")
+        {
+            Debug.Log("Touched ground");
+            jumping = false;
+        }
+    }
+    
 
     public void SetDebugText(string text)
     {
@@ -51,8 +68,13 @@ public class Player : MonoBehaviour
         SetDebugText("Jumping");
 
         //If not already in a jumping state, then do below
-        playerRigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-        playerRigidbody.gravityScale = jumpGravity;
+        if (!jumping)
+        {
+            playerRigidbody.velocity = transform.up * jumpVelocity;
+            playerRigidbody.gravityScale = jumpGravity;
+            jumping = true;
+        }
+
     }
 
     public void ReleaseJump()
