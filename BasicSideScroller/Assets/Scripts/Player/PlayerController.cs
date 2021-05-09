@@ -4,37 +4,42 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Player playerComponent;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerComponent = this.GetComponent<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("PlayerController update loop");
         //Jump
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Jump is pressed.");
+            playerComponent.Jump();
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            playerComponent.ReleaseJump();
         }
         //Fast fall / crouch
         if (Input.GetButton("Down"))
         {
-            Debug.Log("Down is pressed.");
+            playerComponent.SetDebugText("Downing");
         }
 
 
         //Slash
         if (Input.GetButtonDown("Slash"))
         {
-            Debug.Log("Slash is pressed.");
+            playerComponent.SetDebugText("Slashing");
         }
         //Smash
         if (Input.GetButtonDown("Smash"))
         {
-            Debug.Log("Smash is pressed.");
+            playerComponent.SetDebugText("SMASHING");
         }
     }
 }
