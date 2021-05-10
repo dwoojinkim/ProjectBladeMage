@@ -5,6 +5,8 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 
 public class Player : MonoBehaviour
 {
+    private GameManager GM;
+
     public GameObject DebugTextObj;
     public GameObject Hitbox;
 
@@ -21,7 +23,7 @@ public class Player : MonoBehaviour
     private bool smashRequest = false;
     private bool smashing = false;
     private float hitboxStartup = 0.05f;
-    private float hitboxDuration = 0.15f;
+    private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
 
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour
                 slashRequest = false;
 
                 Hitbox.GetComponent<SpriteRenderer>().enabled = true;
+                Hitbox.GetComponent<BoxCollider2D>().enabled = true;
                 attackTimer = 0f;
             }
             attackTimer += Time.deltaTime;
@@ -58,6 +61,7 @@ public class Player : MonoBehaviour
             {
                 slashing = false;
                 Hitbox.GetComponent<SpriteRenderer>().enabled = false;
+                Hitbox.GetComponent<BoxCollider2D>().enabled = false;
                 attackTimer = 0f;
             }
 
@@ -68,12 +72,12 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.gameObject.tag == "Obstacle")
+        if (obj.gameObject.tag == "Obstacle" && obj.GetComponent<Collider2D>().enabled)
         {
             Debug.Log("Game Over");
             //Reset game logic here

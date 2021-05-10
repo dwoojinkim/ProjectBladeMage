@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager s_Instance = null;
+
+    public GameObject GameTimerObj;
     public GameObject Minion;
     public GameObject Box;
     public GameObject Log;
@@ -22,25 +25,46 @@ public class GameManager : MonoBehaviour
     private float spawnTimer = 0.0f;
     private float timeToSpawn = 2.0f;
 
+    private Text GameTimerText;
+
+    void Awake()
+    {
+        if (s_Instance == null)
+        {
+            s_Instance = this;
+            DontDestroyOnLoad(gameObject);
+ 
+            //Initialization code goes here[/INDENT]
+            GameObject enemy;
+            enemySpeed = InitialEnemySpeed;
+            GameTimerText = GameTimerObj.GetComponent<Text>();
+
+            //Create a pool of enemies
+            enemy = Instantiate(Minion, EnemySpawn, Quaternion.identity);
+            inactiveEnemies.Add(enemy);
+            enemy = Instantiate(Box, EnemySpawn, Quaternion.identity);
+            inactiveEnemies.Add(enemy);
+            enemy = Instantiate(Log, EnemySpawn, Quaternion.identity);
+            inactiveEnemies.Add(enemy);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        GameObject enemy;
-        enemySpeed = InitialEnemySpeed;
 
-        //Create a pool of enemies
-        enemy = Instantiate(Minion, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Add(enemy);
-        enemy = Instantiate(Box, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Add(enemy);
-        enemy = Instantiate(Log, EnemySpawn, Quaternion.identity);
-        inactiveEnemies.Add(enemy);
     }
 
     // Update is called once per frame
     void Update()
     {
         gameTime += Time.deltaTime;
+        GameTimerText.text = gameTime.ToString();
+
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)
         {
@@ -72,11 +96,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void ResetGame()
+    {
+        gameTime = 0f;
+    }
+
     private void SpawnEnemy()
     {
         GameObject enemy;
 
         enemy = inactiveEnemies[0];
+        enemy.GetComponent<Obstacle>().Spawn();
         inactiveEnemies.RemoveAt(0);
         activeEnemies.Add(enemy);
     }
@@ -87,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         enemy.transform.position = EnemySpawn;
 
+        enemy.GetComponent<Obstacle>().Kill();
         resetEnemy = activeEnemies[0];
         activeEnemies.RemoveAt(0);
         inactiveEnemies.Add(resetEnemy);
