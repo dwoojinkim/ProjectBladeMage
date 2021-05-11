@@ -70,7 +70,6 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemy();
             spawnTimer = 0.0f;
-            Debug.Log("Spawned Enemy!");
         }
     }
 
@@ -98,6 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+
         gameTime = 0f;
     }
 
