@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager s_Instance = null;
+    public static GameManager instance = null;
 
     public GameObject GameTimerObj;
     public GameObject Minion;
@@ -29,9 +29,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (s_Instance == null)
+        if (instance == null)
         {
-            s_Instance = this;
+            instance = this;
             DontDestroyOnLoad(gameObject);
  
             //Initialization code goes here[/INDENT]
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void ResetGame()
+    public void ResetGame()
     {
         gameTime = 0f;
     }

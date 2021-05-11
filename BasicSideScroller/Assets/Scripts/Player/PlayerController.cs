@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Down"))
         {
             playerComponent.SetDebugText("Downing");
+            playerComponent.Down();
         }
 
 

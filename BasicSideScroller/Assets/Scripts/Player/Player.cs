@@ -5,14 +5,13 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 
 public class Player : MonoBehaviour
 {
-    private GameManager GM;
-
     public GameObject DebugTextObj;
     public GameObject Hitbox;
 
     public float jumpVelocity = 5f;
     public float jumpGravity = 1f;
     public float normalGravity = 10f;
+    public float extraGravity = 20f;
 
     private Rigidbody2D playerRigidbody;
 
@@ -80,7 +79,7 @@ public class Player : MonoBehaviour
         if (obj.gameObject.tag == "Obstacle" && obj.GetComponent<Collider2D>().enabled)
         {
             Debug.Log("Game Over");
-            //Reset game logic here
+            Kill();
         }
     }
 
@@ -117,6 +116,11 @@ public class Player : MonoBehaviour
         playerRigidbody.gravityScale = normalGravity;
     }
 
+    public void Down()
+    {
+        playerRigidbody.gravityScale = extraGravity;
+    }
+
     public void Slash()
     {
         if (!slashing)
@@ -126,5 +130,10 @@ public class Player : MonoBehaviour
     public void Smash()
     {
         smashRequest = true;
+    }
+
+    public void Kill()
+    {
+        GameManager.instance.ResetGame();
     }
 }
