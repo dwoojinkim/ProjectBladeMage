@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
+    private float playerMovespeed = 5;
 
 
     // Start is called before the first frame update
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //MovePlayer();
+
         if (slashRequest)
         {  
             if (attackTimer >= hitboxStartup)
@@ -71,7 +74,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        
+        MovePlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D obj)
@@ -95,6 +98,11 @@ public class Player : MonoBehaviour
     public void SetDebugText(string text)
     {
         debugText.text = text;
+    }
+
+    public void MovePlayer()
+    {
+        transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
     }
 
     public void Jump()
