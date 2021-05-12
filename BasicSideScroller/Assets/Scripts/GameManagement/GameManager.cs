@@ -8,22 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public GameObject GameTimerObj;
-    public GameObject Minion;
-    public GameObject Box;
-    public GameObject Log;
-
-    public Vector3 EnemySpawn = new Vector3(0,0,0);
-
-    public int InitialEnemySpeed = 2;
-    public int EnemyAcceleration = 2;
-
-    private List<GameObject> activeEnemies = new List<GameObject>();
-    private List<GameObject> inactiveEnemies = new List<GameObject>();
 
     private float gameTime = 0.0f;
-    private int enemySpeed;
-    private float spawnTimer = 0.0f;
-    private float timeToSpawn = 2.0f;
 
     private Text GameTimerText;
 
@@ -34,10 +20,12 @@ public class GameManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
  
-            //Initialization code goes here[/INDENT]
+            GameTimerText = GameTimerObj.GetComponent<Text>();
+
+
+/*             //Initialization code goes here[/INDENT]
             GameObject enemy;
             enemySpeed = InitialEnemySpeed;
-            GameTimerText = GameTimerObj.GetComponent<Text>();
 
             //Create a pool of enemies
             enemy = Instantiate(Minion, EnemySpawn, Quaternion.identity);
@@ -45,7 +33,7 @@ public class GameManager : MonoBehaviour
             enemy = Instantiate(Box, EnemySpawn, Quaternion.identity);
             inactiveEnemies.Add(enemy);
             enemy = Instantiate(Log, EnemySpawn, Quaternion.identity);
-            inactiveEnemies.Add(enemy);
+            inactiveEnemies.Add(enemy); */
         }
         else
         {
@@ -64,13 +52,13 @@ public class GameManager : MonoBehaviour
     {
         gameTime += Time.deltaTime;
         GameTimerText.text = gameTime.ToString();
-
+/* 
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)
         {
             SpawnEnemy();
             spawnTimer = 0.0f;
-        }
+        } */
     }
 
     private void FixedUpdate()
@@ -86,13 +74,13 @@ public class GameManager : MonoBehaviour
                 ResetEnemy(enemy);
         }*/
 
-        for (int i = 0; i < activeEnemies.Count; i++)
+/*         for (int i = 0; i < activeEnemies.Count; i++)
         {
             activeEnemies[i].transform.position -= transform.right * Time.fixedDeltaTime * enemySpeed;
 
             if (activeEnemies[i].transform.position.x < -10)
                 ResetEnemy(activeEnemies[i]);
-        }
+        } */
     }
 
     public void ResetGame()
@@ -101,7 +89,7 @@ public class GameManager : MonoBehaviour
         gameTime = 0f;
     }
 
-    private void SpawnEnemy()
+/*     private void SpawnEnemy()
     {
         GameObject enemy;
 
@@ -121,5 +109,5 @@ public class GameManager : MonoBehaviour
         resetEnemy = activeEnemies[0];
         activeEnemies.RemoveAt(0);
         inactiveEnemies.Add(resetEnemy);
-    }
+    } */
 }
