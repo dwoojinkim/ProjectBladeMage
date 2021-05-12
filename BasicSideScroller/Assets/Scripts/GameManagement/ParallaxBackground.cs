@@ -21,9 +21,6 @@ public class ParallaxBackground : MonoBehaviour
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;
         textureUnitSizeX = texture.width * transform.localScale.x / sprite.pixelsPerUnit;
-        Debug.Log("texture.width: " + texture.width);
-        Debug.Log("sprite.pixelsPerUnit: " + sprite.pixelsPerUnit);    
-        Debug.Log("textureUnitSizeX: " + textureUnitSizeX);
     }
 
     // Update is called once per frame

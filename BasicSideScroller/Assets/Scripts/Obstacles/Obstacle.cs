@@ -27,11 +27,11 @@ public class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.gameObject.tag == "SlashHitbox")
+/*         if (obj.gameObject.tag == "SlashHitbox")
         {
             Debug.Log(this.name + " is kill");
             Kill();
-        }
+        } */
     }
 
     public void Spawn()
