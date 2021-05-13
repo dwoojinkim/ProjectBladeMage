@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6463759285605162700}
   - component: {fileID: 6463759285605162703}
   - component: {fileID: -2683347877214415452}
+  - component: {fileID: 7347390256576730400}
   m_Layer: 0
   m_Name: Box
   m_TagString: Obstacle
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6463759285605162702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 5, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -119,5 +120,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e84a24022c234d438423b367fe94b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7347390256576730400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6463759285605162702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c9d00623e1f53042ad187b93d8960cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

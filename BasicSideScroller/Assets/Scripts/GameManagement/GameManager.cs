@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         gameTime += Time.deltaTime;
-        GameTimerText.text = gameTime.ToString();
+        GameTimerText.text = ((int)gameTime).ToString();
 /* 
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= timeToSpawn)

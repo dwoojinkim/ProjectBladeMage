@@ -24,11 +24,17 @@ public class PlayerController : MonoBehaviour
         {
             playerComponent.ReleaseJump();
         }
-        //Fast fall / crouch
-        if (Input.GetButton("Down"))
+        //Fast fall 
+        if (Input.GetButtonDown("Down"))
         {
             playerComponent.SetDebugText("Downing");
             playerComponent.Down();
+        }
+        // Crouch
+        if (Input.GetButton("Down"))
+        {
+            //playerComponent.SetDebugText("Crouching");
+            playerComponent.Crouch();
         }
 
 
@@ -42,6 +48,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Smash"))
         {
             playerComponent.SetDebugText("SMASHING");
+            playerComponent.Smash();
         }
     }
 }

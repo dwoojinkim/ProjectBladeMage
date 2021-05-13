@@ -6,7 +6,8 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 public class Player : MonoBehaviour
 {
     public GameObject DebugTextObj;
-    public GameObject Hitbox;
+    public GameObject SlashHitbox;
+    public GameObject SmashHitbox;
 
     public float jumpVelocity = 5f;
     public float jumpGravity = 1f;
@@ -44,32 +45,8 @@ public class Player : MonoBehaviour
     {
         //MovePlayer();
 
-        if (slashRequest)
-        {  
-            if (attackTimer >= hitboxStartup)
-            {
-                slashing = true;
-                slashRequest = false;
-
-                Hitbox.GetComponent<SpriteRenderer>().enabled = true;
-                Hitbox.GetComponent<BoxCollider2D>().enabled = true;
-                attackTimer = 0f;
-            }
-            attackTimer += Time.deltaTime;
-        }
-        if (slashing)
-        {
-            if (attackTimer >= hitboxDuration)
-            {
-                slashing = false;
-                Hitbox.GetComponent<SpriteRenderer>().enabled = false;
-                Hitbox.GetComponent<BoxCollider2D>().enabled = false;
-                attackTimer = 0f;
-            }
-
-            attackTimer += Time.deltaTime;
-        }
-
+        SlashCheck();
+        SmashCheck();
     }
 
     void FixedUpdate()
@@ -128,16 +105,79 @@ public class Player : MonoBehaviour
     {
         playerRigidbody.gravityScale = extraGravity;
     }
+    public void Crouch()
+    {
+
+    }
 
     public void Slash()
     {
-        if (!slashing)
+        if (!slashing && !smashing)
             slashRequest = true;
+    }
+
+    private void SlashCheck()
+    {
+        if (slashRequest)
+        {  
+            if (attackTimer >= hitboxStartup)
+            {
+                slashing = true;
+                slashRequest = false;
+
+                SlashHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                SlashHitbox.GetComponent<BoxCollider2D>().enabled = true;
+                attackTimer = 0f;
+            }
+            attackTimer += Time.deltaTime;
+        }
+        if (slashing)
+        {
+            if (attackTimer >= hitboxDuration)
+            {
+                slashing = false;
+                SlashHitbox.GetComponent<SpriteRenderer>().enabled = false;
+                SlashHitbox.GetComponent<BoxCollider2D>().enabled = false;
+                attackTimer = 0f;
+            }
+
+            attackTimer += Time.deltaTime;
+        }
     }
 
     public void Smash()
     {
-        smashRequest = true;
+        if (!smashing && !slashing)
+            smashRequest = true;
+    }
+
+    public void SmashCheck()
+    {
+        if (smashRequest)
+        {  
+            if (attackTimer >= hitboxStartup)
+            {
+                smashing = true;
+                smashRequest = false;
+
+                SmashHitbox.GetComponent<SpriteRenderer>().enabled = true;
+                SmashHitbox.GetComponent<BoxCollider2D>().enabled = true;
+                attackTimer = 0f;
+            }
+            attackTimer += Time.deltaTime;
+        }
+        if (smashing)
+        {
+            if (attackTimer >= hitboxDuration)
+            {
+                smashing = false;
+                SmashHitbox.GetComponent<SpriteRenderer>().enabled = false;
+                SmashHitbox.GetComponent<BoxCollider2D>().enabled = false;
+                attackTimer = 0f;
+            }
+
+            attackTimer += Time.deltaTime;
+        }
     }
 
     public void Kill()

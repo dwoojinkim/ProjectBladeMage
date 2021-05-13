@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - SlashHitbox
   - GameManager
+  - SmashHitbox
   layers:
   - Default
   - TransparentFX
