@@ -8,8 +8,14 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public GameObject GameTimerObj;
+    public GameObject Player;
+    public GameObject ObstacleSpawner;
 
     private float gameTime = 0.0f;
+    private float resetDistance;
+
+    private float camHeight;
+    private float camWidth;
 
     private Text GameTimerText;
 
@@ -21,6 +27,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
  
             GameTimerText = GameTimerObj.GetComponent<Text>();
+
 
 
 /*             //Initialization code goes here[/INDENT]
@@ -39,12 +46,17 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        Camera cam = Camera.main;
+        camHeight = 2f * cam.orthographicSize;
+        camWidth = camHeight * cam.aspect; 
+        resetDistance = camWidth + 5;
+        Debug.Log("Reset distance: " + resetDistance);
     }
 
     // Update is called once per frame
@@ -59,6 +71,7 @@ public class GameManager : MonoBehaviour
             SpawnEnemy();
             spawnTimer = 0.0f;
         } */
+
     }
 
     private void FixedUpdate()
@@ -81,6 +94,13 @@ public class GameManager : MonoBehaviour
             if (activeEnemies[i].transform.position.x < -10)
                 ResetEnemy(activeEnemies[i]);
         } */
+
+        
+        if (Player.transform.position.x >= resetDistance)
+        {
+            Player.GetComponent<Player>().MovePlayerBack(resetDistance);
+            ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
+        }
     }
 
     public void ResetGame()

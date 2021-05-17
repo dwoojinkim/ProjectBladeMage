@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
 
-    public float jumpVelocity = 5f;
+    public float jumpVelocity = 7.5f;
     public float jumpGravity = 1f;
     public float normalGravity = 10f;
     public float extraGravity = 20f;
@@ -178,6 +178,11 @@ public class Player : MonoBehaviour
 
             attackTimer += Time.deltaTime;
         }
+    }
+
+    public void MovePlayerBack(float resetDistance)
+    {
+        transform.position -= transform.right * resetDistance;
     }
 
     public void Kill()

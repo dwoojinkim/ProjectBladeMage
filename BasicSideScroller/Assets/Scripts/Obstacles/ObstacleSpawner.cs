@@ -73,4 +73,12 @@ public class ObstacleSpawner : MonoBehaviour
         activeObstacles.RemoveAt(0);
         inactiveObstacles.Add(resetObstacle);
     }
+
+    //Test function if this is a way to move all gameobjects back seamlessly and prevent
+    //players from eventually getting to too high have an X position.
+    public void MoveObstaclesBack(float resetDistance)
+    {
+        for (int i = 0; i < activeObstacles.Count; i++)
+            activeObstacles[i].transform.position -= transform.right * resetDistance;
+    }
 }

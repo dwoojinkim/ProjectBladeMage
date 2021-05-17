@@ -328,10 +328,10 @@ MonoBehaviour:
   DebugTextObj: {fileID: 2119173353}
   SlashHitbox: {fileID: 1458698056}
   SmashHitbox: {fileID: 2026418947}
-  jumpVelocity: 12
-  jumpGravity: 2.5
-  normalGravity: 5
-  extraGravity: 20
+  jumpVelocity: 16
+  jumpGravity: 4
+  normalGravity: 9
+  extraGravity: 25
 --- !u!114 &357309448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1074,6 +1074,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTimerObj: {fileID: 228916982}
+  Player: {fileID: 357309443}
+  ObstacleSpawner: {fileID: 1955602562}
+  bg1: {fileID: 1113268873}
+  bg2: {fileID: 1991387709}
+  bg3: {fileID: 1550736445}
+  bg4: {fileID: 450375453}
 --- !u!1 &1213010523
 GameObject:
   m_ObjectHideFlags: 0
