@@ -40,4 +40,9 @@ public class ParallaxBackground : MonoBehaviour
             transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
         }
     }
+
+    public void MoveBackground(float resetDistance)
+    {
+        transform.position -= transform.right * resetDistance * (1.0f - parallaxEffectMultiplier.x);
+    }
 }

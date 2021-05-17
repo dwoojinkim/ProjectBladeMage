@@ -10,6 +10,10 @@ public class GameManager : MonoBehaviour
     public GameObject GameTimerObj;
     public GameObject Player;
     public GameObject ObstacleSpawner;
+    public GameObject bg1;
+    public GameObject bg2;
+    public GameObject bg3;
+    public GameObject bg4;
 
     private float gameTime = 0.0f;
     private float resetDistance;
@@ -100,6 +104,10 @@ public class GameManager : MonoBehaviour
         {
             Player.GetComponent<Player>().MovePlayerBack(resetDistance);
             ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
+            bg1.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+            bg2.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+            bg3.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+            bg4.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
         }
     }
 
