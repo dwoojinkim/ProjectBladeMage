@@ -37,7 +37,7 @@ public class ObstacleSpawner : MonoBehaviour
         ObstacleSpawnPos = transform.position;
 
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= timeToSpawn)
+        if (spawnTimer >= timeToSpawn && inactiveObstacles.Count > 0)
         {
             SpawnObstacle();
             spawnTimer = 0.0f;
