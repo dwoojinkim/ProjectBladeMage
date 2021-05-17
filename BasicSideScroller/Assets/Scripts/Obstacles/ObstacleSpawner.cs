@@ -15,7 +15,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     private float spawnTimer = 0.0f;
     private float timeToSpawn = 2.0f;
-    private float respawnDistance = 26.0f;
+    private float respawnDistance = 30.0f;
 
     void Start()
     {
@@ -46,10 +46,19 @@ public class ObstacleSpawner : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+    }
+
+    void LateUpdate()
+    {
         for (int i = 0; i < activeObstacles.Count; i++)
         {
             if (Mathf.Abs(activeObstacles[i].transform.position.x - ObstacleSpawnPos.x) > respawnDistance)
+            {
+                Debug.Log("RESET OBSTACLE: " + activeObstacles[i].name + ". DISTANCE: " + Mathf.Abs(activeObstacles[i].transform.position.x - ObstacleSpawnPos.x));
                 ResetObstacle(activeObstacles[i]);
+
+            }
         }
     }
 

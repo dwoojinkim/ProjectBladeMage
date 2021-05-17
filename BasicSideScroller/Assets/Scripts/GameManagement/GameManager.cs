@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject bg3;
     public GameObject bg4;
 
+    public bool pushback = false;
+
     private float gameTime = 0.0f;
     private float resetDistance;
 
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
         Camera cam = Camera.main;
         camHeight = 2f * cam.orthographicSize;
         camWidth = camHeight * cam.aspect; 
-        resetDistance = camWidth + 5;
+        resetDistance = camWidth;
         Debug.Log("Reset distance: " + resetDistance);
     }
 
@@ -100,15 +102,15 @@ public class GameManager : MonoBehaviour
         } */
 
         
-        if (Player.transform.position.x >= resetDistance)
+         if (Player.transform.position.x >= resetDistance)
         {
-            Player.GetComponent<Player>().MovePlayerBack(resetDistance);
             ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
+            Player.GetComponent<Player>().MovePlayerBack(resetDistance);
             bg1.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
             bg2.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
             bg3.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
             bg4.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
-        }
+        } 
     }
 
     public void ResetGame()

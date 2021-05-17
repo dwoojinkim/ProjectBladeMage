@@ -26,10 +26,6 @@ public class ParallaxBackground : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (this.gameObject.name == "ObstacleSpawner")
-        {
-            Debug.Log(transform.position.x);
-        }
         Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
         lastCameraPosition = cameraTransform.position;
