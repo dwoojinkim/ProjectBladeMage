@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
         }
         
         playerRigidbody = this.GetComponent<Rigidbody2D>();
+        playerRigidbody.gravityScale = normalGravity;
     }
 
     // Update is called once per frame

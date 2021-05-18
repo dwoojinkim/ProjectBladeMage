@@ -20,15 +20,19 @@ public class ObstacleSpawner : MonoBehaviour
     void Start()
     {
         ObstacleSpawnPos = transform.position;
-        GameObject obstacle;
+        //GameObject obstacle;
 
         //Create a pool of enemies
-        obstacle = Instantiate(Minion, ObstacleSpawnPos, Quaternion.identity);
+/*         obstacle = Instantiate(Minion, ObstacleSpawnPos, Quaternion.identity);
         inactiveObstacles.Add(obstacle);
         obstacle = Instantiate(Box, ObstacleSpawnPos, Quaternion.identity);
         inactiveObstacles.Add(obstacle);
         obstacle = Instantiate(Log, ObstacleSpawnPos, Quaternion.identity);
-        inactiveObstacles.Add(obstacle);
+        inactiveObstacles.Add(obstacle); */
+        // New pool code
+        CreateObstaclePool(ref inactiveObstacles, Minion, 3);
+        CreateObstaclePool(ref inactiveObstacles, Box, 3);
+        CreateObstaclePool(ref inactiveObstacles, Log, 3);
     }
 
     // Update is called once per frame
@@ -54,22 +58,20 @@ public class ObstacleSpawner : MonoBehaviour
         for (int i = 0; i < activeObstacles.Count; i++)
         {
             if (Mathf.Abs(activeObstacles[i].transform.position.x - ObstacleSpawnPos.x) > respawnDistance)
-            {
-                Debug.Log("RESET OBSTACLE: " + activeObstacles[i].name + ". DISTANCE: " + Mathf.Abs(activeObstacles[i].transform.position.x - ObstacleSpawnPos.x));
                 ResetObstacle(activeObstacles[i]);
-
-            }
         }
     }
 
     private void SpawnObstacle()
     {
         GameObject obstacle;
+        int randomObstacleIndex = Random.Range(0, inactiveObstacles.Count);
 
-        obstacle = inactiveObstacles[0];
+
+        obstacle= inactiveObstacles[randomObstacleIndex];
         obstacle.transform.position = ObstacleSpawnPos;
         obstacle.GetComponent<Obstacle>().Spawn();
-        inactiveObstacles.RemoveAt(0);
+        inactiveObstacles.RemoveAt(randomObstacleIndex);
         activeObstacles.Add(obstacle);
     }
 
@@ -82,6 +84,17 @@ public class ObstacleSpawner : MonoBehaviour
         activeObstacles.RemoveAt(0);
         inactiveObstacles.Add(resetObstacle);
     }
+
+    private void CreateObstaclePool(ref List<GameObject> pool, GameObject obj, int numObj)
+    {
+        GameObject instantiatedObj;
+        for (int i = 0; i < numObj; i++)
+        {
+            instantiatedObj = Instantiate(obj, Vector3.zero, Quaternion.identity);
+            pool.Add(instantiatedObj);
+        }
+    }
+
 
     //Test function if this is a way to move all gameobjects back seamlessly and prevent
     //players from eventually getting to too high have an X position.

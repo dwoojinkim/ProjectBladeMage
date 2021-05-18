@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public bool pushback = false;
 
     private float gameTime = 0.0f;
-    private float resetDistance;
+    private float resetDistance = 100f;
 
     private float camHeight;
     private float camWidth;
@@ -33,20 +33,6 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
  
             GameTimerText = GameTimerObj.GetComponent<Text>();
-
-
-
-/*             //Initialization code goes here[/INDENT]
-            GameObject enemy;
-            enemySpeed = InitialEnemySpeed;
-
-            //Create a pool of enemies
-            enemy = Instantiate(Minion, EnemySpawn, Quaternion.identity);
-            inactiveEnemies.Add(enemy);
-            enemy = Instantiate(Box, EnemySpawn, Quaternion.identity);
-            inactiveEnemies.Add(enemy);
-            enemy = Instantiate(Log, EnemySpawn, Quaternion.identity);
-            inactiveEnemies.Add(enemy); */
         }
         else
         {
@@ -58,11 +44,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Camera cam = Camera.main;
-        camHeight = 2f * cam.orthographicSize;
-        camWidth = camHeight * cam.aspect; 
-        resetDistance = camWidth;
-        Debug.Log("Reset distance: " + resetDistance);
+
     }
 
     // Update is called once per frame
@@ -70,38 +52,10 @@ public class GameManager : MonoBehaviour
     {
         gameTime += Time.deltaTime;
         GameTimerText.text = ((int)gameTime).ToString();
-/* 
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= timeToSpawn)
-        {
-            SpawnEnemy();
-            spawnTimer = 0.0f;
-        } */
-
     }
 
     private void FixedUpdate()
     {
-
-        //Move all enemies to the left a certain speed
-        /*
-        foreach (GameObject enemy in activeEnemies)
-        {
-            enemy.transform.position -= transform.right * Time.fixedDeltaTime * enemySpeed;
-
-            if (enemy.transform.position.x < -10)
-                ResetEnemy(enemy);
-        }*/
-
-/*         for (int i = 0; i < activeEnemies.Count; i++)
-        {
-            activeEnemies[i].transform.position -= transform.right * Time.fixedDeltaTime * enemySpeed;
-
-            if (activeEnemies[i].transform.position.x < -10)
-                ResetEnemy(activeEnemies[i]);
-        } */
-
-        
          if (Player.transform.position.x >= resetDistance)
         {
             ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
@@ -118,26 +72,4 @@ public class GameManager : MonoBehaviour
 
         gameTime = 0f;
     }
-
-/*     private void SpawnEnemy()
-    {
-        GameObject enemy;
-
-        enemy = inactiveEnemies[0];
-        enemy.GetComponent<Obstacle>().Spawn();
-        inactiveEnemies.RemoveAt(0);
-        activeEnemies.Add(enemy);
-    }
-
-    private void ResetEnemy(GameObject enemy)
-    {
-        GameObject resetEnemy;
-
-        enemy.transform.position = EnemySpawn;
-
-        enemy.GetComponent<Obstacle>().Kill();
-        resetEnemy = activeEnemies[0];
-        activeEnemies.RemoveAt(0);
-        inactiveEnemies.Add(resetEnemy);
-    } */
 }
