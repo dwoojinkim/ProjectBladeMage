@@ -14,9 +14,8 @@ public class ObstacleSpawner : MonoBehaviour
     private List<GameObject> inactiveObstacles = new List<GameObject>();
 
     private float spawnTimer = 0.0f;
-    private float timeToSpawn = 2.0f;
+    private float timeToSpawn = 1.0f;
     private float respawnDistance = 30.0f;
-
     void Start()
     {
         ObstacleSpawnPos = transform.position;
@@ -67,7 +66,6 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject obstacle;
         int randomObstacleIndex = Random.Range(0, inactiveObstacles.Count);
 
-
         obstacle= inactiveObstacles[randomObstacleIndex];
         obstacle.transform.position = ObstacleSpawnPos;
         obstacle.GetComponent<Obstacle>().Spawn();
@@ -75,14 +73,12 @@ public class ObstacleSpawner : MonoBehaviour
         activeObstacles.Add(obstacle);
     }
 
-    private void ResetObstacle(GameObject obstacle)
+        private void ResetObstacle(GameObject obstacle)
     {
-        GameObject resetObstacle;
-
         obstacle.GetComponent<Obstacle>().Kill();
-        resetObstacle = activeObstacles[0];
+        obstacle = activeObstacles[0];
         activeObstacles.RemoveAt(0);
-        inactiveObstacles.Add(resetObstacle);
+        inactiveObstacles.Add(obstacle);
     }
 
     private void CreateObstaclePool(ref List<GameObject> pool, GameObject obj, int numObj)
@@ -102,5 +98,19 @@ public class ObstacleSpawner : MonoBehaviour
     {
         for (int i = 0; i < activeObstacles.Count; i++)
             activeObstacles[i].transform.position -= transform.right * resetDistance;
+    }
+
+    public void ResetSpawner()
+    {
+        int activeObstaclesCount = activeObstacles.Count;
+        // Reset all currently active obstacles
+        for (int i = 0; i < activeObstaclesCount; i++)
+        {
+            // Since ResetObstacle keeps removing the first index of activeObstacles,
+            // The 0th index will always have to be reset.
+            ResetObstacle(activeObstacles[0]);
+        }
+
+        spawnTimer = 0.0f;
     }
 }

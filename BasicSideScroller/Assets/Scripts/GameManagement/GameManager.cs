@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public bool pushback = false;
 
     private float gameTime = 0.0f;
-    private float resetDistance = 100f;
+    private float resetDistance = 25;
+    private Vector3 playerResetPos;
 
     private float camHeight;
     private float camWidth;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
  
             GameTimerText = GameTimerObj.GetComponent<Text>();
+            playerResetPos = Player.transform.position;
         }
         else
         {
@@ -69,7 +71,9 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
-
         gameTime = 0f;
+
+        Player.transform.position = playerResetPos;
+        ObstacleSpawner.GetComponent<ObstacleSpawner>().ResetSpawner();
     }
 }
