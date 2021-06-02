@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Toggles the time scale between 1 and 0.7
+    // whenever the user hits the Fire1 button.
+    private float fixedDeltaTime;
+
+
     private Player playerComponent;
 
     // Start is called before the first frame update
     void Start()
     {
         playerComponent = this.GetComponent<Player>();
+    }
+    
+    void Awake()
+    {
+        // Make a copy of the fixedDeltaTime, it defaults to 0.02f, but it can be changed in the editor
+        this.fixedDeltaTime = Time.fixedDeltaTime;
     }
 
     // Update is called once per frame
@@ -49,6 +60,17 @@ public class PlayerController : MonoBehaviour
         {
             playerComponent.SetDebugText("SMASHING");
             playerComponent.Smash();
+        }
+
+        if (Input.GetButtonDown("TimeScaleTest"))
+        {
+            if (Time.timeScale == 1.0f)
+                Time.timeScale = 0.25f;
+            else
+                Time.timeScale = 1.0f;
+            // Adjust fixed delta time according to timescale
+            // The fixed delta time will now be 0.02 real-time seconds per frame
+            Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
         }
     }
 }
