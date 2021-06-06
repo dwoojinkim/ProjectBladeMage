@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
     private float playerMovespeed = 5;
+    private float timeToIncreaseSpeed = 5.0f;
+    private float speedIncreaseTimer = 0.0f;
 
 
     // Start is called before the first frame update
@@ -48,6 +50,14 @@ public class Player : MonoBehaviour
 
         SlashCheck();
         SmashCheck();
+
+        speedIncreaseTimer += Time.deltaTime;
+        if (speedIncreaseTimer >= timeToIncreaseSpeed)
+        {
+            speedIncreaseTimer = 0.0f;
+            playerMovespeed += 1;
+            Debug.Log("Increasing Speed!!!");
+        }
     }
 
     void FixedUpdate()
