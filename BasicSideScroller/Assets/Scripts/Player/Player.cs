@@ -5,6 +5,9 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 
 public class Player : MonoBehaviour
 {
+    private const float MAX_SPEED_CAP = 25.0f;
+    private const float INIT_PLAYER_MOVESPEED = 5.0f;
+
     public GameObject DebugTextObj;
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
@@ -26,9 +29,10 @@ public class Player : MonoBehaviour
     private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
-    private float playerMovespeed = 5;
-    private float timeToIncreaseSpeed = 5.0f;
+    private float playerMovespeed = INIT_PLAYER_MOVESPEED;
+    private float timeToIncreaseSpeed = 1.0f;
     private float speedIncreaseTimer = 0.0f;
+    private float increaseSpeedAmount = 1.0f;
 
 
     // Start is called before the first frame update
@@ -51,13 +55,7 @@ public class Player : MonoBehaviour
         SlashCheck();
         SmashCheck();
 
-        speedIncreaseTimer += Time.deltaTime;
-        if (speedIncreaseTimer >= timeToIncreaseSpeed)
-        {
-            speedIncreaseTimer = 0.0f;
-            playerMovespeed += 1;
-            Debug.Log("Increasing Speed!!!");
-        }
+        SpeedCheck();
     }
 
     void FixedUpdate()
@@ -126,6 +124,28 @@ public class Player : MonoBehaviour
         if (!slashing && !smashing)
             slashRequest = true;
     }
+
+
+
+    private void SpeedCheck()
+    {
+        if (playerMovespeed < MAX_SPEED_CAP)
+        {
+            speedIncreaseTimer += Time.deltaTime;
+            if (speedIncreaseTimer >= timeToIncreaseSpeed)
+            {
+                speedIncreaseTimer = 0.0f;
+
+                playerMovespeed += increaseSpeedAmount;
+                if (playerMovespeed > MAX_SPEED_CAP)
+                    playerMovespeed = MAX_SPEED_CAP;
+
+                Debug.Log("Increasing Speed!!!. Speed is now: " + playerMovespeed);
+            }
+        }
+
+    }
+
 
     private void SlashCheck()
     {
@@ -198,6 +218,8 @@ public class Player : MonoBehaviour
 
     public void Kill()
     {
+        speedIncreaseTimer = 0.0f;
+        playerMovespeed = INIT_PLAYER_MOVESPEED;
         GameManager.instance.ResetGame();
     }
 }
