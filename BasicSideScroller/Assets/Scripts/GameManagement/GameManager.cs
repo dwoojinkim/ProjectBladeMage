@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public GameObject GameTimerObj;
+    public GameObject HighScoreObj;
     public GameObject Player;
     public GameObject ObstacleSpawner;
     public GameObject bg1;
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     public bool pushback = false;
 
     private float gameTime = 0.0f;
+    private int highScore = 0;
     private float resetDistance = 25;
     private Vector3 playerResetPos;
 
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
     private float camWidth;
 
     private Text GameTimerText;
+    private Text HighScoreText;
 
     void Awake()
     {
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
  
             GameTimerText = GameTimerObj.GetComponent<Text>();
+            HighScoreText = HighScoreObj.GetComponent<Text>();
             playerResetPos = Player.transform.position;
         }
         else
@@ -71,6 +75,8 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        highScore = (int)gameTime;
+        HighScoreText.text = "High Score: " + highScore.ToString();
         gameTime = 0f;
 
         Player.transform.position = playerResetPos;
