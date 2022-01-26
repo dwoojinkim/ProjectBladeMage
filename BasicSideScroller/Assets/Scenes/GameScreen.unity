@@ -1152,6 +1152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTimerObj: {fileID: 228916982}
+  HighScoreObj: {fileID: 29800332}
   Player: {fileID: 357309443}
   ObstacleSpawner: {fileID: 1955602562}
   bg1: {fileID: 1113268873}

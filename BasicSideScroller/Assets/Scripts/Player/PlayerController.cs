@@ -48,6 +48,16 @@ public class PlayerController : MonoBehaviour
             playerComponent.Crouch();
         }
 
+        //Move Left
+        if (Input.GetButton("Left"))
+        {
+            playerComponent.Move("Left");
+        }
+        //Move right
+        if (Input.GetButton("Right"))
+        {
+            playerComponent.Move("Right");
+        }
 
         //Slash
         if (Input.GetButtonDown("Slash"))
@@ -62,6 +72,7 @@ public class PlayerController : MonoBehaviour
             playerComponent.Smash();
         }
 
+        //Time Scale (for debugging purposes)
         if (Input.GetButtonDown("TimeScaleTest"))
         {
             if (Time.timeScale == 1.0f)

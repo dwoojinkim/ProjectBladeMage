@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D playerRigidbody;
 
     private Text debugText;
-    private bool jumping = false;
+    private bool jumping = true;
     private bool slashRequest = false;
     private bool slashing = false;
     private bool smashRequest = false;
@@ -86,9 +86,15 @@ public class Player : MonoBehaviour
         debugText.text = text;
     }
 
+    //Calculates the total movement for the player (Global stage movement + local stage movement)
     public void MovePlayer()
     {
         transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
+    }
+
+    public void Move(string direction)
+    {
+        
     }
 
     public void Jump()
