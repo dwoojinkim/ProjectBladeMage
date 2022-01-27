@@ -94,13 +94,13 @@ public class Player : MonoBehaviour
         transform.position += transform.right * (playerMovespeed + cameraMovespeed) * Time.fixedDeltaTime;
     }
 
-    public void Move(string direction)
+    public void Move(float direction)
     {
-        if (direction == "Left")
+        if (direction < 0)      //Move left
             playerMovespeed = -playerMovespeedValue;
-        else if (direction == "Right")
+        else if (direction > 0) // Move right
             playerMovespeed = playerMovespeedValue;
-        else if (direction == "None")
+        else
             playerMovespeed = 0;
     }
 
