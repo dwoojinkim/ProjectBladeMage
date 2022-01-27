@@ -956,7 +956,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1077577511}
   m_Layer: 0
-  m_Name: CameraTracker
+  m_Name: DummyCameraTracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
