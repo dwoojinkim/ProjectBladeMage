@@ -6,7 +6,7 @@ using UnityEngine.UI;   //Remove this once I no longer need the debug text
 public class Player : MonoBehaviour
 {
     private const float MAX_SPEED_CAP = 25.0f;
-    private const float INIT_PLAYER_MOVESPEED = 5.0f;
+    private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
     public GameObject DebugTextObj;
     public GameObject SlashHitbox;
@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
     private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
-    private float playerMovespeed = INIT_PLAYER_MOVESPEED;
+    private float playerMovespeedValue = 10; // Magnitude of speed when left/right is input
+    private float playerMovespeed = 0;      // Actual player's speed in reference to the camera
+    private float cameraMovespeed = INIT_CAMERA_MOVESPEED;
     private float timeToIncreaseSpeed = 1.0f;
     private float speedIncreaseTimer = 0.0f;
     private float increaseSpeedAmount = 1.0f;
@@ -89,12 +91,17 @@ public class Player : MonoBehaviour
     //Calculates the total movement for the player (Global stage movement + local stage movement)
     public void MovePlayer()
     {
-        transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
+        transform.position += transform.right * (playerMovespeed + cameraMovespeed) * Time.fixedDeltaTime;
     }
 
     public void Move(string direction)
     {
-        
+        if (direction == "Left")
+            playerMovespeed = -playerMovespeedValue;
+        else if (direction == "Right")
+            playerMovespeed = playerMovespeedValue;
+        else if (direction == "None")
+            playerMovespeed = 0;
     }
 
     public void Jump()
@@ -225,7 +232,7 @@ public class Player : MonoBehaviour
     public void Kill()
     {
         speedIncreaseTimer = 0.0f;
-        playerMovespeed = INIT_PLAYER_MOVESPEED;
+        playerMovespeed = 0;
         GameManager.instance.ResetGame();
     }
 }
