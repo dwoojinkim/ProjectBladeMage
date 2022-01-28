@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
     public GameObject DebugTextObj;
+    public GameObject CameraTracker;
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
 
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
         SlashCheck();
         SmashCheck();
 
-        SpeedCheck();
+        //SpeedCheck();
     }
 
     void FixedUpdate()
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
     //Calculates the total movement for the player (Global stage movement + local stage movement)
     public void MovePlayer()
     {
-        transform.position += transform.right * (playerMovespeed + cameraMovespeed) * Time.fixedDeltaTime;
+        transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
     }
 
     public void Move(float direction)
