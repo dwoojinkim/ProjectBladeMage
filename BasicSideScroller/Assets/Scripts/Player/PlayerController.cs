@@ -49,10 +49,9 @@ public class PlayerController : MonoBehaviour
         }
 
         //Move Left/Right
-        if (Input.GetButtonDown("Horizontal"))
-        {
+        if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
             playerComponent.Move(Input.GetAxisRaw("Horizontal"));
-        }
+
         //Slash
         if (Input.GetButtonDown("Slash"))
         {
