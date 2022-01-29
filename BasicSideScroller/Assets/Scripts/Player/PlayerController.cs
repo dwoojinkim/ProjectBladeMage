@@ -48,16 +48,9 @@ public class PlayerController : MonoBehaviour
             playerComponent.Crouch();
         }
 
-        //Move Left
-        if (Input.GetButton("Left"))
-        {
-            playerComponent.Move("Left");
-        }
-        //Move right
-        if (Input.GetButton("Right"))
-        {
-            playerComponent.Move("Right");
-        }
+        //Move Left/Right
+        if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
+            playerComponent.Move(Input.GetAxisRaw("Horizontal"));
 
         //Slash
         if (Input.GetButtonDown("Slash"))
