@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
     public GameObject DebugTextObj;
-    public GameObject CameraTracker;
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
 
@@ -53,12 +52,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //MovePlayer();
-
         SlashCheck();
         SmashCheck();
-
-        //SpeedCheck();
     }
 
     void FixedUpdate()
@@ -223,11 +218,6 @@ public class Player : MonoBehaviour
 
             attackTimer += Time.deltaTime;
         }
-    }
-
-    public void MovePlayerBack(float resetDistance)
-    {
-        transform.position -= transform.right * resetDistance;
     }
 
     public void Kill()

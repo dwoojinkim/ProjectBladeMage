@@ -22,17 +22,12 @@ public class CameraScroller : MonoBehaviour
     void Start()
     {
         stageSpeed = INIT_CAMERA_MOVESPEED;
-        //lastPlayerPosition = cameraTrackerTransform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //float deltaMovement = cameraTrackerTransform.position.x - lastPlayerPosition.x;
-        //transform.position += transform.right * deltaMovement;
-        //lastPlayerPosition = cameraTrackerTransform.position;
         SpeedCheck();
-
     }
 
     void FixedUpdate()

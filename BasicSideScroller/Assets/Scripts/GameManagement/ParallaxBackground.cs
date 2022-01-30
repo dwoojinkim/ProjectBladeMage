@@ -8,7 +8,6 @@ public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] private Vector2 parallaxEffectMultiplier;
 
-    //private Transform cameraTransform;
     private Transform cameraTrackerTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
@@ -17,7 +16,6 @@ public class ParallaxBackground : MonoBehaviour
     void Start()
     {
         cameraTrackerTransform = GameObject.FindGameObjectWithTag("CameraTracker").transform;
-        //cameraTransform = Camera.main.transform;
         lastCameraPosition = cameraTrackerTransform.position;
 
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
