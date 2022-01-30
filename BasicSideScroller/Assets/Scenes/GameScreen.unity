@@ -291,6 +291,7 @@ GameObject:
   - component: {fileID: 357309449}
   - component: {fileID: 357309447}
   - component: {fileID: 357309448}
+  - component: {fileID: 357309450}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -404,7 +405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DebugTextObj: {fileID: 2119173353}
-  CameraTracker: {fileID: 1077577510}
   SlashHitbox: {fileID: 1458698056}
   SmashHitbox: {fileID: 2026418947}
   jumpVelocity: 16
@@ -444,6 +444,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &357309450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357309443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4264ec7ef1a0fe1439010a031c7af10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCamera: {fileID: 519420031}
 --- !u!1 &450375453
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +649,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c82ed0c6ce41c741832494dc451f80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTrackerTransform: {fileID: 1077577511}
 --- !u!1 &543034384
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +971,7 @@ GameObject:
   - component: {fileID: 1077577512}
   m_Layer: 0
   m_Name: DummyCameraTracker
-  m_TagString: Untagged
+  m_TagString: CameraTracker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -992,7 +1004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c82ed0c6ce41c741832494dc451f80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTrackerTransform: {fileID: 0}
 --- !u!1 &1113268873
 GameObject:
   m_ObjectHideFlags: 0

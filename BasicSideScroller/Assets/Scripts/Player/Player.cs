@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
         if (obj.gameObject.tag == "Obstacle" && obj.GetComponent<Collider2D>().enabled)
         {
             Debug.Log("Game Over");
-            Kill();
+            //Kill();
         }
     }
 
@@ -133,28 +133,6 @@ public class Player : MonoBehaviour
         if (!slashing && !smashing)
             slashRequest = true;
     }
-
-
-
-    private void SpeedCheck()
-    {
-        if (playerMovespeed < MAX_SPEED_CAP)
-        {
-            speedIncreaseTimer += Time.deltaTime;
-            if (speedIncreaseTimer >= timeToIncreaseSpeed)
-            {
-                speedIncreaseTimer = 0.0f;
-
-                playerMovespeed += increaseSpeedAmount;
-                if (playerMovespeed > MAX_SPEED_CAP)
-                    playerMovespeed = MAX_SPEED_CAP;
-
-                Debug.Log("Increasing Speed!!!. Speed is now: " + playerMovespeed);
-            }
-        }
-
-    }
-
 
     private void SlashCheck()
     {
