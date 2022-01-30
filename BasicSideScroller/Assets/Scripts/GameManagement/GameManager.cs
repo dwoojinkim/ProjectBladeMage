@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
          if (Player.transform.position.x >= resetDistance)
         {
             ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
-            Player.GetComponent<Player>().MovePlayerBack(resetDistance);
+            CameraTracker.transform.position -= transform.right * resetDistance;
             bg1.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
             bg2.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
             bg3.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);

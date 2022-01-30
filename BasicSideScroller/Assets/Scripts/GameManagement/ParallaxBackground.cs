@@ -8,15 +8,17 @@ public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] private Vector2 parallaxEffectMultiplier;
 
-    private Transform cameraTransform;
+    //private Transform cameraTransform;
+    private Transform cameraTrackerTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
 
     // Start is called before the first frame update
     void Start()
     {
-        cameraTransform = Camera.main.transform;
-        lastCameraPosition = cameraTransform.position;
+        cameraTrackerTransform = GameObject.FindGameObjectWithTag("CameraTracker").transform;
+        //cameraTransform = Camera.main.transform;
+        lastCameraPosition = cameraTrackerTransform.position;
 
         Sprite sprite = GetComponent<SpriteRenderer>().sprite;
         Texture2D texture = sprite.texture;
@@ -26,14 +28,14 @@ public class ParallaxBackground : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
+        Vector3 deltaMovement = cameraTrackerTransform.position - lastCameraPosition;
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
-        lastCameraPosition = cameraTransform.position;
+        lastCameraPosition = cameraTrackerTransform.position;
 
-        if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        if (Mathf.Abs(cameraTrackerTransform.position.x - transform.position.x) >= textureUnitSizeX)
         {
-            float offsetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
+            float offsetPositionX = (cameraTrackerTransform.position.x - transform.position.x) % textureUnitSizeX;
+            transform.position = new Vector3(cameraTrackerTransform.position.x + offsetPositionX, transform.position.y);
         }
     }
 
