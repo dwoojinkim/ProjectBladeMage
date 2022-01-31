@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraScroller : MonoBehaviour
 {
-    private const float MAX_SPEED_CAP = 1.0f;
+    private const float MAX_SPEED_CAP = 25.0f;
 
-    private const float INIT_CAMERA_MOVESPEED = 1.0f;
+    private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
     private float timeToIncreaseSpeed = 1.0f;
     private float speedIncreaseTimer = 0.0f;
