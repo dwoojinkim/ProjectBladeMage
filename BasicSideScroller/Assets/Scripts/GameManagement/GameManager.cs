@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
          if (CameraTracker.transform.position.x >= resetDistance)
         {
-            AdjustBG();
+            //AdjustBG();
         } 
     }
 
