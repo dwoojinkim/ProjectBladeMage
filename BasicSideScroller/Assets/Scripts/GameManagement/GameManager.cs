@@ -67,14 +67,9 @@ public class GameManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-         if (Player.transform.position.x >= resetDistance)
+         if (CameraTracker.transform.position.x >= resetDistance)
         {
-            ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
-            CameraTracker.transform.position -= transform.right * resetDistance;
-            bg1.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
-            bg2.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
-            bg3.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
-            bg4.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+            //AdjustBG();
         } 
     }
 
@@ -88,4 +83,16 @@ public class GameManager : MonoBehaviour
         Player.transform.position = playerResetPos;
         ObstacleSpawner.GetComponent<ObstacleSpawner>().ResetSpawner();
     }
+
+    // Move the background so it loops seamlessly as it is moving
+    private void AdjustBG()
+    {
+        ObstacleSpawner.GetComponent<ObstacleSpawner>().MoveObstaclesBack(resetDistance);
+        CameraTracker.transform.position -= transform.right * resetDistance;
+        bg1.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+        bg2.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+        bg3.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+        bg4.GetComponent<ParallaxBackground>().MoveBackground(resetDistance);
+    }
+
 }

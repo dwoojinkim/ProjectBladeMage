@@ -363,8 +363,8 @@ Transform:
   - {fileID: 625506385}
   - {fileID: 1458698057}
   - {fileID: 2026418948}
-  m_Father: {fileID: 1077577511}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &357309446
 BoxCollider2D:
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8df29bf56b3d04eb8467022b2c1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: {x: 0.95, y: 0.95}
+  parallaxEffectMultiplier: {x: -0.01, y: -0.01}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,8 +634,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1955602563}
-  m_Father: {fileID: 1077577511}
-  m_RootOrder: 1
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
 MonoBehaviour:
@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8df29bf56b3d04eb8467022b2c1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: {x: 1, y: 1}
+  parallaxEffectMultiplier: {x: 0, y: 0}
 --- !u!1 &625506384
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,9 +986,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 357309445}
-  - {fileID: 519420032}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1098,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8df29bf56b3d04eb8467022b2c1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: {x: 0.4, y: 0.4}
+  parallaxEffectMultiplier: {x: -1, y: -1}
 --- !u!1 &1156138206
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,7 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8df29bf56b3d04eb8467022b2c1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: {x: 0.92, y: 0.92}
+  parallaxEffectMultiplier: {x: -0.02, y: -0.02}
 --- !u!1 &1955602562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1879,7 +1877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8df29bf56b3d04eb8467022b2c1c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: {x: 0.6, y: 0.6}
+  parallaxEffectMultiplier: {x: -0.1, y: -0.1}
 --- !u!1 &2026418947
 GameObject:
   m_ObjectHideFlags: 0

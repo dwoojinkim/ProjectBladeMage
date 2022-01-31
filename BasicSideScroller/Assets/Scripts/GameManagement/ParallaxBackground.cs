@@ -8,6 +8,7 @@ public class ParallaxBackground : MonoBehaviour
 {
     [SerializeField] private Vector2 parallaxEffectMultiplier;
 
+    private GameObject mainCamera;
     private Transform cameraTrackerTransform;
     private Vector3 lastCameraPosition;
     private float textureUnitSizeX;
@@ -15,6 +16,7 @@ public class ParallaxBackground : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
         cameraTrackerTransform = GameObject.FindGameObjectWithTag("CameraTracker").transform;
         lastCameraPosition = cameraTrackerTransform.position;
 
@@ -30,10 +32,12 @@ public class ParallaxBackground : MonoBehaviour
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
         lastCameraPosition = cameraTrackerTransform.position;
 
-        if (Mathf.Abs(cameraTrackerTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        if (Mathf.Abs(mainCamera.transform.position.x - transform.position.x) >= textureUnitSizeX)
         {
-            float offsetPositionX = (cameraTrackerTransform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(cameraTrackerTransform.position.x + offsetPositionX, transform.position.y);
+            float offsetPositionX = (mainCamera.transform.position.x - transform.position.x) % textureUnitSizeX;
+            transform.position = new Vector3(mainCamera.transform.position.x + offsetPositionX, transform.position.y);
+            Debug.Log("RESETTING BACKGROUND " + this.name + ". New Pos: " + transform.position.x);
+            Debug.Log("RESETTING BACKGROUND " + this.name + ". Offset Pos: " + offsetPositionX);
         }
     }
 
