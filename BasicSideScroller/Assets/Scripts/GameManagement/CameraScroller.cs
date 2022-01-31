@@ -36,7 +36,6 @@ public class CameraScroller : MonoBehaviour
 
     private void MoveStage()
     {
-        // Commenting out for now to test player boundaries
         transform.position += transform.right * stageSpeed * Time.fixedDeltaTime;
     }
 
