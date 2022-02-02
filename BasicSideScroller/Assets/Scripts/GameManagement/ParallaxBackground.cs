@@ -36,8 +36,6 @@ public class ParallaxBackground : MonoBehaviour
         {
             float offsetPositionX = (mainCamera.transform.position.x - transform.position.x) % textureUnitSizeX;
             transform.position = new Vector3(mainCamera.transform.position.x + offsetPositionX, transform.position.y);
-            Debug.Log("RESETTING BACKGROUND " + this.name + ". New Pos: " + transform.position.x);
-            Debug.Log("RESETTING BACKGROUND " + this.name + ". Offset Pos: " + offsetPositionX);
         }
     }
 
