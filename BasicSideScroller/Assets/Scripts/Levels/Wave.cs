@@ -29,6 +29,7 @@ public class Wave : MonoBehaviour
         timer += Time.deltaTime;
         if (timer > 3)
         {
+            Debug.Log("Spawning Wave!");
             SpawnWave();
             timer = -100;
         }
