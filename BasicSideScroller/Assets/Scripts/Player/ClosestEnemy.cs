@@ -6,6 +6,7 @@ public class ClosestEnemy : MonoBehaviour
 {
     public float circleRadius = 5.0f;
     private Collider2D[] enemies = new Collider2D[100];
+    private Collider2D closestEnemy;
     private LayerMask enemyLayer;
     private ContactFilter2D enemyFilter;
 
@@ -22,12 +23,17 @@ public class ClosestEnemy : MonoBehaviour
     void Update()
     {
         numEnemies = Physics2D.OverlapCircle((Vector2)this.transform.position, circleRadius, enemyFilter, enemies);
+        closestEnemy = FindClosestEnemy(enemies);
 
         DrawEllipse(this.transform.position, Vector3.forward, Vector3.up, circleRadius, circleRadius, 16, Color.red);
         Debug.Log("Number of enemies in circle: " + numEnemies);
+
+        if (closestEnemy != null)
+            Debug.Log("Closest enemy: " + closestEnemy.name);
     }
 
-        private static void DrawEllipse(Vector3 pos, Vector3 forward, Vector3 up, float radiusX, float radiusY, int segments, Color color, float duration = 0)
+    // This is just used for visualising the range of the closest enemy check
+    private static void DrawEllipse(Vector3 pos, Vector3 forward, Vector3 up, float radiusX, float radiusY, int segments, Color color, float duration = 0)
     {
         float angle = 0f;
         Quaternion rot = Quaternion.LookRotation(forward, up);
@@ -47,5 +53,25 @@ public class ClosestEnemy : MonoBehaviour
             lastPoint = thisPoint;
             angle += 360f / segments;
         }
+    }
+
+    private Collider2D FindClosestEnemy(Collider2D[] enemyList)
+    {
+        Collider2D closestEnemy = null;
+        float closestDistance = float.MaxValue;
+
+        if (enemyList != null)
+        {
+            foreach(Collider2D enemy in enemyList)
+            {
+                if (enemy != null && Vector3.Distance(this.transform.position, enemy.transform.position) < closestDistance)
+                {
+                    closestDistance = Vector3.Distance(this.transform.position, enemy.transform.position);
+                    closestEnemy = enemy;
+                }
+            }
+        }
+
+        return closestEnemy;
     }
 }
