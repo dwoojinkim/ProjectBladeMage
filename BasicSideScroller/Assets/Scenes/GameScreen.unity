@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 357309448}
   - component: {fileID: 357309450}
   - component: {fileID: 357309451}
+  - component: {fileID: 357309452}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -339,8 +340,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.1745283, g: 0.3322292, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f76adca1efa0be540b1b8d05bf3d5210, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -358,8 +359,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357309443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.83, z: 1}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: -3.68, y: 0.43, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 625506385}
   - {fileID: 1458698057}
@@ -382,9 +383,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.0006830245, y: -0.0013659894}
   m_SpriteTilingProperty:
-    border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.2, y: 0.2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -470,6 +471,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c6f410988142c4dac55e2e9180ba5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circleRadius: 5
+--- !u!114 &357309452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357309443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d707102448456dc4594611ba7ec5b053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolCount: 25
+  bulletPrefab: {fileID: 6778313813630796566, guid: 6ccaf77c4f9fc1d42b0a8fd423f3bb0c,
+    type: 3}
 --- !u!1 &450375453
 GameObject:
   m_ObjectHideFlags: 0
