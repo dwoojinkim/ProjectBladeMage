@@ -26,15 +26,16 @@ public class Bullet : MonoBehaviour
     {
         direction = dir;
 
-        //Quaternion rotation = Quaternion.LookRotation(direction);
-        //transform.rotation = rotation;
+        transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
+        transform.rotation *= Quaternion.Euler(0, 0, -90);
 
     }
 
     // Updates position of bullet
     private void MoveBullet()
     {
-        transform.Translate(direction * speed * Time.deltaTime);
+        //transform.Translate(direction * speed * Time.deltaTime);
+        transform.position += direction * speed * Time.deltaTime;
 
         // Placeholder reset condition. Will need to be relative to screen rather than hard coded values
         if (transform.position.x >=  15 || transform.position.x <= -15 || transform.position.y >= 15 || transform.position.x <= -15)
