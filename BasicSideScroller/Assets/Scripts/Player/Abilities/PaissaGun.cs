@@ -12,11 +12,13 @@ public class PaissaGun : MonoBehaviour
 
     private float bulletDelay = 0.15f;
     private float bulletTimer = 0f;
+    private ClosestEnemy closestEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
         CreateBulletPool();
+        closestEnemy = this.transform.GetComponent<ClosestEnemy>();
     }
 
     // Update is called once per frame
@@ -54,5 +56,6 @@ public class PaissaGun : MonoBehaviour
     {
         bullet.transform.position = this.transform.position;
         bullet.GetComponent<Bullet>().IsEnabled = true;
+        bullet.GetComponent<Bullet>().FireBullet(closestEnemy.GetDirectionVector());
     }
 }

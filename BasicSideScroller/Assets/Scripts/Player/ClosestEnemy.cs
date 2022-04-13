@@ -23,7 +23,7 @@ public class ClosestEnemy : MonoBehaviour
     void Update()
     {
         numEnemies = Physics2D.OverlapCircle((Vector2)this.transform.position, circleRadius, enemyFilter, enemies);
-        closestEnemy = FindClosestEnemy(enemies);
+        //closestEnemy = FindClosestEnemy(enemies);
 
         DrawEllipse(this.transform.position, Vector3.forward, Vector3.up, circleRadius, circleRadius, 16, Color.red);
         Debug.Log("Number of enemies in circle: " + numEnemies);
@@ -73,5 +73,16 @@ public class ClosestEnemy : MonoBehaviour
         }
 
         return closestEnemy;
+    }
+
+    public Vector3 GetDirectionVector()
+    {
+        closestEnemy = FindClosestEnemy(enemies);
+
+        var vector = closestEnemy.transform.position - this.transform.position;
+
+        //vector = vector / vector.magnitude;     // Normalized direction
+
+        return vector.normalized;
     }
 }

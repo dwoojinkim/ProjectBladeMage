@@ -22,6 +22,15 @@ public class Bullet : MonoBehaviour
             MoveBullet();
     }
 
+    public void FireBullet(Vector3 dir)
+    {
+        direction = dir;
+
+        //Quaternion rotation = Quaternion.LookRotation(direction);
+        //transform.rotation = rotation;
+
+    }
+
     // Updates position of bullet
     private void MoveBullet()
     {
