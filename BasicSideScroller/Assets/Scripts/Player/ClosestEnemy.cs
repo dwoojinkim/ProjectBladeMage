@@ -5,7 +5,7 @@ using UnityEngine;
 public class ClosestEnemy : MonoBehaviour
 {
     public float circleRadius = 5.0f;
-    private Collider2D[] enemies = new Collider2D[100];
+    private List<Collider2D> enemies = new List<Collider2D>();
     private Collider2D closestEnemy;
     private LayerMask enemyLayer;
     private ContactFilter2D enemyFilter;
@@ -55,12 +55,14 @@ public class ClosestEnemy : MonoBehaviour
         }
     }
 
-    private Collider2D FindClosestEnemy(Collider2D[] enemyList)
+
+    // TODO: The list of enemies should be from a certain range, not from the list of all enemies
+    private Collider2D FindClosestEnemy(List<Collider2D> enemyList)
     {
         Collider2D closestEnemy = null;
         float closestDistance = float.MaxValue;
 
-        if (enemyList != null)
+        if (enemyList.Count != 0)
         {
             foreach(Collider2D enemy in enemyList)
             {
@@ -71,18 +73,24 @@ public class ClosestEnemy : MonoBehaviour
                 }
             }
         }
+        else
+            return null;
 
         return closestEnemy;
     }
 
     public Vector3 GetDirectionVector()
     {
+        Vector3 vector;
         closestEnemy = FindClosestEnemy(enemies);
+        
+        if (closestEnemy != null)
+        {
+            vector = closestEnemy.transform.position - this.transform.position;
+            return vector.normalized;
+        }
+        else
+            return Vector3.right;
 
-        var vector = closestEnemy.transform.position - this.transform.position;
-
-        //vector = vector / vector.magnitude;     // Normalized direction
-
-        return vector.normalized;
     }
 }

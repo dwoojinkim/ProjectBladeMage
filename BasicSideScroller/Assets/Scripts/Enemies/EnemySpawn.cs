@@ -24,6 +24,7 @@ public class EnemySpawn : MonoBehaviour
         // - Script will be attached to all enemies.
 
         this.GetComponent<SpriteRenderer>().enabled = true;
+        this.GetComponent<CircleCollider2D>().enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
 
         Debug.Log("Spawning enemy!");
     }
