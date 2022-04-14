@@ -26,10 +26,10 @@ public class ClosestEnemy : MonoBehaviour
         //closestEnemy = FindClosestEnemy(enemies);
 
         DrawEllipse(this.transform.position, Vector3.forward, Vector3.up, circleRadius, circleRadius, 16, Color.red);
-        Debug.Log("Number of enemies in circle: " + numEnemies);
+        //Debug.Log("Number of enemies in circle: " + numEnemies);
 
-        if (closestEnemy != null)
-            Debug.Log("Closest enemy: " + closestEnemy.name);
+        //if (closestEnemy != null)
+            //Debug.Log("Closest enemy: " + closestEnemy.name);
     }
 
     // This is just used for visualising the range of the closest enemy check

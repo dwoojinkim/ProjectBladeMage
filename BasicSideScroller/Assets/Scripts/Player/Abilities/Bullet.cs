@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public bool IsEnabled { get; set;}
+    public string Owner { get; set;}
 
     [SerializeField] private float speed = 100f;
-    private Vector3 direction = new Vector3(1, 0, 0);
+    private Vector3 direction = Vector3.right;
 
     // Start is called before the first frame update
     void Awake()

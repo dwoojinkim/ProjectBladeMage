@@ -131,7 +131,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy_3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 833137113711408455, guid: edb6016eccbf60247b939746db44285d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: edb6016eccbf60247b939746db44285d, type: 3}
 --- !u!1 &5206207539654204921 stripped
 GameObject:
@@ -293,7 +294,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingEnemy_2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 833137113711408455, guid: edb6016eccbf60247b939746db44285d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: edb6016eccbf60247b939746db44285d, type: 3}
 --- !u!1 &1006337435912740532 stripped
 GameObject:

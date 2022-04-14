@@ -47,6 +47,7 @@ public class PaissaGun : MonoBehaviour
         for (int i = 0; i < poolCount; i++)
         {
             bullet = Instantiate(bulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
+            bullet.GetComponent<Projectile>().Owner = this.tag;
             bulletPool.Add(bullet);
         }
     }

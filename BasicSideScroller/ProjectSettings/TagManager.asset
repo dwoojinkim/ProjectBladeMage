@@ -10,6 +10,8 @@ TagManager:
   - GameManager
   - SmashHitbox
   - CameraTracker
+  - Enemy
+  - Projectile
   layers:
   - Default
   - TransparentFX
