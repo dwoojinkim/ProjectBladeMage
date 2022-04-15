@@ -7,13 +7,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    private int maxHealth = 10;
-    private int currentHealth = 0;
+    private int maxHP = 10;
+    private int currentHP = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHP = maxHP;
     }
 
     // Update is called once per frame
@@ -30,15 +30,31 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("Player has hit an enemy!");
 
-            if (currentHealth > 0)
+            if (currentHP > 0)
             {
-                currentHealth -= obj.GetComponent<Projectile>().Damage;
+                currentHP -= obj.GetComponent<Projectile>().Damage;
 
-                if (currentHealth <= 0)
+                if (currentHP <= 0)
+                {
                     Debug.Log(this.name + " has died!");
+                    KillEnemy();
+                }
             }
-            
-            
         }
+    }
+
+    // Currently just passing in each stat that I need set for different enemies as a parameter, but I may change this 
+    // since I'm expecting more stats to be set in here in the future.
+    // Probably need to change this to extracting the stats from an XML file. I'll need to read up on that though.
+    public void CreateEnemy(int maxHealth)
+    {
+        maxHP = maxHealth;
+        currentHP = maxHealth;
+    }
+
+    public void KillEnemy()
+    {
+        this.GetComponent<Collider2D>().enabled = false;
+        this.GetComponent<SpriteRenderer>().enabled = false;
     }
 }
