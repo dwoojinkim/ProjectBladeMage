@@ -12,6 +12,7 @@ public class PaissaGun : MonoBehaviour
 
     private float bulletDelay = 0.15f;
     private float bulletTimer = 0f;
+    private int bulletDmg = 1;
     private ClosestEnemy closestEnemy;
 
     // Start is called before the first frame update
@@ -47,7 +48,7 @@ public class PaissaGun : MonoBehaviour
         for (int i = 0; i < poolCount; i++)
         {
             bullet = Instantiate(bulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
-            bullet.GetComponent<Projectile>().Owner = this.tag;
+            bullet.GetComponent<Projectile>().CreateBullet(this.tag, bulletDmg);
             bulletPool.Add(bullet);
         }
     }

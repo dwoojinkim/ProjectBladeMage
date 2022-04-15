@@ -5,7 +5,9 @@ using UnityEngine;
 // Generic projectile functions and fields
 public class Projectile : MonoBehaviour
 {
-    public string Owner { get; set; }
+    public string Owner { get; private set; }
+
+    public int Damage { get; private set;}
 
     // Start is called before the first frame update
     void Start()
@@ -19,4 +21,9 @@ public class Projectile : MonoBehaviour
         
     }
 
+    public void CreateBullet(string ownerTag, int dmg)
+    {
+        Owner = ownerTag;
+        Damage = dmg;
+    }
 }
