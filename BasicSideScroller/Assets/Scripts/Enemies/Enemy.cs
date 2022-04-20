@@ -6,14 +6,17 @@ using UnityEngine;
 // Contains basic enemy functions and fields common for all enemies
 public class Enemy : MonoBehaviour
 {
+    public bool IsAlive { get; private set;}
 
     private int maxHP = 10;
     private int currentHP = 0;
+ 
 
     // Start is called before the first frame update
     void Start()
     {
         currentHP = maxHP;
+        IsAlive = false;
     }
 
     // Update is called once per frame
@@ -54,7 +57,23 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
+        IsAlive = false;
+
         this.GetComponent<Collider2D>().enabled = false;
         this.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void SpawnEnemy()
+    {
+        //Spawn logic
+        // - Basically just enable the enemy so other scriptes are running and sprite is visible
+        // = Can add more logic for spawning effects if necessary
+        // - Script will be attached to all enemies.
+
+        IsAlive = true;
+        this.GetComponent<SpriteRenderer>().enabled = true;
+        this.GetComponent<CircleCollider2D>().enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
+
+        Debug.Log("Spawning enemy!");
     }
 }

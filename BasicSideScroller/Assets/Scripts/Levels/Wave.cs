@@ -33,6 +33,9 @@ public class Wave : MonoBehaviour
             SpawnWave();
             timer = -100;
         }
+
+        if (IsWaveOver())
+            Debug.Log("WAVE IS OVER!!!");
     }
 
     private void SpawnWave()
@@ -41,8 +44,19 @@ public class Wave : MonoBehaviour
         {
             foreach (GameObject e in enemies)
             {
-                e.GetComponent<EnemySpawn>().SpawnEnemy();
+                e.GetComponent<Enemy>().SpawnEnemy();
             }
         }
+    }
+
+    public bool IsWaveOver()
+    {
+        foreach (GameObject e in enemies)
+        {
+            if (e.GetComponent<Enemy>().IsAlive)
+                return false;
+        }
+
+        return true;
     }
 }

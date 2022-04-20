@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This may be a redundant component as I can just move this function to the Enemy component. Think about deleting this.
 public class EnemySpawn : MonoBehaviour
 {
     // Start is called before the first frame update
