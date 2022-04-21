@@ -73,6 +73,8 @@ public class Enemy : MonoBehaviour
         IsAlive = true;
         this.GetComponent<SpriteRenderer>().enabled = true;
         this.GetComponent<CircleCollider2D>().enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
+        currentHP = maxHP;
+        IsAlive = true;
 
         Debug.Log("Spawning enemy!");
     }

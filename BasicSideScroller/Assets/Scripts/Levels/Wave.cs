@@ -11,31 +11,46 @@ public class Wave : MonoBehaviour
         HealthPercentage
     };
 
+    private enum WaveState
+    {
+        Idle,
+        WaveStarted,
+        WaveComplete
+    };
+
     [SerializeField] private SpawnType WaveSpawnType;
 
     [SerializeField] private GameObject[] enemies;
 
     private float timer = 0;
+    private WaveState waveState;
  
     // Start is called before the first frame update
     void Awake()
     {
-        
+        waveState = WaveState.Idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 3)
+        if (waveState == WaveState.Idle || waveState == WaveState.WaveComplete)
         {
-            Debug.Log("Spawning Wave!");
-            SpawnWave();
-            timer = -100;
+            timer += Time.deltaTime;
+            if (timer > 3)
+            {
+                Debug.Log("Spawning Wave!");
+                waveState = WaveState.WaveStarted;
+                SpawnWave();
+            }
         }
 
-        if (IsWaveOver())
+        if (waveState == WaveState.WaveStarted && IsWaveOver())
+        {
             Debug.Log("WAVE IS OVER!!!");
+            waveState = WaveState.WaveComplete;
+            timer = 0;
+        }
     }
 
     private void SpawnWave()
