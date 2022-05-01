@@ -8,13 +8,19 @@ public class Enemy : MonoBehaviour
 {
     public bool IsAlive { get; private set;}
 
+    public SpriteRenderer EnemySprite {get; private set;}
+    public Collider2D EnemyCollider {get; private set;}
+
     private int maxHP = 10;
     private int currentHP = 0;
  
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        EnemySprite = this.transform.GetComponent<SpriteRenderer>();
+        EnemyCollider = this.transform.GetComponent<Collider2D>();
+
         currentHP = maxHP;
         IsAlive = false;
     }
@@ -40,7 +46,7 @@ public class Enemy : MonoBehaviour
                 if (currentHP <= 0)
                 {
                     Debug.Log(this.name + " has died!");
-                    KillEnemy();
+                    //KillEnemy();
                 }
             }
         }
@@ -59,8 +65,8 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = false;
 
-        this.GetComponent<Collider2D>().enabled = false;
-        this.GetComponent<SpriteRenderer>().enabled = false;
+        EnemySprite.enabled = false;
+        EnemyCollider.enabled = false;
     }
 
     public void SpawnEnemy()
@@ -71,8 +77,8 @@ public class Enemy : MonoBehaviour
         // - Script will be attached to all enemies.
 
         IsAlive = true;
-        this.GetComponent<SpriteRenderer>().enabled = true;
-        this.GetComponent<CircleCollider2D>().enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
+        EnemySprite.enabled = true;
+        EnemyCollider.enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
         currentHP = maxHP;
         IsAlive = true;
 

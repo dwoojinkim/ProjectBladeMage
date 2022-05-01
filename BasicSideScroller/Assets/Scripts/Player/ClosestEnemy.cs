@@ -23,6 +23,7 @@ public class ClosestEnemy : MonoBehaviour
     void Update()
     {
         numEnemies = Physics2D.OverlapCircle((Vector2)this.transform.position, circleRadius, enemyFilter, enemies);
+        Debug.Log("NumEnemies: " + numEnemies);
         //closestEnemy = FindClosestEnemy(enemies);
 
         DrawEllipse(this.transform.position, Vector3.forward, Vector3.up, circleRadius, circleRadius, 16, Color.red);
