@@ -1,19 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 
 // This may be a redundant component as I can just move this function to the Enemy component. Think about deleting this.
 public class EnemySpawn : MonoBehaviour
 {
-    private SpriteRenderer enemySprite {get; set;}
-    private Collider2D enemyCollider {get; set;}
+    private SpriteRenderer enemySprite;
+    private Collider2D enemyCollider;
+    private AIPath aiPathScript;
+
+    private Vector3 startingPos;
 
     // Start is called before the first frame update
     void Start()
     {
         enemySprite = this.transform.GetComponent<Enemy>().EnemySprite;
         enemyCollider = this.transform.GetComponent<Enemy>().EnemyCollider;
+        aiPathScript = this.transform.GetComponent<Enemy>().AIPathScript;
+
+        startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
     }
 
     // Update is called once per frame
@@ -29,10 +36,14 @@ public class EnemySpawn : MonoBehaviour
         // = Can add more logic for spawning effects if necessary
         // - Script will be attached to all enemies.
 
+        transform.position = startingPos;
+
         if (enemySprite != null)
             enemySprite.enabled = true;
         if (enemyCollider != null)
             enemyCollider.enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
+        if (aiPathScript != null)
+            aiPathScript.enabled = true;
 
         Debug.Log("Spawning enemy!");
     }

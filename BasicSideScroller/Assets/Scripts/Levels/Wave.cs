@@ -11,6 +11,12 @@ public class Wave : MonoBehaviour
         HealthPercentage
     };
 
+    enum SpawnLocation
+    {
+        SpawnBox,
+        SpawnPoint
+    }
+
     private enum WaveState
     {
         Idle,
@@ -19,6 +25,7 @@ public class Wave : MonoBehaviour
     };
 
     [SerializeField] private SpawnType WaveSpawnType;
+    [SerializeField] private SpawnLocation SpawnLocationType;
 
     [SerializeField] private GameObject[] enemies;
 
