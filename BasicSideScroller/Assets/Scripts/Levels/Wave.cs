@@ -28,6 +28,7 @@ public class Wave : MonoBehaviour
     [SerializeField] private SpawnLocation SpawnLocationType;
 
     [SerializeField] private GameObject[] enemies;
+    [SerializeField] private GameObject spawnBox;
 
     private float timer = 0;
     private WaveState waveState;
@@ -66,7 +67,18 @@ public class Wave : MonoBehaviour
         {
             foreach (GameObject e in enemies)
             {
-                e.GetComponent<Enemy>().SpawnEnemy();
+                if (SpawnLocationType == SpawnLocation.SpawnBox)
+                {
+                    float leftBound = spawnBox.transform.position.x - spawnBox.GetComponent<SpriteRenderer>().bounds.size.x/2f;
+                    float rightBound = spawnBox.transform.position.x + spawnBox.GetComponent<SpriteRenderer>().bounds.size.x/2f;
+                    float bottomBound = spawnBox.transform.position.y - spawnBox.GetComponent<SpriteRenderer>().bounds.size.y/2f;
+                    float topBound = spawnBox.transform.position.y + spawnBox.GetComponent<SpriteRenderer>().bounds.size.y/2f;
+
+                    Vector2 spawnPos = new Vector2(Random.Range(leftBound, rightBound), Random.Range(bottomBound, topBound));
+                    e.GetComponent<Enemy>().SpawnEnemy(spawnPos);
+                }
+                else
+                    e.GetComponent<Enemy>().SpawnEnemy();
             }
         }
     }

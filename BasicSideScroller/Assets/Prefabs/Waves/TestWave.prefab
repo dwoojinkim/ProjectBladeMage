@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8846337008181402451}
   - component: {fileID: 4225113733453520252}
   m_Layer: 0
-  m_Name: SpawnBox1
+  m_Name: SpawnBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,10 +129,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WaveSpawnType: 0
+  SpawnLocationType: 0
   enemies:
   - {fileID: 3260494796885987876}
   - {fileID: 1006337435912740532}
   - {fileID: 5206207539654204921}
+  spawnBox: {fileID: 4369570267741596087}
 --- !u!1001 &3933754569132158478
 PrefabInstance:
   m_ObjectHideFlags: 0
