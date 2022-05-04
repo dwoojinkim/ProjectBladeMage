@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 29800335}
   - component: {fileID: 29800334}
   m_Layer: 5
-  m_Name: High Score
+  m_Name: PlayerHP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -190,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'High Score: 0'
+  m_Text: 'Player HP: -1'
 --- !u!222 &29800335
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c6f410988142c4dac55e2e9180ba5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleRadius: 5
+  circleRadius: 15
 --- !u!114 &357309452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1145,6 +1145,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4848887859609429385, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 357309445}
     - target: {fileID: 4939780825560718637, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
         type: 3}
       propertyPath: m_Enabled
@@ -1243,7 +1248,7 @@ PrefabInstance:
     - target: {fileID: 9010718583963080238, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
         type: 3}
       propertyPath: enemies.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9010718583963080238, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
         type: 3}
@@ -1260,6 +1265,11 @@ PrefabInstance:
       propertyPath: enemies.Array.data[2]
       value: 
       objectReference: {fileID: 1147508856}
+    - target: {fileID: 9010718583963080238, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
+        type: 3}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 1664778352}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 1937307642737227203, guid: 7689a93a66c7c7c4ab34a2e084bf28df, type: 3}
@@ -1732,7 +1742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameTimerObj: {fileID: 228916982}
-  HighScoreObj: {fileID: 29800332}
+  PlayerHPObj: {fileID: 29800332}
   Player: {fileID: 357309443}
   CameraTracker: {fileID: 1077577510}
   ObstacleSpawner: {fileID: 1955602562}
@@ -2308,6 +2318,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: {x: -0.0015, y: -0.0015}
+--- !u!1 &1664778352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6472273472285789142, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
+    type: 3}
+  m_PrefabInstance: {fileID: 696300519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1771910330 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3260494796885987876, guid: 7689a93a66c7c7c4ab34a2e084bf28df,

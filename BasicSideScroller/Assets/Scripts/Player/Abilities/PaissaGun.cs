@@ -10,7 +10,7 @@ public class PaissaGun : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     private List<GameObject> bulletPool = new List<GameObject>();
 
-    private float bulletDelay = 0.15f;
+    private float bulletDelay = 1f;
     private float bulletTimer = 0f;
     private int bulletDmg = 1;
     private ClosestEnemy closestEnemy;
@@ -48,7 +48,7 @@ public class PaissaGun : MonoBehaviour
         for (int i = 0; i < poolCount; i++)
         {
             bullet = Instantiate(bulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
-            bullet.GetComponent<Projectile>().CreateBullet(this.tag, bulletDmg);
+            bullet.GetComponent<Projectile>().CreateProjectile(this.tag, bulletDmg);
             bulletPool.Add(bullet);
         }
     }

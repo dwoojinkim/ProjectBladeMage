@@ -31,6 +31,11 @@ public class Bullet : MonoBehaviour
         transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 
+    public void LandBullet()
+    {
+        Reset();
+    }
+
     // Updates position of bullet
     private void MoveBullet()
     {
@@ -42,6 +47,7 @@ public class Bullet : MonoBehaviour
 
     }
 
+    // This will probably have to be moved to the Projectile component
     private void Reset()
     {
         IsEnabled = false;

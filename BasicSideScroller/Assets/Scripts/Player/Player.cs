@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float normalGravity = 10f;
     public float extraGravity = 20f;
 
+    public int Health {get; private set;}
+
     private Rigidbody2D playerRigidbody;
 
     private Text debugText;
@@ -47,6 +49,8 @@ public class Player : MonoBehaviour
         
         playerRigidbody = this.GetComponent<Rigidbody2D>();
         playerRigidbody.gravityScale = normalGravity;
+
+        Health = 100;
     }
 
     // Update is called once per frame
@@ -63,10 +67,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.gameObject.tag == "Obstacle" && obj.GetComponent<Collider2D>().enabled)
+        if (obj.gameObject.tag == "Enemy" && obj.GetComponent<Collider2D>().enabled)
         {
-            Debug.Log("Game Over");
-            //Kill();
+            Debug.Log("Player has been hit by enemy");
+                Health -= 10;
         }
     }
 
