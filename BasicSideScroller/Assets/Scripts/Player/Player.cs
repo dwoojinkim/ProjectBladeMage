@@ -65,20 +65,16 @@ public class Player : MonoBehaviour
         MovePlayer();
     }
 
-    private void OnTriggerEnter2D(Collider2D obj)
-    {
-        if (obj.gameObject.tag == "Enemy" && obj.GetComponent<Collider2D>().enabled)
-        {
-            Debug.Log("Player has been hit by enemy");
-                Health -= 10;
-        }
-    }
-
     private void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Ground")
         {
             jumping = false;
+        }
+        else if (col.gameObject.tag == "Enemy" && col.enabled)
+        {
+            Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
+                Health -= 10;
         }
     }
     
