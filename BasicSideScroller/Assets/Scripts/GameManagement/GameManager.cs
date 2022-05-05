@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             playerResetPos = Player.transform.position;
             cameraResetPos = CameraTracker.transform.position;
 
-            Debug.Log(cameraResetPos.y);
+            //Debug.Log(cameraResetPos.y);
         }
         else
         {

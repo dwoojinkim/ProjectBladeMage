@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4701721308742939523}
   - component: {fileID: 9010718583963080238}
   m_Layer: 0
-  m_Name: TestWave
+  m_Name: TestWave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -261,6 +261,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4701721308742939523}
     m_Modifications:
+    - target: {fileID: 4638179589222278087, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990588174641530331, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: enableRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: slowWhenNotFacingTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9139961831626748917, guid: edb6016eccbf60247b939746db44285d,
         type: 3}
       propertyPath: m_RootOrder
@@ -343,6 +383,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4701721308742939523}
     m_Modifications:
+    - target: {fileID: 4638179589222278087, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990588174641530331, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: enableRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: slowWhenNotFacingTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9139961831626748917, guid: edb6016eccbf60247b939746db44285d,
         type: 3}
       propertyPath: m_RootOrder
@@ -424,6 +504,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4701721308742939523}
     m_Modifications:
+    - target: {fileID: 4638179589222278087, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7990588174641530331, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: gravity.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: enableRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9139961831626748917, guid: edb6016eccbf60247b939746db44285d,
         type: 3}
       propertyPath: m_RootOrder
