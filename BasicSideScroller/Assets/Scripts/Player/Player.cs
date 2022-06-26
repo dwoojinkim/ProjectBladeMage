@@ -202,6 +202,6 @@ public class Player : MonoBehaviour
     {
         speedIncreaseTimer = 0.0f;
         playerMovespeed = 0;
-        GameManager.instance.ResetGame();
+        LevelManager.LMinstance.ResetGame();
     }
 }
