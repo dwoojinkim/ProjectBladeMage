@@ -7,8 +7,6 @@ public class PlayerController : MonoBehaviour
     // Toggles the time scale between 1 and 0.7
     // whenever the user hits the Fire1 button.
     private float fixedDeltaTime;
-
-
     private Player playerComponent;
 
     // Start is called before the first frame update

@@ -5,7 +5,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    enum Menu
+    {
+        PressAnyButton,
+        InitialMenu
+    }
+
     public static GameManager GMinstance = null;
+
+    private Menu currentMenu;
 
     void Awake()
     {
@@ -22,7 +30,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+            currentMenu = Menu.PressAnyButton;
     }
 
     // Update is called once per frame
