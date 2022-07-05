@@ -55,7 +55,7 @@ public class TitleScreen : MonoBehaviour
                 currentMenu = Menu.InitialMenu;
                 PressAnyButtonText.SetActive(false);
                 InitialMenu.gameObject.SetActive(true);
-                OptionSelector.SetActive(true);
+                //OptionSelector.SetActive(true);
                 currentMenuTransform = InitialMenu;
             }
         }
@@ -65,6 +65,12 @@ public class TitleScreen : MonoBehaviour
                 selectorPosition--;
             else if (Input.GetButtonDown("Down"))
                 selectorPosition++;
+            else if (Input.GetButtonDown("Submit"))
+            {
+                // Code for activating button functionality.
+                Debug.Log("Submit button has been pressed.");
+            }
+
 
             // When the cursor is on the bottom option and presses down, the cursor will loop to the top
             // and vice versa
@@ -74,11 +80,10 @@ public class TitleScreen : MonoBehaviour
                 selectorPosition += currentMenuTransform.childCount;
 
 
-            Debug.Log(selectorPosition);
+            //Debug.Log(selectorPosition);
 
-            MoveSelector(currentMenuTransform.GetChild(selectorPosition));
+            //MoveSelector(currentMenuTransform.GetChild(selectorPosition));
         }
-
 
     }
 
@@ -87,5 +92,24 @@ public class TitleScreen : MonoBehaviour
         float selectorX = OptionSelector.GetComponent<RectTransform>().anchoredPosition.x;
 
         OptionSelector.GetComponent<RectTransform>().anchoredPosition = new Vector2(selectorX, menuOption.GetComponent<RectTransform>().anchoredPosition.y);
+    }
+
+
+    // Function to move to the character select screen after choosing "Start Game"
+    // This will change eventually, but for now will go straight into character select.
+    public void CharacterSelectScreen()
+    {
+        // Move to character select. 
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Exiting Game");
+
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+        
+        Application.Quit();
     }
 }
