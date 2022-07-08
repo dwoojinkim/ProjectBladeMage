@@ -214,7 +214,7 @@ MonoBehaviour:
   pickNextWaypointDist: 1
   endReachedDistance: 0.2
   alwaysDrawGizmos: 1
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &7228063422729133480
