@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 134bc33004acb064180604b48b2202f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyData: {fileID: 11400000, guid: 79b33c3cf06f34447a0eebd2705d34a8, type: 2}
 --- !u!114 &-1346537572443045481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ MonoBehaviour:
   pickNextWaypointDist: 1
   endReachedDistance: 0.2
   alwaysDrawGizmos: 1
-  slowWhenNotFacingTarget: 0
+  slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &7228063422729133480

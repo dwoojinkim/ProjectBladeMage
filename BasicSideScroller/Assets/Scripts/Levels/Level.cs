@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [SerializeField] private Wave[] waves;
+    [SerializeField] private LevelSO levelData;
+    [SerializeField] private Wave[] waves;  // I probably can get rid of this once I get the LevelSO data working.
+
 
     // Start is called before the first frame update
     void Start()

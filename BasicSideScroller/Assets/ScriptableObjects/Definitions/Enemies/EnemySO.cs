@@ -3,8 +3,10 @@
 [CreateAssetMenu(fileName = "New Enemy", menuName ="Enemies/Enemy")]
 public class EnemySO : ScriptableObject
 {
-    public new string name;
+    public string enemyName;
     public int maxHealth;
     public int damage;
-    public Sprite gameSprite;
+    public RuntimeAnimatorController animController;
+
+
 }

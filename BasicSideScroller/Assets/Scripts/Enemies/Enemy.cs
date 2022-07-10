@@ -7,7 +7,7 @@ using Pathfinding;
 // Contains basic enemy functions and fields common for all enemies
 public class Enemy : MonoBehaviour
 {
-    public Enemy enemyData;
+    public EnemySO enemyData;
 
     public bool IsAlive { get; private set;}
 
