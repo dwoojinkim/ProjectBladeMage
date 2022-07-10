@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class LevelManager : MonoBehaviour
     public GameObject ObstacleSpawner;
 
 
-    private Text GameTimerText;
-    private Text PlayerHPText;
+    private TextMeshProUGUI GameTimerText;
+    private TextMeshProUGUI PlayerHPText;
 
     private float gameTime = 0.0f;
     private int highScore = 0;
@@ -38,8 +39,8 @@ public class LevelManager : MonoBehaviour
         }
 
 
-            GameTimerText = GameTimerObj.GetComponent<Text>();
-            PlayerHPText = PlayerHPObj.GetComponent<Text>();
+            GameTimerText = GameTimerObj.GetComponent<TextMeshProUGUI>();
+            PlayerHPText = PlayerHPObj.GetComponent<TextMeshProUGUI>();
 
             playerResetPos = Player.transform.position;
             cameraResetPos = CameraTracker.transform.position;
@@ -50,7 +51,7 @@ public class LevelManager : MonoBehaviour
     {
         gameTime += Time.deltaTime;
         GameTimerText.text = ((int)gameTime).ToString();
-        PlayerHPText.text = "Player HP: " + Player.GetComponent<Player>().Health.ToString();
+        PlayerHPText.text = "Player HP: " + Player.GetComponent<Player>().HP.ToString();
     }
 
     public void ResetGame()

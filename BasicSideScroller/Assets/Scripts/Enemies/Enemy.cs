@@ -10,13 +10,14 @@ public class Enemy : MonoBehaviour
     public EnemySO enemyData;
 
     public bool IsAlive { get; private set;}
+    public int Damage { get; private set;}
 
     public SpriteRenderer EnemySprite {get; private set;}
     public Collider2D EnemyCollider {get; private set;}
     public AIPath AIPathScript {get; private set;}
 
-    private int maxHP = 10;
-    private int currentHP = 0;
+    private int maxHP;
+    private int currentHP;
 
     private Vector3 startingPos;
  
@@ -30,7 +31,9 @@ public class Enemy : MonoBehaviour
 
         startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
 
+        maxHP = enemyData.maxHP;
         currentHP = maxHP;
+        Damage = enemyData.damage;
         IsAlive = false;
     }
 

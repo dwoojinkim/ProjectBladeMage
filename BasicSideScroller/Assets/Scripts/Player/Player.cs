@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public float normalGravity = 10f;
     public float extraGravity = 20f;
 
-    public int Health {get; private set;}
+    public int HP {get; private set;}
 
     private Rigidbody2D playerRigidbody;
 
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         playerRigidbody = this.GetComponent<Rigidbody2D>();
         playerRigidbody.gravityScale = normalGravity;
 
-        Health = 100;
+        HP = 100;
     }
 
     // Update is called once per frame
@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         else if (col.gameObject.tag == "Enemy" && col.enabled)
         {
             Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
-                Health -= 10;
+                HP -= col.gameObject.GetComponent<Enemy>().Damage;
         }
     }
     
