@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     public Collider2D EnemyCollider {get; private set;}
     public AIPath AIPathScript {get; private set;}
 
+    private AIDestinationSetter AIDestinationSetterScript;
+
     private int maxHP;
     private int currentHP;
 
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour
         EnemySprite = this.transform.GetComponent<SpriteRenderer>();
         EnemyCollider = this.transform.GetComponent<Collider2D>();
         AIPathScript = this.transform.GetComponent<AIPath>();
+        AIDestinationSetterScript = this.transform.GetComponent<AIDestinationSetter>();
 
         startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
 
@@ -99,6 +102,7 @@ public class Enemy : MonoBehaviour
         EnemySprite.enabled = true;
         EnemyCollider.enabled = true;   // This will work for ALL 2d Colliders since the variable is a generic Collider2D type
         AIPathScript.enabled = true;
+        AIDestinationSetterScript.target = LevelManager.LMinstance.Player.transform;
         currentHP = maxHP;
         IsAlive = true;
 
