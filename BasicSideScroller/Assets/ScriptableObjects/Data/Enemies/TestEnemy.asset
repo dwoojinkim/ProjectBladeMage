@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
   enemyName: TestEnemy
-  maxHP: 5
+  maxHP: 10
   damage: 5
   animController: {fileID: 9100000, guid: aa6f5107df20d4b4a8d9090b96ffe5c9, type: 2}

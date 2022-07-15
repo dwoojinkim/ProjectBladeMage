@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
+
+    // DELETE THESE IF GAME RUNS NORMALLY AS THEY ARE ALREADY A PART
+    // OF THE WAVE SRIPTABLE OBJECT
+    /*
     enum SpawnType
     {
         Timer,
@@ -15,7 +19,7 @@ public class Wave : MonoBehaviour
     {
         SpawnBox,
         SpawnPoint
-    }
+    }*/
 
     private enum WaveState
     {
@@ -24,11 +28,15 @@ public class Wave : MonoBehaviour
         WaveComplete
     };
 
-    [SerializeField] private SpawnType WaveSpawnType;
-    [SerializeField] private SpawnLocation SpawnLocationType;
+    [SerializeField] private WaveSO waveData;
 
-    [SerializeField] private GameObject[] enemies;
-    [SerializeField] private GameObject spawnBox;
+    private SpawnType waveSpawnType;
+    private SpawnLocation spawnLocationType;
+
+    private List<GameObject> enemies = new List<GameObject>();
+    //private GameObject spawnBox;
+    private Vector2 spawnBoxDimensions;
+    private Vector2 spawnBoxPosition;
 
     private float timer = 0;
     private WaveState waveState;
@@ -37,6 +45,18 @@ public class Wave : MonoBehaviour
     void Awake()
     {
         waveState = WaveState.Idle;
+
+        waveSpawnType = waveData.waveSpawnType;
+        spawnLocationType = waveData.spawnLocationType;
+        
+        //spawnBox = waveData.spawnBox;
+        spawnBoxDimensions.x = waveData.spawnBoxWidth;
+        spawnBoxDimensions.y = waveData.spawnBoxHeight;
+
+        spawnBoxPosition.x = waveData.spawnBoxPosX;
+        spawnBoxPosition.y = waveData.spawnBoxPosY;
+
+        enemies = InstantiateEnemies(waveData.enemies);
     }
 
     // Update is called once per frame
@@ -45,7 +65,7 @@ public class Wave : MonoBehaviour
         if (waveState == WaveState.Idle || waveState == WaveState.WaveComplete)
         {
             timer += Time.deltaTime;
-            if (timer > 3)
+            if (timer > 1)
             {
                 Debug.Log("Spawning Wave!");
                 waveState = WaveState.WaveStarted;
@@ -61,21 +81,56 @@ public class Wave : MonoBehaviour
         }
     }
 
+    // Copied snippet from user 'chilemanga' (https://answers.unity.com/questions/461588/drawing-a-bounding-box-similar-to-box-collider.html)
+    // It has been modified so the gizmos will be drawn from the ScriptableObject data so it can be seen outside of runtime.
+    // I should be able to modify this to loop through multiple spawnboxes
+    void OnDrawGizmos() 
+    {
+         Gizmos.color = Color.yellow;
+         float wHalf = (waveData.spawnBoxWidth * .5f);
+         float hHalf = (waveData.spawnBoxHeight * .5f);
+         Vector3 topLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+         Vector3 topRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+         Vector3 bottomLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+         Vector3 bottomRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+         Gizmos.DrawLine (topLeftCorner, topRightCorner);
+         Gizmos.DrawLine (topRightCorner, bottomRightCorner);
+         Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
+         Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
+     }
+
+    // Instantiates the list of enemy prefabs from the Wave Scriptable Object
+    private List<GameObject> InstantiateEnemies(GameObject[] enemyPrefabList)
+    {
+        List<GameObject> enemyList = new List<GameObject>();
+        GameObject enemy;
+
+        for(int i = 0; i < enemyPrefabList.Length; i++)
+        {
+            enemy = Instantiate(enemyPrefabList[i]);
+            enemy.SetActive(false);
+            enemyList.Add(enemy);
+        }
+
+        return enemyList;
+    }
+    
     private void SpawnWave()
     {
-        if (enemies.Length > 0)
+        if (enemies.Count > 0)
         {
             foreach (GameObject e in enemies)
             {
-                if (SpawnLocationType == SpawnLocation.SpawnBox)
+                if (spawnLocationType == SpawnLocation.SpawnBox)
                 {
-                    float leftBound = spawnBox.transform.position.x - spawnBox.GetComponent<SpriteRenderer>().bounds.size.x/2f;
-                    float rightBound = spawnBox.transform.position.x + spawnBox.GetComponent<SpriteRenderer>().bounds.size.x/2f;
-                    float bottomBound = spawnBox.transform.position.y - spawnBox.GetComponent<SpriteRenderer>().bounds.size.y/2f;
-                    float topBound = spawnBox.transform.position.y + spawnBox.GetComponent<SpriteRenderer>().bounds.size.y/2f;
+                    float leftBound = spawnBoxPosition.x - spawnBoxDimensions.x/2f;
+                    float rightBound = spawnBoxPosition.x + spawnBoxDimensions.x/2f;
+                    float bottomBound = spawnBoxPosition.y - spawnBoxDimensions.y/2f;
+                    float topBound = spawnBoxPosition.y + spawnBoxDimensions.y/2f;
 
                     Vector2 spawnPos = new Vector2(Random.Range(leftBound, rightBound), Random.Range(bottomBound, topBound));
                     e.GetComponent<Enemy>().SpawnEnemy(spawnPos);
+                    e.SetActive(true);
                 }
                 else
                     e.GetComponent<Enemy>().SpawnEnemy();

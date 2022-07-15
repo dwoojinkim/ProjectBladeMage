@@ -45,19 +45,18 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D obj)
     {
-        Debug.Log(obj.name + " has touched" + this.name);
+        //Debug.Log(obj.name + " has touched" + this.name);
 
         if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Player")
         {
-            Debug.Log("Player has hit an enemy!");
+            //Debug.Log("Player has hit an enemy!");
 
             if (currentHP > 0)
             {
                 currentHP -= obj.GetComponent<Projectile>().Damage;
-
                 if (currentHP <= 0)
                 {
-                    Debug.Log(this.name + " has died!");
+                    //Debug.Log(this.name + " has died!");
                     KillEnemy();
                 }
             }
@@ -98,7 +97,7 @@ public class Enemy : MonoBehaviour
 
         IsAlive = true;
         EnemySprite.enabled = true;
-        EnemyCollider.enabled = true;   // This will work for ALL 2d Collirders since the variable is a generic Collider2D type
+        EnemyCollider.enabled = true;   // This will work for ALL 2d Colliders since the variable is a generic Collider2D type
         AIPathScript.enabled = true;
         currentHP = maxHP;
         IsAlive = true;
