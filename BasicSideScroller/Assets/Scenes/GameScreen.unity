@@ -992,16 +992,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1236368530594978882, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: m_Name
-      value: TopSpawnBox
-      objectReference: {fileID: 0}
-    - target: {fileID: 1236368530594978882, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1483692937261717604, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1061,11 +1051,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestLevel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2928602601254701245, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba6830396e935ff4eb5dc0bf95bb0e8f, type: 3}
@@ -1724,6 +1709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1302061378}
   - component: {fileID: 1302061377}
+  - component: {fileID: 1302061379}
   m_Layer: 0
   m_Name: FlyingShooter
   m_TagString: Untagged
@@ -1775,10 +1761,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.96, y: 0.24}
+  m_Size: {x: 1.5, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1302061378
@@ -1795,6 +1781,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1302061379
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302061376}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2c51e51cd967e404491116e9483ac634, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1357609700
 GameObject:
   m_ObjectHideFlags: 0
