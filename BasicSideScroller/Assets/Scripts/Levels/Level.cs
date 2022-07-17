@@ -29,6 +29,13 @@ public class Level : MonoBehaviour
         levelState = LevelState.LevelStarted;   // Level will actually be started by LevelManager. For testing, it'll be initialzed as started.
         currentWave = -1;                        // currentWave should start at -1 and be set to 0 when started by the LevelManager.    
 
+        // subscribe to WaveStart event. Used for multiple Timer waves in a row. Starts timer on previous wave's spawn.
+        for (int i = 0; i < waves.Length; i++)
+        {
+            waves[i].WaveStart += InitiateNextWave;
+            Debug.Log("Subcribing Wave Event");
+        }
+
         InitiateNextWave();
     }
 
@@ -59,12 +66,16 @@ public class Level : MonoBehaviour
     }
 
     private bool IsLevelComplete()
-    {
+    {   
+        // Code for checking if level is complete here
         return false;
     }
 
     private void InitiateNextWave()
     {
+        if (currentWave < waves.Length && currentWave > 0)
+            waves[currentWave].WaveStart -= InitiateNextWave;
+
         currentWave++;
 
         if (currentWave < waves.Length) // Change to waves.Count when I make it a List rather than an Array.
@@ -72,6 +83,14 @@ public class Level : MonoBehaviour
             //waves[currentWave].gameObject.SetActive(true);
             waves[currentWave].InitiateWave();
         }
+    }
+
+    private void InitiateSubsequentWave()
+    {
+        waves[currentWave].WaveStart -= InitiateSubsequentWave;
+
+        Debug.Log("Starting  subsequent wave!");
+        waves[currentWave+1].InitiateWave();
     }
 
     public void StartLevel()

@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void Notify();  // delegate
+
 public class Wave : MonoBehaviour
 {
-    private enum WaveState
+    public enum WaveState
     {
-        Uninitiated,
-        Idle,
+        Standby,
+        Initiated,
         WaveStarted,
         WaveComplete
     };
+
+    public WaveState CurrentWaveState {get; private set;}
+    public event Notify WaveStart;      // event
 
     [SerializeField] private WaveSO waveData;
 
@@ -23,12 +28,11 @@ public class Wave : MonoBehaviour
     private Vector2 spawnBoxPosition;
 
     private float timer = 0;
-    [SerializeField]private WaveState waveState;
  
     // Start is called before the first frame update
     void Awake()
     {
-        waveState = WaveState.Uninitiated;
+        CurrentWaveState = WaveState.Standby;
 
         waveSpawnType = waveData.waveSpawnType;
         spawnLocationType = waveData.spawnLocationType;
@@ -46,23 +50,21 @@ public class Wave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveState == WaveState.Idle) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
+        if (CurrentWaveState == WaveState.Initiated) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
         {
-            Debug.Log("Timer: " + timer);
-
             timer += Time.deltaTime;
             if (timer > 1)  // Need to change from being hard-coded to be a timer and for only a second
             {
                 Debug.Log("Spawning Wave!");
-                waveState = WaveState.WaveStarted;
+                CurrentWaveState = WaveState.WaveStarted;
                 SpawnWave();
             }
         }
 
-        if (waveState == WaveState.WaveStarted && IsWaveOver())
+        if (CurrentWaveState == WaveState.WaveStarted && IsWaveOver())
         {
             Debug.Log("WAVE IS OVER!!!");
-            waveState = WaveState.WaveComplete;
+            CurrentWaveState = WaveState.WaveComplete;
             timer = 0;
         }
 
@@ -126,6 +128,8 @@ public class Wave : MonoBehaviour
                 else
                     e.GetComponent<Enemy>().SpawnEnemy();
             }
+
+            WaveStart?.Invoke();
         }
     }
 
@@ -144,14 +148,13 @@ public class Wave : MonoBehaviour
     // This may actually not be necessary if I just keep the GameObject inactive.
     public void InitiateWave()
     {
-        waveState = WaveState.Idle;
-        Debug.Log("Initiating Wave!");
+        CurrentWaveState = WaveState.Initiated;
     }
 
     // Used by the 'Level' class to easily check when the wave is complete. 
     public bool IsWaveComplete()
     {
-        if (waveState == WaveState.WaveComplete)
+        if (CurrentWaveState == WaveState.WaveComplete)
             return true;
         
         return false;
