@@ -15,3 +15,4 @@ MonoBehaviour:
   levelName: TestLevel
   waves:
   - {fileID: 9010718583963080238, guid: 7689a93a66c7c7c4ab34a2e084bf28df, type: 3}
+  - {fileID: 9010718583963080238, guid: 4d6b62389d0ed0d4aafc8722a9a3f758, type: 3}

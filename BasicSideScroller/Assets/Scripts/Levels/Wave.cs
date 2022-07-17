@@ -4,25 +4,9 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-
-    // DELETE THESE IF GAME RUNS NORMALLY AS THEY ARE ALREADY A PART
-    // OF THE WAVE SRIPTABLE OBJECT
-    /*
-    enum SpawnType
-    {
-        Timer,
-        EndOfWave,
-        HealthPercentage
-    };
-
-    enum SpawnLocation
-    {
-        SpawnBox,
-        SpawnPoint
-    }*/
-
     private enum WaveState
     {
+        Uninitiated,
         Idle,
         WaveStarted,
         WaveComplete
@@ -32,24 +16,24 @@ public class Wave : MonoBehaviour
 
     private SpawnType waveSpawnType;
     private SpawnLocation spawnLocationType;
+    private EnemyWaveType enemyWaveType;
 
     private List<GameObject> enemies = new List<GameObject>();
-    //private GameObject spawnBox;
     private Vector2 spawnBoxDimensions;
     private Vector2 spawnBoxPosition;
 
     private float timer = 0;
-    private WaveState waveState;
+    [SerializeField]private WaveState waveState;
  
     // Start is called before the first frame update
     void Awake()
     {
-        waveState = WaveState.Idle;
+        waveState = WaveState.Uninitiated;
 
         waveSpawnType = waveData.waveSpawnType;
         spawnLocationType = waveData.spawnLocationType;
+        enemyWaveType = waveData.enemyWaveType;
         
-        //spawnBox = waveData.spawnBox;
         spawnBoxDimensions.x = waveData.spawnBoxWidth;
         spawnBoxDimensions.y = waveData.spawnBoxHeight;
 
@@ -62,10 +46,12 @@ public class Wave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (waveState == WaveState.Idle || waveState == WaveState.WaveComplete)
+        if (waveState == WaveState.Idle) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
         {
+            Debug.Log("Timer: " + timer);
+
             timer += Time.deltaTime;
-            if (timer > 1)
+            if (timer > 1)  // Need to change from being hard-coded to be a timer and for only a second
             {
                 Debug.Log("Spawning Wave!");
                 waveState = WaveState.WaveStarted;
@@ -79,6 +65,7 @@ public class Wave : MonoBehaviour
             waveState = WaveState.WaveComplete;
             timer = 0;
         }
+
     }
 
     // Copied snippet from user 'chilemanga' (https://answers.unity.com/questions/461588/drawing-a-bounding-box-similar-to-box-collider.html)
@@ -86,17 +73,21 @@ public class Wave : MonoBehaviour
     // I should be able to modify this to loop through multiple spawnboxes
     void OnDrawGizmos() 
     {
-         Gizmos.color = Color.yellow;
-         float wHalf = (waveData.spawnBoxWidth * .5f);
-         float hHalf = (waveData.spawnBoxHeight * .5f);
-         Vector3 topLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY + hHalf, 1f);
-         Vector3 topRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY + hHalf, 1f);
-         Vector3 bottomLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY - hHalf, 1f);
-         Vector3 bottomRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY - hHalf, 1f);
-         Gizmos.DrawLine (topLeftCorner, topRightCorner);
-         Gizmos.DrawLine (topRightCorner, bottomRightCorner);
-         Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
-         Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
+        if (spawnLocationType == SpawnLocation.SpawnBox)
+        {
+            Gizmos.color = Color.yellow;
+            float wHalf = (waveData.spawnBoxWidth * .5f);
+            float hHalf = (waveData.spawnBoxHeight * .5f);
+            Vector3 topLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+            Vector3 topRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+            Vector3 bottomLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+            Vector3 bottomRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+            Gizmos.DrawLine (topLeftCorner, topRightCorner);
+            Gizmos.DrawLine (topRightCorner, bottomRightCorner);
+            Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
+            Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
+        }
+         
      }
 
     // Instantiates the list of enemy prefabs from the Wave Scriptable Object
@@ -138,7 +129,7 @@ public class Wave : MonoBehaviour
         }
     }
 
-    public bool IsWaveOver()
+    private bool IsWaveOver()
     {
         foreach (GameObject e in enemies)
         {
@@ -148,4 +139,22 @@ public class Wave : MonoBehaviour
 
         return true;
     }
+
+    // Method used by the 'Level' class to initiate the wave
+    // This may actually not be necessary if I just keep the GameObject inactive.
+    public void InitiateWave()
+    {
+        waveState = WaveState.Idle;
+        Debug.Log("Initiating Wave!");
+    }
+
+    // Used by the 'Level' class to easily check when the wave is complete. 
+    public bool IsWaveComplete()
+    {
+        if (waveState == WaveState.WaveComplete)
+            return true;
+        
+        return false;
+    }
+
 }
