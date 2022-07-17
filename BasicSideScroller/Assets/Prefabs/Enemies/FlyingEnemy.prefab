@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -1156181775874074998}
   - component: {fileID: 4638179589222278087}
   - component: {fileID: 7990588174641530331}
-  - component: {fileID: 8951869921064381776}
+  - component: {fileID: 8876430399230884661}
   - component: {fileID: -1828944937810403879}
   - component: {fileID: -1346537572443045481}
   - component: {fileID: 8672678146745079743}
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!50 &8951869921064381776
+--- !u!50 &8876430399230884661
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -144,7 +144,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &-1828944937810403879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 0.5

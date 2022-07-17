@@ -21,7 +21,7 @@ MonoBehaviour:
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  spawnBoxPosX: 6.39
-  spawnBoxPosY: 7.61
-  spawnBoxWidth: 5
-  spawnBoxHeight: 5
+  spawnBoxPosX: 0
+  spawnBoxPosY: 6.37
+  spawnBoxWidth: 17.76
+  spawnBoxHeight: 2.6

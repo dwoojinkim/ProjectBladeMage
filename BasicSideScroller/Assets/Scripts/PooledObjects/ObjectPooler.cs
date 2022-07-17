@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Copied code from Brackeys for ObjectPooling.
-// Will be modifying for my specific needs once I get a better feel for it.
-public class ObjectPooler : MonoBehaviour
+// Modified to be a static class for more efficiency (Courtesy of Nocturne on YouTube)
+public static class ObjectPooler
 {
-    [System.Serializable]
     public class Pool
     {
         public string tag;
@@ -14,23 +13,14 @@ public class ObjectPooler : MonoBehaviour
         public int size;
     }
 
-    #region Singleton
+    public static List<Pool> pools;
 
-    public static ObjectPooler Instance;
+    public static Dictionary<string, Queue<GameObject>> poolDictionary;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    public static bool Initialized {get; private set;}
 
-    #endregion
-
-    public List<Pool> pools;
-
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    // Start is called before the first frame update
-    void Start()
+    // Have oa script run this initialization on their Awake method
+    public static void RunttimeInitializeOnLoad()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
@@ -40,17 +30,21 @@ public class ObjectPooler : MonoBehaviour
 
             for (int i = 0; i < pool.size; i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Object.Instantiate(pool.prefab);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
 
             poolDictionary.Add(pool.tag, objectPool);
         }
+
+        Initialized = true;
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+    public static GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
+
+        // Change this to a try-catch
         if (!poolDictionary.ContainsKey(tag))
         {
             Debug.LogWarning("Pool with tag " + tag + "doesn't exist.");
