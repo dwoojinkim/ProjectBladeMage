@@ -27,7 +27,8 @@ public class Wave : MonoBehaviour
     private Vector2 spawnBoxDimensions;
     private Vector2 spawnBoxPosition;
 
-    private float timer = 0;
+    private float timer;
+    private float timeUntilSpawn;
  
     // Start is called before the first frame update
     void Awake()
@@ -38,6 +39,9 @@ public class Wave : MonoBehaviour
         spawnLocationType = waveData.spawnLocationType;
         enemyWaveType = waveData.enemyWaveType;
         
+        timer = 0;
+        timeUntilSpawn = waveData.TimeUntilSpawn;
+
         spawnBoxDimensions.x = waveData.spawnBoxWidth;
         spawnBoxDimensions.y = waveData.spawnBoxHeight;
 
@@ -53,7 +57,7 @@ public class Wave : MonoBehaviour
         if (CurrentWaveState == WaveState.Initiated) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
         {
             timer += Time.deltaTime;
-            if (timer > 1)  // Need to change from being hard-coded to be a timer and for only a second
+            if (timer > timeUntilSpawn)
             {
                 Debug.Log("Spawning Wave!");
                 CurrentWaveState = WaveState.WaveStarted;

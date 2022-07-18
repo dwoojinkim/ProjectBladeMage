@@ -27,6 +27,8 @@ public class WaveSO : ScriptableObject
     public SpawnLocation spawnLocationType;
     public EnemyWaveType enemyWaveType;
 
+    public float TimeUntilSpawn;
+
     public GameObject[] enemies;
 
     public float spawnBoxPosX;

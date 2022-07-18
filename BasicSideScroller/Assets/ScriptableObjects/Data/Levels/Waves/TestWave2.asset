@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveSpawnType: 0
   spawnLocationType: 0
+  enemyWaveType: 0
+  TimeUntilSpawn: 5
   enemies:
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
@@ -22,7 +24,7 @@ MonoBehaviour:
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  spawnBoxPosX: 10.4
+  spawnBoxPosX: 13.1
   spawnBoxPosY: 2.2
   spawnBoxWidth: 2.66
-  spawnBoxHeight: 10.87
+  spawnBoxHeight: 13.92
