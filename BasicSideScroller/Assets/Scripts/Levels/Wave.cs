@@ -158,10 +158,7 @@ public class Wave : MonoBehaviour
     // Used by the 'Level' class to easily check when the wave is complete. 
     public bool IsWaveComplete()
     {
-        if (CurrentWaveState == WaveState.WaveComplete)
-            return true;
-        
-        return false;
+        return CurrentWaveState == WaveState.WaveComplete;
     }
 
 }

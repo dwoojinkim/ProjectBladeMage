@@ -52,5 +52,6 @@ public class Bullet : MonoBehaviour
     {
         IsEnabled = false;
         transform.position = new Vector3(1000, 1000, 0);
+        this.gameObject.SetActive(false);
     }
 }

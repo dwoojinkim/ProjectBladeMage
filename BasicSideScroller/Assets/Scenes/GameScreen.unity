@@ -521,7 +521,7 @@ MonoBehaviour:
   DebugTextObj: {fileID: 2119173353}
   SlashHitbox: {fileID: 1458698056}
   SmashHitbox: {fileID: 2026418947}
-  jumpVelocity: 16
+  jumpVelocity: 22
   jumpGravity: 4
   normalGravity: 9
   extraGravity: 25
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d707102448456dc4594611ba7ec5b053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolCount: 25
+  poolCount: 10
   bulletPrefab: {fileID: 6778313813630796566, guid: 6ccaf77c4f9fc1d42b0a8fd423f3bb0c,
     type: 3}
 --- !u!1 &450375453

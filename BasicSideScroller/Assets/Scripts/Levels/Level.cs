@@ -44,7 +44,11 @@ public class Level : MonoBehaviour
     {
         if (levelState == LevelState.LevelStarted)
         {
-            
+            if (IsLevelComplete())
+            {
+                levelState = LevelState.LevelComplete;
+                Debug.Log("LEVEL COMPLETE!");
+            }
         }
     }
 
@@ -67,8 +71,13 @@ public class Level : MonoBehaviour
 
     private bool IsLevelComplete()
     {   
-        // Code for checking if level is complete here
-        return false;
+        foreach(Wave wave in waves)
+        {
+            if (!wave.IsWaveComplete())
+                return false;
+        }
+
+        return true;
     }
 
     private void InitiateNextWave()

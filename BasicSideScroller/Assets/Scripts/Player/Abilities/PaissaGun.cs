@@ -6,7 +6,7 @@ using UnityEngine;
 // Basic gun logic that will target the closest enemy to the player
 public class PaissaGun : MonoBehaviour
 {
-    [SerializeField] int poolCount = 50;     // Number of bullets in the pool
+    [SerializeField] int poolCount = 10;     // Number of bullets in the pool
     [SerializeField] GameObject bulletPrefab;
     private List<GameObject> bulletPool = new List<GameObject>();
 
@@ -49,6 +49,7 @@ public class PaissaGun : MonoBehaviour
         {
             bullet = Instantiate(bulletPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
             bullet.GetComponent<Projectile>().CreateProjectile(this.tag, bulletDmg);
+            bullet.SetActive(false);
             bulletPool.Add(bullet);
         }
     }
@@ -57,6 +58,7 @@ public class PaissaGun : MonoBehaviour
     private void FireBullet(GameObject bullet)
     {
         bullet.transform.position = this.transform.position;
+        bullet.SetActive(true);
         bullet.GetComponent<Bullet>().IsEnabled = true;
         bullet.GetComponent<Bullet>().FireBullet(closestEnemy.GetDirectionVector());
     }

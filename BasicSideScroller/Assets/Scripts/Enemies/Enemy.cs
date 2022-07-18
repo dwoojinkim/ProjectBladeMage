@@ -82,6 +82,8 @@ public class Enemy : MonoBehaviour
         EnemySprite.enabled = false;
         EnemyCollider.enabled = false;
         AIPathScript.enabled = false;
+
+        this.gameObject.SetActive(false);
     }
 
     public void SpawnEnemy()
