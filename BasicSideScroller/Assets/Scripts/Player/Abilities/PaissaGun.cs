@@ -11,7 +11,7 @@ public class PaissaGun : MonoBehaviour
     private List<GameObject> bulletPool = new List<GameObject>();
 
     private float bulletDelay = .1f;
-    private float bulletTimer = 0f;
+    private float bulletTimer = 0f;     // Timer counting time since the last bullet was fired
     private int bulletDmg = 1;
     private ClosestEnemy closestEnemy;
 
@@ -60,6 +60,6 @@ public class PaissaGun : MonoBehaviour
         bullet.transform.position = this.transform.position;
         bullet.SetActive(true);
         bullet.GetComponent<Bullet>().IsEnabled = true;
-        bullet.GetComponent<Bullet>().FireBullet(closestEnemy.GetDirectionVector());
+        bullet.GetComponent<Bullet>().FireProjectile(closestEnemy.GetDirectionVector());
     }
 }
