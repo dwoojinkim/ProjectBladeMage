@@ -79,10 +79,8 @@ public class Projectile : MonoBehaviour
     }
 
     // Updates position of bullet
-    protected void MoveProjectile()
+    protected virtual void MoveProjectile()
     {
-        Debug.Log("speed: " + speed); 
-
         transform.position += direction * speed * Time.deltaTime;
 
         // Placeholder reset condition. Will need to be relative to screen rather than hard coded values

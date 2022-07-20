@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8672678146745079743}
   - component: {fileID: 8294334433209375923}
   - component: {fileID: 7228063422729133480}
+  - component: {fileID: -5017861839978130117}
   m_Layer: 8
   m_Name: FlyingShooter
   m_TagString: Enemy
@@ -255,3 +256,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+--- !u!114 &-5017861839978130117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9139961831626748919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13beb683822ca38479b3fe3f550aae08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aiPath: {fileID: 8294334433209375923}
