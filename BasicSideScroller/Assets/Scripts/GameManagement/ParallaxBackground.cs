@@ -32,10 +32,11 @@ public class ParallaxBackground : MonoBehaviour
         transform.position += new Vector3(deltaMovement.x * parallaxEffectMultiplier.x, deltaMovement.y * parallaxEffectMultiplier.y);
         lastCameraPosition = cameraTrackerTransform.position;
 
+        // Reset the background position to make the background SEEM SEAMless
         if (Mathf.Abs(mainCamera.transform.position.x - transform.position.x) >= textureUnitSizeX)
         {
-            float offsetPositionX = (mainCamera.transform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(mainCamera.transform.position.x + offsetPositionX, transform.position.y);
+            float offsetPositionX = -((mainCamera.transform.position.x - transform.position.x) % textureUnitSizeX);
+            transform.position = new Vector3(offsetPositionX, transform.position.y);
         }
     }
 
