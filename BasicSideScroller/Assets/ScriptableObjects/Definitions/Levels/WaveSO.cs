@@ -28,6 +28,7 @@ public class WaveSO : ScriptableObject
     public EnemyWaveType enemyWaveType;
 
     public float TimeUntilSpawn;
+    public float SuccessiveUnitDelay;   // If not all enemies in a wave should be spawned at once, can be delayed (in seconds)
 
     public GameObject[] enemies;
 

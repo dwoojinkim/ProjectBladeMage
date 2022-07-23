@@ -29,6 +29,8 @@ public class Wave : MonoBehaviour
 
     private float timer;
     private float timeUntilSpawn;
+    private float successiveUnitDelay;
+ 
  
     // Start is called before the first frame update
     void Awake()
@@ -41,6 +43,7 @@ public class Wave : MonoBehaviour
         
         timer = 0;
         timeUntilSpawn = waveData.TimeUntilSpawn;
+        successiveUnitDelay = waveData.SuccessiveUnitDelay;
 
         spawnBoxDimensions.x = waveData.spawnBoxWidth;
         spawnBoxDimensions.y = waveData.spawnBoxHeight;
@@ -61,7 +64,7 @@ public class Wave : MonoBehaviour
             {
                 Debug.Log("Spawning Wave!");
                 CurrentWaveState = WaveState.WaveStarted;
-                SpawnWave();
+                StartCoroutine(SpawnWave());
             }
         }
 
@@ -112,7 +115,7 @@ public class Wave : MonoBehaviour
         return enemyList;
     }
     
-    private void SpawnWave()
+    IEnumerator SpawnWave()
     {
         if (enemies.Count > 0)
         {
@@ -131,6 +134,9 @@ public class Wave : MonoBehaviour
                 }
                 else
                     e.GetComponent<Enemy>().SpawnEnemy();
+
+                // successiveUnitDelay is set in seconds, so multiplying by 1000 for milliseconds.
+                yield return new WaitForSeconds(successiveUnitDelay);
             }
 
             WaveStart?.Invoke();

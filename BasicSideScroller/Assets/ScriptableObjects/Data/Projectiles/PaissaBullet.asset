@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1572f2a4e08776046b0076945ec341d0, type: 3}
   m_Name: PaissaBullet
   m_EditorClassIdentifier: 
-  projectileSpeed: 50
+  projectileSpeed: 30
   baseDamage: 5
   maxNumHits: 0

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// Script used by the DummyCamera to simulate camera moving to the side
 public class CameraScroller : MonoBehaviour
 {
     private const float MAX_SPEED_CAP = 10.0f;
