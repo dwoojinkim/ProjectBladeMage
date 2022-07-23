@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4638179589222278087}
   - component: {fileID: 7990588174641530331}
   - component: {fileID: 8876430399230884661}
-  - component: {fileID: -1828944937810403879}
+  - component: {fileID: 8577132339930276156}
   - component: {fileID: -1346537572443045481}
   - component: {fileID: 8672678146745079743}
   - component: {fileID: 260761935616503000}
@@ -145,7 +145,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-1828944937810403879
+--- !u!114 &8577132339930276156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,10 +154,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9139961831626748919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 134bc33004acb064180604b48b2202f7, type: 3}
+  m_Script: {fileID: 11500000, guid: eb3daf3bdf6cdb1448db878f99a74fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 79b33c3cf06f34447a0eebd2705d34a8, type: 2}
+  checkDistance: 35
 --- !u!114 &-1346537572443045481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,5 +212,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 500
+  speed: 250
   nextWaypointDistance: 2

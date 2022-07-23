@@ -16,17 +16,28 @@ public class Enemy : MonoBehaviour
     public Collider2D EnemyCollider {get; private set;}
     public AIPath AIPathScript {get; private set;}
 
-    private AIDestinationSetter AIDestinationSetterScript;
-    private EnemyAI enemyAIScript;
+    protected AIDestinationSetter AIDestinationSetterScript;
+    protected EnemyAI enemyAIScript;
 
-    private int maxHP;
-    private int currentHP;
+    protected int maxHP;
+    protected int currentHP;
 
-    private Vector3 startingPos;
+    protected Vector3 startingPos;
  
 
     // Start is called before the first frame update
     void Awake()
+    {
+        InitializeEnemy();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    protected void InitializeEnemy()
     {
         EnemySprite = this.transform.GetComponent<SpriteRenderer>();
         EnemyCollider = this.transform.GetComponent<Collider2D>();
@@ -41,12 +52,6 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         Damage = enemyData.damage;
         IsAlive = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -84,6 +89,7 @@ public class Enemy : MonoBehaviour
 
         EnemySprite.enabled = false;
         EnemyCollider.enabled = false;
+        enemyAIScript.enabled = false;
         //AIPathScript.enabled = false;
 
         this.gameObject.SetActive(false);
