@@ -18,6 +18,7 @@ public class Wave : MonoBehaviour
     public event Notify WaveStart;      // event
 
     [SerializeField] private WaveSO waveData;
+    [SerializeField] private WaveRuntimeSet activeWaveSet;
 
     private SpawnType waveSpawnType;
     private SpawnLocation spawnLocationType;
@@ -63,6 +64,7 @@ public class Wave : MonoBehaviour
             if (timer > timeUntilSpawn)
             {
                 Debug.Log("Spawning Wave!");
+                activeWaveSet.Add(this);
                 CurrentWaveState = WaveState.WaveStarted;
                 StartCoroutine(SpawnWave());
             }
@@ -150,6 +152,8 @@ public class Wave : MonoBehaviour
             if (e.GetComponent<Enemy>().IsAlive)
                 return false;
         }
+
+        activeWaveSet.Remove(this);
 
         return true;
     }

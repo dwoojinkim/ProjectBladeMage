@@ -118,6 +118,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9010718583963080238, guid: 7689a93a66c7c7c4ab34a2e084bf28df,
+        type: 3}
+      propertyPath: activeWaveSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7689a93a66c7c7c4ab34a2e084bf28df, type: 3}
 --- !u!4 &1483692936984194320 stripped

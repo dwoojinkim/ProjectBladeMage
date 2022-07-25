@@ -8,6 +8,7 @@ using Pathfinding;
 public class Enemy : MonoBehaviour
 {
     public EnemySO enemyData;
+    public EnemyRuntimeSet ActiveEnemiesSet;
 
     public bool IsAlive { get; private set;}
     public int Damage { get; private set;}
@@ -52,6 +53,8 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         Damage = enemyData.damage;
         IsAlive = false;
+
+        ActiveEnemiesSet.Add(this);
     }
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -91,6 +94,7 @@ public class Enemy : MonoBehaviour
         EnemyCollider.enabled = false;
         enemyAIScript.enabled = false;
         //AIPathScript.enabled = false;
+        ActiveEnemiesSet.Remove(this);
 
         this.gameObject.SetActive(false);
     }
