@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     {
         if (LMinstance == null)
         {
+            Debug.Log("Initializing LevelManager...");
             LMinstance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -37,7 +38,6 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
 
             GameTimerText = GameTimerObj.GetComponent<TextMeshProUGUI>();
             PlayerHPText = PlayerHPObj.GetComponent<TextMeshProUGUI>();

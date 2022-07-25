@@ -15,7 +15,7 @@ MonoBehaviour:
   waveSpawnType: 0
   spawnLocationType: 0
   enemyWaveType: 0
-  TimeUntilSpawn: 1
+  TimeUntilSpawn: 3
   SuccessiveUnitDelay: 1
   enemies:
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}

@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private const float MAX_SPEED_CAP = 25.0f;
     private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
+    public FloatPositionVariable playerPositionTracker;
+
     public GameObject DebugTextObj;
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
@@ -56,6 +58,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        playerPositionTracker.SetVector3Value(transform.position);
+        
         SlashCheck();
         SmashCheck();
     }
