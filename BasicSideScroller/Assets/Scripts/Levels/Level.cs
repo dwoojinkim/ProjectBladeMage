@@ -34,6 +34,7 @@ public class Level : MonoBehaviour
         {
             waves[i].WaveStart += InitiateNextWave;
             Debug.Log("Subcribing Wave Event");
+            waves[i].gameObject.SetActive(false);
         }
 
         InitiateNextWave();
@@ -89,7 +90,7 @@ public class Level : MonoBehaviour
 
         if (currentWave < waves.Length) // Change to waves.Count when I make it a List rather than an Array.
         {
-            //waves[currentWave].gameObject.SetActive(true);
+            waves[currentWave].gameObject.SetActive(true);
             waves[currentWave].InitiateWave();
         }
     }

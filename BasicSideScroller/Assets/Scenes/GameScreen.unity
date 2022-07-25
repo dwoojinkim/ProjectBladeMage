@@ -992,6 +992,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1483692936984194322, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1483692937261717604, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1051,6 +1056,29 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestLevel
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663511603486474369, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
+        type: 3}
+      propertyPath: activeWaveSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
+        type: 2}
+    - target: {fileID: 2021384580478677710, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
+        type: 3}
+      propertyPath: activeWaveSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
+        type: 2}
+    - target: {fileID: 2928602601254701245, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
+        type: 3}
+      propertyPath: activeWaveSet
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
+        type: 2}
+    - target: {fileID: 3109353653353178414, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba6830396e935ff4eb5dc0bf95bb0e8f, type: 3}

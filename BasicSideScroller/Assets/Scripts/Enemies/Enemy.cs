@@ -38,6 +38,16 @@ public class Enemy : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        ActiveEnemiesSet.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActiveEnemiesSet.Remove(this);
+    }
+
     protected void InitializeEnemy()
     {
         EnemySprite = this.transform.GetComponent<SpriteRenderer>();
@@ -53,8 +63,6 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         Damage = enemyData.damage;
         IsAlive = false;
-
-        ActiveEnemiesSet.Add(this);
     }
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -94,7 +102,6 @@ public class Enemy : MonoBehaviour
         EnemyCollider.enabled = false;
         enemyAIScript.enabled = false;
         //AIPathScript.enabled = false;
-        ActiveEnemiesSet.Remove(this);
 
         this.gameObject.SetActive(false);
     }

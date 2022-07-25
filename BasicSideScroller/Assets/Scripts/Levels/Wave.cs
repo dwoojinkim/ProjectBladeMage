@@ -64,7 +64,6 @@ public class Wave : MonoBehaviour
             if (timer > timeUntilSpawn)
             {
                 Debug.Log("Spawning Wave!");
-                activeWaveSet.Add(this);
                 CurrentWaveState = WaveState.WaveStarted;
                 StartCoroutine(SpawnWave());
             }
@@ -75,8 +74,18 @@ public class Wave : MonoBehaviour
             Debug.Log("WAVE IS OVER!!!");
             CurrentWaveState = WaveState.WaveComplete;
             timer = 0;
+            this.gameObject.SetActive(false);
         }
+    }
 
+    private void OnEnable()
+    {
+        activeWaveSet.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        activeWaveSet.Remove(this);
     }
 
     // Copied snippet from user 'chilemanga' (https://answers.unity.com/questions/461588/drawing-a-bounding-box-similar-to-box-collider.html)
