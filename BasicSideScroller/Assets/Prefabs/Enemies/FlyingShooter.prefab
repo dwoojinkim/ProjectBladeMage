@@ -162,6 +162,8 @@ MonoBehaviour:
   numberOfBullets: 2
   bulletPrefab: {fileID: 6778313813630796566, guid: 6ccaf77c4f9fc1d42b0a8fd423f3bb0c,
     type: 3}
+  playerPositionTracker: {fileID: 11400000, guid: 8a664650663b7aa40bba686975707534,
+    type: 2}
   checkDistance: 10
 --- !u!114 &-1346537572443045481
 MonoBehaviour:
