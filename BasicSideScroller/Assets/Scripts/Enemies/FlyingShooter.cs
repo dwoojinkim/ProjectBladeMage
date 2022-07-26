@@ -31,11 +31,13 @@ public class FlyingShooter : ShootingEnemy
             if (!bullet.activeSelf)
             {
                 Debug.Log("FlyingShooter is shooting from: " + this.transform.position);
-
                 bullet.transform.position = this.transform.position;
+
+                Vector3 playerDirection = (playerPositionTracker.vector3Value - bullet.transform.position).normalized;// Vector3 variable to get direction from bullet to player. maybe something like (bullet.transform.position - playerPositionTracker.vector3Value)
+
                 bullet.SetActive(true);
                 bullet.GetComponent<Bullet>().IsEnabled = true;
-                bullet.GetComponent<Bullet>().FireProjectile(playerPositionTracker.vector3Value.normalized);
+                bullet.GetComponent<Bullet>().FireProjectile(playerDirection);
 
                 cooldownTimer = 0;
                 return;
