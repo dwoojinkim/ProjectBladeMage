@@ -160,11 +160,11 @@ MonoBehaviour:
   enemyData: {fileID: 11400000, guid: 79b33c3cf06f34447a0eebd2705d34a8, type: 2}
   ActiveEnemiesSet: {fileID: 11400000, guid: 51e04bb01c5c5d1449c4d9271955a7aa, type: 2}
   numberOfBullets: 1
-  bulletPrefab: {fileID: 6778313813630796566, guid: 6ccaf77c4f9fc1d42b0a8fd423f3bb0c,
+  bulletPrefab: {fileID: 7599636218046928567, guid: f86986f671dc70f4aa4e12513a6e9285,
     type: 3}
   playerPositionTracker: {fileID: 11400000, guid: 8a664650663b7aa40bba686975707534,
     type: 2}
-  attackRange: 25
+  attackRange: 15
 --- !u!114 &-1346537572443045481
 MonoBehaviour:
   m_ObjectHideFlags: 0
