@@ -32,16 +32,16 @@ public class Projectile : MonoBehaviour
     void OnTriggerEnter2D(Collider2D obj)
     {
         // Now taking into consideration any piercing projectiles with numHits
-        if (obj.tag == "Enemy")
-        {
-            if (numHits > 0)
-                numHits--;
-            else
-            {
-                numHits = 0;
-                Reset();
-            }
-        }
+        // if (obj.tag == "Enemy")
+        // {
+        //     if (numHits > 0)
+        //         numHits--;
+        //     else
+        //     {
+        //         numHits = 0;
+        //         Reset();
+        //     }
+        // }
     }
 
     protected void InitializeProjectile()

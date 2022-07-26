@@ -15,7 +15,7 @@ public class ShootingEnemy : Enemy
     protected List<GameObject> bullets = new List<GameObject>();     // Using generic bullet for testing. Will be different later.
     protected Transform player;
 
-    [SerializeField] protected float checkDistance;
+    [SerializeField] protected float attackRange;
 
     // Start is called before the first frame update
     void Awake()
@@ -26,7 +26,7 @@ public class ShootingEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (IsPlayerCloseEnough(checkDistance))
+        if (IsPlayerCloseEnough(attackRange))
             Debug.Log("Player is close enough to " + this.name);
     }
 
@@ -58,5 +58,10 @@ public class ShootingEnemy : Enemy
             bullet.SetActive(false);
             bullets.Add(bullet);
         }
+    }
+
+    virtual protected void Shoot()
+    {
+        
     }
 }

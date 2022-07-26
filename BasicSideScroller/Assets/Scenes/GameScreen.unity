@@ -478,7 +478,7 @@ Transform:
   - {fileID: 1458698057}
   - {fileID: 2026418948}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &357309446
 BoxCollider2D:
@@ -1002,7 +1002,7 @@ PrefabInstance:
     - target: {fileID: 1483692937261717604, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1483692937261717604, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
         type: 3}
@@ -1117,7 +1117,7 @@ Transform:
   - {fileID: 1991387710}
   - {fileID: 1113268874}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031008478
 GameObject:
@@ -1597,7 +1597,7 @@ Transform:
   m_LocalScale: {x: 29.02, y: 7.7000003, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1357609703
 Rigidbody2D:

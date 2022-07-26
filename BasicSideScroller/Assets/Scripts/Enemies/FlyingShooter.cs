@@ -16,7 +16,7 @@ public class FlyingShooter : ShootingEnemy
     {
         if (cooldownTimer >= shootCooldown)
         {
-            if (IsPlayerCloseEnough(checkDistance))
+            if (IsPlayerCloseEnough(attackRange))
                 Shoot();
         }
 
@@ -24,11 +24,23 @@ public class FlyingShooter : ShootingEnemy
     }
 
     // So anyway, I started blasting
-    private void Shoot()
+    protected override void Shoot()
     {
-        Debug.Log("FlyingShooter is shooting!");
+        foreach (GameObject bullet in bullets)
+        {
+            if (!bullet.activeSelf)
+            {
+                Debug.Log("FlyingShooter is shooting from: " + this.transform.position);
 
-        cooldownTimer = 0;
+                bullet.transform.position = this.transform.position;
+                bullet.SetActive(true);
+                bullet.GetComponent<Bullet>().IsEnabled = true;
+                bullet.GetComponent<Bullet>().FireProjectile(playerPositionTracker.vector3Value.normalized);
+
+                cooldownTimer = 0;
+                return;
+            }
+        }
     }
 
 }
