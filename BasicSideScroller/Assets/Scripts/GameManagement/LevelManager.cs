@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
     {
         gameTime += Time.deltaTime;
         GameTimerText.text = ((int)gameTime).ToString();
-        PlayerHPText.text = "Player HP: " + Player.GetComponent<Player>().HP.ToString();
+        //PlayerHPText.text = "Player HP: " + Player.GetComponent<Player>().HP.ToString();
     }
 
     public void ResetGame()

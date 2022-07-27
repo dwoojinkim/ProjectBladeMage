@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public GameObject DebugTextObj;
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
+    public FloatVariable playerHP;
 
     public float jumpVelocity = 7.5f;
     public float jumpGravity = 1f;
@@ -59,6 +60,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         playerPositionTracker.SetVector3Value(transform.position);
+        playerHP.SetValue(HP);
         
         SlashCheck();
         SmashCheck();
