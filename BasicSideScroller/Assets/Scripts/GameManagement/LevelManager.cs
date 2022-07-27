@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour
     {
         if (LMinstance == null)
         {
-            Debug.Log("Initializing LevelManager...");
             LMinstance = this;
             DontDestroyOnLoad(gameObject);
         }

@@ -29,23 +29,31 @@ public class Projectile : MonoBehaviour
 
     }
 
+    // Checking who shoots and gets hit can probably be done more optimally with Scriptable Object Sets
     void OnTriggerEnter2D(Collider2D obj)
     {
         // Now taking into consideration any piercing projectiles with numHits
         if (Owner == "Player")
         {
             if (obj.tag == "Enemy")
-            {
-                if (numHits > 0)
-                    numHits--;
-                else
-                {
-                    numHits = 0;
-                    Reset();
-                }
-            }
+                ReduceProjectileHits();
         }
+        else if (Owner == "Enemy")
+        {
+            if (obj.tag == "Player")
+                ReduceProjectileHits();
+        }
+    }
 
+    protected void ReduceProjectileHits()
+    {
+        if (numHits > 0)
+            numHits--;
+        else
+        {
+            numHits = 0;
+            Reset();
+        }
     }
 
     protected void InitializeProjectile()

@@ -80,10 +80,29 @@ public class Player : MonoBehaviour
         else if (col.gameObject.tag == "Enemy" && col.enabled)
         {
             Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
-                HP -= col.gameObject.GetComponent<Enemy>().Damage;
+            DamagePlayer(col.gameObject.GetComponent<Enemy>().Damage); // GetComponent call is bad okay? Find another method to extract this data?
         }
     }
     
+    private void OnTriggerEnter2D(Collider2D obj)
+    {
+        if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Enemy")
+        {
+            if (HP > 0)
+                DamagePlayer(obj.GetComponent<Projectile>().Damage); // GetComponent call is bad okay? Find another method to extract this data?
+        }
+    }
+
+    private void DamagePlayer(int damage)
+    {
+        HP -= damage;
+
+        if (HP <= 0)
+        {
+            // Kill Player
+            Debug.Log("Player has died!");
+        }
+    }
 
     public void SetDebugText(string text)
     {

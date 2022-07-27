@@ -8,7 +8,6 @@ public class FlyingShooter : ShootingEnemy
     void Awake()
     {
         InitializeShootingEnemy();
-        shootCooldown = 1f;
     }
 
     // Update is called once per frame
@@ -30,7 +29,6 @@ public class FlyingShooter : ShootingEnemy
         {
             if (!bullet.activeSelf)
             {
-                Debug.Log("FlyingShooter is shooting from: " + this.transform.position);
                 bullet.transform.position = this.transform.position;
 
                 Vector3 playerDirection = (playerPositionTracker.vector3Value - bullet.transform.position).normalized;// Vector3 variable to get direction from bullet to player. maybe something like (bullet.transform.position - playerPositionTracker.vector3Value)

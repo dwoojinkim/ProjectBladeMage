@@ -164,6 +164,7 @@ MonoBehaviour:
     type: 3}
   playerPositionTracker: {fileID: 11400000, guid: 8a664650663b7aa40bba686975707534,
     type: 2}
+  shootCooldown: 2
   attackRange: 15
 --- !u!114 &-1346537572443045481
 MonoBehaviour:

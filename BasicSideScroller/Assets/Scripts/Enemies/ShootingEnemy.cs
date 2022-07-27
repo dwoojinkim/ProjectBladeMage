@@ -8,8 +8,8 @@ public class ShootingEnemy : Enemy
     public int numberOfBullets;
     [SerializeField] protected GameObject bulletPrefab;
     [SerializeField] protected FloatPositionVariable playerPositionTracker;
-
-    protected float shootCooldown;
+    [SerializeField] protected float shootCooldown;
+    
     protected float cooldownTimer;
 
     protected List<GameObject> bullets = new List<GameObject>();     // Using generic bullet for testing. Will be different later.
