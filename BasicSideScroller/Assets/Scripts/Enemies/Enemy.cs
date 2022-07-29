@@ -132,4 +132,10 @@ public class Enemy : MonoBehaviour
 
         Debug.Log("Spawning enemy!");
     }
+
+    // WARNING: This method is used to detroy the enemy GameObject. Use KillEnemy() when enemy is killed.
+    virtual public void DestroyEnemy()
+    {
+        Destroy(this.gameObject);
+    }
 }

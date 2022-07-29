@@ -1013,11 +1013,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1483692936984194322, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1483692937261717604, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1078,39 +1073,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestLevel
       objectReference: {fileID: 0}
-    - target: {fileID: 1663511603486474369, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: activeWaveSet
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
-        type: 2}
-    - target: {fileID: 2021384580478677710, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: activeWaveSet
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
-        type: 2}
-    - target: {fileID: 2928602601254701245, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: activeWaveSet
-      value: 
-      objectReference: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934,
-        type: 2}
-    - target: {fileID: 3109353653353178414, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6439528831856831595, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: waves.Array.data[0]
-      value: 
-      objectReference: {fileID: 1839100584}
-    - target: {fileID: 6439528831856831595, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-        type: 3}
-      propertyPath: waves.Array.data[1]
-      value: 
-      objectReference: {fileID: 1698315189}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba6830396e935ff4eb5dc0bf95bb0e8f, type: 3}
 --- !u!1 &1018418093
@@ -2031,30 +1993,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxEffectMultiplier: {x: -0.0015, y: -0.0015}
---- !u!114 &1698315189 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2928602601254701245, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-    type: 3}
-  m_PrefabInstance: {fileID: 629726272}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd28573c517caf49b6e86bd2bf2f8c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1839100584 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1663511603486474369, guid: ba6830396e935ff4eb5dc0bf95bb0e8f,
-    type: 3}
-  m_PrefabInstance: {fileID: 629726272}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd28573c517caf49b6e86bd2bf2f8c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1955602562
 GameObject:
   m_ObjectHideFlags: 0

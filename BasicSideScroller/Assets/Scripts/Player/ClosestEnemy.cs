@@ -56,8 +56,6 @@ public class ClosestEnemy : MonoBehaviour
         }
     }
 
-
-    // TODO: The list of enemies should be from a certain range, not from the list of all enemies
     private Collider2D FindClosestEnemy(List<Collider2D> enemyList)
     {
         Collider2D closestEnemy = null;
@@ -93,5 +91,10 @@ public class ClosestEnemy : MonoBehaviour
         else
             return Vector3.right;
 
+    }
+
+    public bool HasClosestEnemy()
+    {
+        return numEnemies != 0;
     }
 }

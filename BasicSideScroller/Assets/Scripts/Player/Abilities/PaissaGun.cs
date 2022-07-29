@@ -32,7 +32,7 @@ public class PaissaGun : MonoBehaviour
             bulletTimer = 0f;
             foreach(GameObject bullet in bulletPool)
             {
-                if (!bullet.GetComponent<Bullet>().IsEnabled)
+                if (!bullet.GetComponent<Bullet>().IsEnabled && closestEnemy.HasClosestEnemy())
                 {
                     FireBullet(bullet);
                     break;

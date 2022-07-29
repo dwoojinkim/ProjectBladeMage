@@ -47,6 +47,7 @@ public class ShootingEnemy : Enemy
         return false;
     }
 
+    // TODO: Refactor this so I don't have a bunch of the same functions (PaissaGun uses the exact same function)
     protected void InstantiateBullets(int numBullets)
     {
         GameObject bullet;
@@ -63,5 +64,14 @@ public class ShootingEnemy : Enemy
     virtual protected void Shoot()
     {
         
+    }
+
+    // WARNING: This method is used to detroy the enemy GameObject. Use KillEnemy() when enemy is killed.
+    override public void DestroyEnemy()
+    {
+        foreach (GameObject bullet in bullets)
+            Destroy(bullet);
+
+        Destroy(this.gameObject);
     }
 }

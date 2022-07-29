@@ -23,7 +23,7 @@ public class FlyingShooter : ShootingEnemy
     }
 
     // So anyway, I started blasting
-    protected override void Shoot()
+    override protected void Shoot()
     {
         foreach (GameObject bullet in bullets)
         {

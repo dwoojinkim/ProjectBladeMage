@@ -119,6 +119,7 @@ public class Wave : MonoBehaviour
         for(int i = 0; i < enemyPrefabList.Length; i++)
         {
             enemy = Instantiate(enemyPrefabList[i]);
+            enemy.transform.parent = this.transform;
             enemy.SetActive(false);
             enemyList.Add(enemy);
         }
@@ -180,4 +181,9 @@ public class Wave : MonoBehaviour
         return CurrentWaveState == WaveState.WaveComplete;
     }
 
+    public void CompleteWave()
+    {
+        foreach(GameObject enemy in enemies)
+            enemy.GetComponent<Enemy>().DestroyEnemy();
+    }
 }
