@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private bool slashing = false;
     private bool smashRequest = false;
     private bool smashing = false;
+    private bool inPortal = false;
     private float hitboxStartup = 0.05f;
     private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
@@ -90,6 +91,20 @@ public class Player : MonoBehaviour
         {
             if (HP > 0)
                 DamagePlayer(obj.GetComponent<Projectile>().Damage); // GetComponent call is bad okay? Find another method to extract this data?
+        }
+        else if (obj.gameObject.tag == "Portal")
+        {
+            inPortal = true;
+            Debug.Log("Player is at " + obj.gameObject.name);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D obj)
+    {
+        if (obj.gameObject.tag == "Portal")
+        {
+            inPortal = false;
+            Debug.Log("Player left " + obj.gameObject.name);
         }
     }
 

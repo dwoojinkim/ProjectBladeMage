@@ -12,6 +12,7 @@ TagManager:
   - CameraTracker
   - Enemy
   - Projectile
+  - Portal
   layers:
   - Default
   - TransparentFX

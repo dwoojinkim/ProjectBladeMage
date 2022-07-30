@@ -12,7 +12,9 @@ public class Level : MonoBehaviour
     };
 
     [SerializeField] private LevelSO levelData;
+    [SerializeField] private GameObject nextLevelPortals;
     [SerializeField] private Wave[] waves;  // I probably can get rid of this once I get the LevelSO data working.
+
 
     private string levelName;
     //private List<GameObject> waves;   // Uncomment once I finish integrating ScriptableObject data.
@@ -88,7 +90,9 @@ public class Level : MonoBehaviour
         foreach (Wave wave in waves)
             wave.CompleteWave();
 
-        Destroy(this.gameObject);
+        nextLevelPortals.SetActive(true);
+
+        //Destroy(this.gameObject);
     }
 
     private void InitiateNextWave()
