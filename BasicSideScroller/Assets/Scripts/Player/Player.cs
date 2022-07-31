@@ -168,6 +168,17 @@ public class Player : MonoBehaviour
 
     }
 
+    public void Ability1()
+    {
+        // TODO: Use a scriptable object so it can be a generic call to use the ability. For now, using a hardcoded approach to test next level portals
+
+        if (inPortal)
+        {
+            // Event for next level
+            Debug.Log("Player has entered the portal!");
+        }
+    }
+
     public void Slash()
     {
         if (!slashing && !smashing)

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script used to contain the player within the screen. 
+// Top boundary is currently removed.
 public class ScreenBoundary : MonoBehaviour
 {
     public Camera MainCamera; //be sure to assign this in the inspector to your main camera
@@ -25,7 +27,7 @@ public class ScreenBoundary : MonoBehaviour
     {
         Vector3 viewPos = transform.position;
         viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x * -1 + objectWidth, screenBounds.x - objectWidth);
-        viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
+        viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y * -1 + objectHeight, float.MaxValue);
         transform.position = viewPos;
     }
 }

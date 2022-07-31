@@ -50,17 +50,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Horizontal") || Input.GetButtonUp("Horizontal"))
             playerComponent.Move(Input.GetAxisRaw("Horizontal"));
 
-        //Slash
-        if (Input.GetButtonDown("Slash"))
+        // Abilities / Interactions
+        // Ability1
+        if (Input.GetButtonDown("Ability1"))
         {
-            playerComponent.SetDebugText("Slashing");
-            playerComponent.Slash();
+            playerComponent.SetDebugText("Ability 1 Used!");
+            playerComponent.Ability1();
         }
-        //Smash
-        if (Input.GetButtonDown("Smash"))
+        // Ability2
+        if (Input.GetButtonDown("Ability2"))
         {
-            playerComponent.SetDebugText("SMASHING");
-            playerComponent.Smash();
+            playerComponent.SetDebugText("Ability 2 Used!");
+            //playerComponent.Smash();
+            
         }
 
         //Time Scale (for debugging purposes)
