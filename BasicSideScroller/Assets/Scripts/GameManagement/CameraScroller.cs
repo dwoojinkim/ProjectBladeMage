@@ -10,6 +10,11 @@ public class CameraScroller : MonoBehaviour
 
     private const float INIT_CAMERA_MOVESPEED = 5.0f;
 
+    [SerializeField] private FloatVariable stageSpeedData;
+    [SerializeField] private GameObjectReference currentStageObject;
+    
+    private Level currentStage;
+
     private float timeToIncreaseSpeed = 10.0f;
     private float speedIncreaseTimer = 0.0f;
     private float increaseSpeedAmount = 1.0f;
@@ -22,7 +27,9 @@ public class CameraScroller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currentStage = currentStageObject.gameObject.GetComponent<Level>();
         stageSpeed = INIT_CAMERA_MOVESPEED;
+        currentStage.LevelComplete += StopStage;
     }
 
     // Update is called once per frame
@@ -58,5 +65,12 @@ public class CameraScroller : MonoBehaviour
             }
         }
 
+        stageSpeedData.SetValue(stageSpeed);
+    }
+
+    private void StopStage()
+    {
+        Debug.Log("Stopping Stage!");
+        currentStage.LevelComplete -= StopStage;
     }
 }

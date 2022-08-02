@@ -4,5 +4,6 @@
 public class LevelSO : ScriptableObject
 {
     public string levelName;
-    public Wave[] waves;
+    public GameObject levelPrefab;
+    public Sprite portalPreview;
 }

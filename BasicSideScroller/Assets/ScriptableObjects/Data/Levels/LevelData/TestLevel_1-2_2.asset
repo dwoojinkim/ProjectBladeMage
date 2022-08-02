@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33322caa79991214b91d91dd880e9277, type: 3}
+  m_Name: TestLevel_1-2_2
+  m_EditorClassIdentifier: 
+  levelName: TestLevel_1-2_2
+  levelPrefab: {fileID: 1483692937261717605, guid: 0b23bd2758651e14590e76654a48c3ea,
+    type: 3}
+  portalPreview: {fileID: 21300000, guid: 9b8dcc611f2e3824986db8de310e381f, type: 3}

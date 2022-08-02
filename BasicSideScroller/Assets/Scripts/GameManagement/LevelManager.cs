@@ -38,11 +38,14 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-            GameTimerText = GameTimerObj.GetComponent<TextMeshProUGUI>();
-            PlayerHPText = PlayerHPObj.GetComponent<TextMeshProUGUI>();
+        GameTimerText = GameTimerObj.GetComponent<TextMeshProUGUI>();
+        PlayerHPText = PlayerHPObj.GetComponent<TextMeshProUGUI>();
 
-            playerResetPos = Player.transform.position;
-            cameraResetPos = CameraTracker.transform.position;
+        playerResetPos = Player.transform.position;
+        cameraResetPos = CameraTracker.transform.position;
+
+        GenerateLevelTree();
+
     }
 
     // Update is called once per frame
@@ -60,5 +63,29 @@ public class LevelManager : MonoBehaviour
         CameraTracker.transform.position = cameraResetPos;
         Player.transform.position = playerResetPos;
         ObstacleSpawner.GetComponent<ObstacleSpawner>().ResetSpawner();
+    }
+    
+    private void GenerateLevelTree()
+    {
+        // Temp variable to test level generation.
+        // Will be using Scriptable Objects later.
+        int numLevels = 5;  // Number of levels per Act
+        int numActs = 3;
+        Random.seed = 18;
+        int choice1 = -1;
+        int choice2 = -1;
+
+        Debug.Log("Possible Level Choices:");
+
+        for (int i = 1; i <= numActs; i++)
+        {
+            for (int j = 1; j <= numLevels; j++)
+            {
+                choice1 = Random.Range(1,6);
+                choice2 = Random.Range(1,6);
+
+                Debug.Log("Level " + i + "-" + j + " will be: " + choice1 + " or " + choice2);
+            }
+        }
     }
 }

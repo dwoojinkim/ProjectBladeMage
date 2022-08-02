@@ -812,6 +812,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c82ed0c6ce41c741832494dc451f80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageSpeedData: {fileID: 0}
+  currentStageObject: {fileID: 0}
 --- !u!1 &543034384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c82ed0c6ce41c741832494dc451f80e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageSpeedData: {fileID: 11400000, guid: dc55b4224b3f4124bacf83a55cb75d2f, type: 2}
+  currentStageObject: {fileID: 11400000, guid: 1e95777cc90232244a3268a299d9c115, type: 2}
 --- !u!1 &1113268873
 GameObject:
   m_ObjectHideFlags: 0

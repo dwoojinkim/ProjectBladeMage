@@ -11,9 +11,13 @@ public class Level : MonoBehaviour
         LevelComplete
     };
 
+    public event Notify LevelComplete;      // event
+
     [SerializeField] private LevelSO levelData;
     [SerializeField] private GameObject nextLevelPortals;
     [SerializeField] private Wave[] waves;  // I probably can get rid of this once I get the LevelSO data working.
+    [SerializeField] private GameObjectReference currentStage;
+    [SerializeField] private FloatVariable currentStageSpeed;
 
 
     private string levelName;
@@ -30,6 +34,7 @@ public class Level : MonoBehaviour
 
         levelState = LevelState.LevelStarted;   // Level will actually be started by LevelManager. For testing, it'll be initialzed as started.
         currentWave = -1;                        // currentWave should start at -1 and be set to 0 when started by the LevelManager.    
+        currentStage.SetGameObject(this.gameObject);
 
         // subscribe to WaveStart event. Used for multiple Timer waves in a row. Starts timer on previous wave's spawn.
         for (int i = 0; i < waves.Length; i++)
@@ -90,8 +95,7 @@ public class Level : MonoBehaviour
         foreach (Wave wave in waves)
             wave.CompleteWave();
 
-        nextLevelPortals.SetActive(true);
-
+        LevelComplete?.Invoke();
         //Destroy(this.gameObject);
     }
 
