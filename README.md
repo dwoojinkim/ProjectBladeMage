@@ -2,7 +2,7 @@
 
 ## Description
 
-A roguelike side-scroller with multiple characters to choose from with unique abilities. Upgrade abilities as you traverse though levels and defeat the final boss!
+A roguelite side-scroller with multiple characters to choose from with unique abilities. Upgrade abilities as you traverse though levels and defeat the final boss!
 
 ## Features
 
