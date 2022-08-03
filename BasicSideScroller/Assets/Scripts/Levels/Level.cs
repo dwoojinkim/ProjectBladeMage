@@ -96,6 +96,7 @@ public class Level : MonoBehaviour
             wave.CompleteWave();
 
         LevelComplete?.Invoke();
+        nextLevelPortals.transform.position = new Vector3(0, 0, 0);
         //Destroy(this.gameObject);
     }
 

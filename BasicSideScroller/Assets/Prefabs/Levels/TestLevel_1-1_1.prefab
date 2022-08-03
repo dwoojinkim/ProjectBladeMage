@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 188001002}
   - component: {fileID: 188001004}
   - component: {fileID: 188001003}
+  - component: {fileID: 276925063}
   m_Layer: 0
   m_Name: Portal1
   m_TagString: Portal
@@ -98,6 +99,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.13
+--- !u!114 &276925063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188001001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719e51df3d4eb9c4bbc45b38c7467d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 3df50767d75f800428910d038700bc50, type: 2}
 --- !u!1 &489789353
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +253,7 @@ GameObject:
   - component: {fileID: 1110566034}
   - component: {fileID: 1110566036}
   - component: {fileID: 1110566035}
+  - component: {fileID: 1780317804}
   m_Layer: 0
   m_Name: Portal2
   m_TagString: Portal
@@ -326,6 +341,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.13
+--- !u!114 &1780317804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1110566033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719e51df3d4eb9c4bbc45b38c7467d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelData: {fileID: 11400000, guid: 454de6a3e53baab42a100ea8491be870, type: 2}
 --- !u!1 &1916038211
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,6 +363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1916038212}
+  - component: {fileID: 1912767452}
   m_Layer: 0
   m_Name: NextLevelPortal
   m_TagString: Untagged
@@ -359,6 +388,20 @@ Transform:
   m_Father: {fileID: 1483692937261717604}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1912767452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916038211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bcdc4322ffd0304aa4c404f7fa00779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portal1: {fileID: 276925063}
+  portal2: {fileID: 1780317804}
 --- !u!1 &1483692937261717605
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,8 +453,6 @@ MonoBehaviour:
   nextLevelPortals: {fileID: 1916038211}
   waves:
   - {fileID: 2928602601254701245}
-  - {fileID: 1663511603486474369}
-  - {fileID: 2021384580478677710}
   currentStage: {fileID: 11400000, guid: 1e95777cc90232244a3268a299d9c115, type: 2}
   currentStageSpeed: {fileID: 11400000, guid: dc55b4224b3f4124bacf83a55cb75d2f, type: 2}
 --- !u!1001 &6172460654410276499
@@ -582,18 +623,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6990121393455326432}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2021384580478677710 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9010718583963080238, guid: a3f5f4d6ac2da264ab97e183745f1d82,
-    type: 3}
-  m_PrefabInstance: {fileID: 6990121393455326432}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd28573c517caf49b6e86bd2bf2f8c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7645276201592559279
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -669,15 +698,3 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7645276201592559279}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1663511603486474369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9010718583963080238, guid: 4d6b62389d0ed0d4aafc8722a9a3f758,
-    type: 3}
-  m_PrefabInstance: {fileID: 7645276201592559279}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd28573c517caf49b6e86bd2bf2f8c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
