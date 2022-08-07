@@ -95,7 +95,7 @@ public class Wave : MonoBehaviour
     {
         if (waveData.spawnLocationType == SpawnLocation.SpawnBox)
         {
-            if (waveData.spawns.Length > 0)
+            if (waveData.spawns.Length != null)
             {
                 for (int i = 0; i < waveData.spawns.Length; i++)
                 {
@@ -116,20 +116,21 @@ public class Wave : MonoBehaviour
                     Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
                 }
             }
+        }
         else if (waveData.spawnLocationType == SpawnLocation.SpawnPoint)
         {
-            Debug.Log("SpawnPoint");
-            if (waveData.spawns.Length > 0)
+            if (waveData.spawns.Length != null)
             {
                 for (int i = 0; i < waveData.spawns.Length; i++)
                 {
                     Vector3 spawnPos = new Vector3(waveData.spawns[i].position.x, waveData.spawns[i].position.y, 1f);
 
-                    UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 1);
+                    UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 0.15f);
+                    UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 0.25f);
+
                 }
             }
 
-        }
             // Gizmos.color = Color.yellow;
             // float wHalf = (waveData.spawnBoxWidth * .5f);
             // float hHalf = (waveData.spawnBoxHeight * .5f);
