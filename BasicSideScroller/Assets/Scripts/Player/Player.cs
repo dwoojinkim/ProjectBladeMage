@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
     public FloatVariable playerHP;
+    public GameObjectReference playerObject;
 
     public float jumpVelocity = 7.5f;
     public float jumpGravity = 1f;
@@ -53,6 +54,7 @@ public class Player : MonoBehaviour
         
         playerRigidbody = this.GetComponent<Rigidbody2D>();
         playerRigidbody.gravityScale = normalGravity;
+        playerObject.SetGameObject(this.gameObject);
 
         HP = 100;
     }
@@ -165,7 +167,7 @@ public class Player : MonoBehaviour
     }
     public void Crouch()
     {
-
+        
     }
 
     public void Ability1()

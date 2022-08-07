@@ -24,7 +24,7 @@ TagManager:
   - 
   - Enemy
   - UnpassableEnvironment
-  - 
+  - CameraBoundary
   - 
   - 
   - 

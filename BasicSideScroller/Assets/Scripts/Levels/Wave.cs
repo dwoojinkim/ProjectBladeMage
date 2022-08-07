@@ -93,19 +93,54 @@ public class Wave : MonoBehaviour
     // I should be able to modify this to loop through multiple spawnboxes
     void OnDrawGizmos() 
     {
-        if (spawnLocationType == SpawnLocation.SpawnBox)
+        if (waveData.spawnLocationType == SpawnLocation.SpawnBox)
         {
-            Gizmos.color = Color.yellow;
-            float wHalf = (waveData.spawnBoxWidth * .5f);
-            float hHalf = (waveData.spawnBoxHeight * .5f);
-            Vector3 topLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY + hHalf, 1f);
-            Vector3 topRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY + hHalf, 1f);
-            Vector3 bottomLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY - hHalf, 1f);
-            Vector3 bottomRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY - hHalf, 1f);
-            Gizmos.DrawLine (topLeftCorner, topRightCorner);
-            Gizmos.DrawLine (topRightCorner, bottomRightCorner);
-            Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
-            Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
+            if (waveData.spawns.Length > 0)
+            {
+                for (int i = 0; i < waveData.spawns.Length; i++)
+                {
+                    float boxWidth = waveData.spawns[i].width;
+                    float boxHeight = waveData.spawns[i].height;
+                    Vector2 boxPos = waveData.spawns[i].position;
+
+                    Gizmos.color = Color.yellow;
+                    float wHalf = (boxWidth * .5f);
+                    float hHalf = (boxHeight * .5f);
+                    Vector3 topLeftCorner = new Vector3 (boxPos.x - wHalf, boxPos.y + hHalf, 1f);
+                    Vector3 topRightCorner = new Vector3 (boxPos.x + wHalf, boxPos.y + hHalf, 1f);
+                    Vector3 bottomLeftCorner = new Vector3 (boxPos.x - wHalf, boxPos.y - hHalf, 1f);
+                    Vector3 bottomRightCorner = new Vector3 (boxPos.x + wHalf, boxPos.y - hHalf, 1f);
+                    Gizmos.DrawLine (topLeftCorner, topRightCorner);
+                    Gizmos.DrawLine (topRightCorner, bottomRightCorner);
+                    Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
+                    Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
+                }
+            }
+        else if (waveData.spawnLocationType == SpawnLocation.SpawnPoint)
+        {
+            Debug.Log("SpawnPoint");
+            if (waveData.spawns.Length > 0)
+            {
+                for (int i = 0; i < waveData.spawns.Length; i++)
+                {
+                    Vector3 spawnPos = new Vector3(waveData.spawns[i].position.x, waveData.spawns[i].position.y, 1f);
+
+                    UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 1);
+                }
+            }
+
+        }
+            // Gizmos.color = Color.yellow;
+            // float wHalf = (waveData.spawnBoxWidth * .5f);
+            // float hHalf = (waveData.spawnBoxHeight * .5f);
+            // Vector3 topLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+            // Vector3 topRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY + hHalf, 1f);
+            // Vector3 bottomLeftCorner = new Vector3 (waveData.spawnBoxPosX - wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+            // Vector3 bottomRightCorner = new Vector3 (waveData.spawnBoxPosX + wHalf, waveData.spawnBoxPosY - hHalf, 1f);
+            // Gizmos.DrawLine (topLeftCorner, topRightCorner);
+            // Gizmos.DrawLine (topRightCorner, bottomRightCorner);
+            // Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
+            // Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
         }
          
      }

@@ -96,7 +96,7 @@ public class Projectile : MonoBehaviour
         transform.position += direction * speed * Time.deltaTime;
 
         // Placeholder reset condition. Will need to be relative to screen rather than hard coded values
-        if (transform.position.x >=  15 || transform.position.x <= -15 || transform.position.y >= 15 || transform.position.x <= -15)
+        if (transform.position.x >=  50 || transform.position.x <= -50 || transform.position.y >= 50 || transform.position.x <= -50)
             Reset();
 
     }

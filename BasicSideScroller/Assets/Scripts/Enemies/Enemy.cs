@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemySO enemyData;
     public EnemyRuntimeSet ActiveEnemiesSet;
+    public GameObjectReference playerObject;
 
     public bool IsAlive { get; private set;}
     public int Damage { get; private set;}
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour
 
     protected AIDestinationSetter AIDestinationSetterScript;
     protected EnemyAI enemyAIScript;
+    protected Transform playerTransform;
 
     protected int maxHP;
     protected int currentHP;
@@ -63,6 +65,8 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         Damage = enemyData.damage;
         IsAlive = false;
+
+        playerTransform = playerObject.GetTransform();
     }
 
     void OnTriggerEnter2D(Collider2D obj)
@@ -125,8 +129,16 @@ public class Enemy : MonoBehaviour
         EnemyCollider.enabled = true;   // This will work for ALL 2d Colliders since the variable is a generic Collider2D type
         //AIPathScript.enabled = true;
         //AIDestinationSetterScript.target = LevelManager.LMinstance.Player.transform;
+
+        // Lines used for infinite runner version
+        //if (this.transform.GetComponent<EnemyAI>() != null)
+        //    enemyAIScript.target = LevelManager.LMinstance.Player.transform;
+
+        // Used for Battle-Arena prototype
         if (this.transform.GetComponent<EnemyAI>() != null)
-            enemyAIScript.target = LevelManager.LMinstance.Player.transform;
+            enemyAIScript.target = playerTransform;
+
+
         currentHP = maxHP;
         IsAlive = true;
 

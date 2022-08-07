@@ -9,4 +9,9 @@ public class GameObjectReference : ScriptableObject
     {
         gameObject = value;
     }
+
+    public Transform GetTransform()
+    {
+        return gameObject.transform;
+    }
 }
