@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: TestWave1
   m_EditorClassIdentifier: 
   waveSpawnType: 0
-  spawnLocationType: 1
+  spawnLocationType: 0
   enemyWaveType: 0
+  enemySpawnOrder: 0
   TimeUntilSpawn: 3
   SuccessiveUnitDelay: 1
   enemies:
@@ -25,9 +26,15 @@ MonoBehaviour:
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   spawns:
-  - width: 2.67
-    height: 1.26
+  - width: 3.08
+    height: 2.01
+    position: {x: -4.97, y: 6.95}
+  - width: 3.08
+    height: 2.01
     position: {x: 0, y: 6.95}
+  - width: 3.08
+    height: 2.01
+    position: {x: 4.89, y: 6.95}
   spawnBoxPosX: 0
   spawnBoxPosY: 7.99
   spawnBoxWidth: 22.87

@@ -11,6 +11,7 @@ public class Wave : MonoBehaviour
         Standby,
         Initiated,
         WaveStarted,
+        WaveSpawnComplete,       // When Wave has completed spawning. Needed to delayed spawns
         WaveComplete
     };
 
@@ -23,8 +24,11 @@ public class Wave : MonoBehaviour
     private SpawnType waveSpawnType;
     private SpawnLocation spawnLocationType;
     private EnemyWaveType enemyWaveType;
+    private SpawnOrder enemySpawnOrder;
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<GameObject> spawnEnemies = new List<GameObject>();             // List of enemies for 1 particular spawn point/box.
+    private List<List<GameObject>> enemies = new List<List<GameObject>>();      // List of list of spawnEnemies. Full list of enemies.
+    private SizePostion2D[] spawnLocations;
     private Vector2 spawnBoxDimensions;
     private Vector2 spawnBoxPosition;
 
@@ -41,6 +45,8 @@ public class Wave : MonoBehaviour
         waveSpawnType = waveData.waveSpawnType;
         spawnLocationType = waveData.spawnLocationType;
         enemyWaveType = waveData.enemyWaveType;
+        enemySpawnOrder = waveData.enemySpawnOrder;
+        spawnLocations = waveData.spawns;
         
         timer = 0;
         timeUntilSpawn = waveData.TimeUntilSpawn;
@@ -69,7 +75,7 @@ public class Wave : MonoBehaviour
             }
         }
 
-        if (CurrentWaveState == WaveState.WaveStarted && IsWaveOver())
+        if (CurrentWaveState == WaveState.WaveSpawnComplete && IsWaveOver())
         {
             Debug.Log("WAVE IS OVER!!!");
             CurrentWaveState = WaveState.WaveComplete;
@@ -143,60 +149,86 @@ public class Wave : MonoBehaviour
             // Gizmos.DrawLine (bottomRightCorner, bottomLeftCorner);
             // Gizmos.DrawLine (bottomLeftCorner, topLeftCorner);
         }
-         
      }
 
     // Instantiates the list of enemy prefabs from the Wave Scriptable Object
-    private List<GameObject> InstantiateEnemies(GameObject[] enemyPrefabList)
+    private List<List<GameObject>> InstantiateEnemies(GameObject[] enemyPrefabList)
     {
-        List<GameObject> enemyList = new List<GameObject>();
+        List<List<GameObject>> spawnEnemiesList = new List<List<GameObject>>();
         GameObject enemy;
 
-        for(int i = 0; i < enemyPrefabList.Length; i++)
+        if (waveData.spawns != null)
         {
-            enemy = Instantiate(enemyPrefabList[i]);
-            enemy.transform.parent = this.transform;
-            enemy.SetActive(false);
-            enemyList.Add(enemy);
+            for (int i = 0; i < waveData.spawns.Length; i++)
+            {
+                List<GameObject> enemyList = new List<GameObject>();
+
+                for(int j = 0; j < enemyPrefabList.Length; j++)
+                {
+                    enemy = Instantiate(enemyPrefabList[j]);
+                    enemy.transform.parent = this.transform;
+                    enemy.SetActive(false);
+                    enemyList.Add(enemy);
+                }
+
+                spawnEnemiesList.Add(enemyList);
+            }
         }
 
-        return enemyList;
+        return spawnEnemiesList;
     }
     
     IEnumerator SpawnWave()
     {
         if (enemies.Count > 0)
         {
-            foreach (GameObject e in enemies)
+            // waveData.enemies.Length represents the number of enemies in a single List of spawn locations
+            for (int i = 0; i < waveData.enemies.Length; i++)       // Probably bad to reference the waveData directly here. Maybe change to a private class variable instead
             {
-                if (spawnLocationType == SpawnLocation.SpawnBox)
+                for (int j = 0; j < enemies.Count; j++)
                 {
-                    float leftBound = spawnBoxPosition.x - spawnBoxDimensions.x/2f;
-                    float rightBound = spawnBoxPosition.x + spawnBoxDimensions.x/2f;
-                    float bottomBound = spawnBoxPosition.y - spawnBoxDimensions.y/2f;
-                    float topBound = spawnBoxPosition.y + spawnBoxDimensions.y/2f;
+                    Debug.Log("Spawning Enemy in SpawnWave method!");
+                    if (enemySpawnOrder == SpawnOrder.Simultaneous)
+                    {
+                        if (spawnLocationType == SpawnLocation.SpawnBox)
+                        {
+                            // float leftBound = spawnBoxPosition.x - spawnBoxDimensions.x/2f;
+                            // float rightBound = spawnBoxPosition.x + spawnBoxDimensions.x/2f;
+                            // float bottomBound = spawnBoxPosition.y - spawnBoxDimensions.y/2f;
+                            // float topBound = spawnBoxPosition.y + spawnBoxDimensions.y/2f;
+                            float leftBound = spawnLocations[j].position.x - spawnLocations[j].width/2f;
+                            float rightBound = spawnLocations[j].position.x + spawnLocations[j].width/2f;
+                            float bottomBound = spawnLocations[j].position.y - spawnLocations[j].height/2f;
+                            float topBound = spawnLocations[j].position.y + spawnLocations[j].height/2f;
 
-                    Vector2 spawnPos = new Vector2(Random.Range(leftBound, rightBound), Random.Range(bottomBound, topBound));
-                    e.GetComponent<Enemy>().SpawnEnemy(spawnPos);
-                    e.SetActive(true);
+                            Vector2 spawnPos = new Vector2(Random.Range(leftBound, rightBound), Random.Range(bottomBound, topBound));
+                            enemies[j][i].GetComponent<Enemy>().SpawnEnemy(spawnPos);
+                            enemies[j][i].SetActive(true);
+                        }
+                        else
+                            enemies[j][i].GetComponent<Enemy>().SpawnEnemy();
+                    }
                 }
-                else
-                    e.GetComponent<Enemy>().SpawnEnemy();
 
                 // successiveUnitDelay is set in seconds, so multiplying by 1000 for milliseconds.
                 yield return new WaitForSeconds(successiveUnitDelay);
             }
-
-            WaveStart?.Invoke();
         }
+
+            CurrentWaveState = WaveState.WaveSpawnComplete;
+            WaveStart?.Invoke();
+            
     }
 
     private bool IsWaveOver()
     {
-        foreach (GameObject e in enemies)
+        foreach (List<GameObject> spawnList in enemies)
         {
-            if (e.GetComponent<Enemy>().IsAlive)
-                return false;
+            foreach (GameObject e in spawnList)
+            {
+                if (e.GetComponent<Enemy>().IsAlive)
+                    return false;
+            }
         }
 
         activeWaveSet.Remove(this);
@@ -219,7 +251,7 @@ public class Wave : MonoBehaviour
 
     public void CompleteWave()
     {
-        foreach(GameObject enemy in enemies)
+        foreach(GameObject enemy in spawnEnemies)
             enemy.GetComponent<Enemy>().DestroyEnemy();
     }
 }

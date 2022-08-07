@@ -13,6 +13,14 @@ public enum SpawnLocation
     SpawnPoint
 };
 
+// Spawn order, when there's multiple spawn points/boxes
+public enum SpawnOrder
+{
+    Simultaneous,   // Mirrors spawning at each spawn point/box
+    Sequential,     // Spawns enemies in sequential order of spawn points/boxes. Only matters if SuccessiveUnitDelay > 0
+    Random          // Spawns enemies at random spawn points/boxes. Only matters if SuccessiveUnitDelay > 0
+}
+
 public enum EnemyWaveType
 {
     Normal,
@@ -25,7 +33,7 @@ public struct SizePostion2D
 {
     public float width;
     public float height;
-    public Vector2 position;   
+    public Vector2 position;
 }
 
 [CreateAssetMenu(fileName="New Wave",menuName="Waves/BasicWave")]
@@ -34,6 +42,7 @@ public class WaveSO : ScriptableObject
     public SpawnType waveSpawnType;
     public SpawnLocation spawnLocationType;
     public EnemyWaveType enemyWaveType;
+    public SpawnOrder enemySpawnOrder;
 
     public float TimeUntilSpawn;
     public float SuccessiveUnitDelay;   // If not all enemies in a wave should be spawned at once, can be delayed (in seconds)
