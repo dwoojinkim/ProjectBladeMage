@@ -15,6 +15,7 @@ MonoBehaviour:
   waveSpawnType: 0
   spawnLocationType: 0
   enemyWaveType: 0
+  enemySpawnOrder: 0
   TimeUntilSpawn: 5
   SuccessiveUnitDelay: 0.25
   enemies:
@@ -24,6 +25,16 @@ MonoBehaviour:
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
+  spawns:
+  - width: 3
+    height: 3
+    position: {x: -20.1, y: 6.36}
+  - width: 3
+    height: 3
+    position: {x: -20.1, y: 1.67}
+  - width: 3
+    height: 3
+    position: {x: -20.1, y: -3.48}
   spawnBoxPosX: -12.82
   spawnBoxPosY: 1.49
   spawnBoxWidth: 2.27

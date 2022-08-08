@@ -27,6 +27,10 @@ public class ClosestEnemy : MonoBehaviour
         //closestEnemy = FindClosestEnemy(enemies);
 
         DrawEllipse(this.transform.position, Vector3.forward, Vector3.up, circleRadius, circleRadius, 16, Color.red);
+        if (closestEnemy != null)
+            DrawLineToEnemy(closestEnemy.gameObject.transform);
+
+        
         //Debug.Log("Number of enemies in circle: " + numEnemies);
 
         //if (closestEnemy != null)
@@ -91,6 +95,11 @@ public class ClosestEnemy : MonoBehaviour
         else
             return Vector3.right;
 
+    }
+
+    private void DrawLineToEnemy(Transform enemyTransform)
+    {
+        Debug.DrawLine(this.transform.position, enemyTransform.position, Color.red, 0);
     }
 
     public bool HasClosestEnemy()

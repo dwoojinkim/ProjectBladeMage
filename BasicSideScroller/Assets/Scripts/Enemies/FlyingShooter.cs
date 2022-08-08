@@ -20,6 +20,7 @@ public class FlyingShooter : ShootingEnemy
         }
 
         cooldownTimer += Time.deltaTime;
+        hpBar.value = (float)currentHP / maxHP;
     }
 
     // So anyway, I started blasting

@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
 
     public Transform target;
-    private Transform EnemyGFX;
+    private SpriteRenderer EnemyGFX;
 
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        EnemyGFX = this.transform;
+        EnemyGFX = this.gameObject.GetComponent<SpriteRenderer>();
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
@@ -77,13 +77,13 @@ public class EnemyAI : MonoBehaviour
         // Enemy is moving right
         if (rb.velocity.x >= 0.01f && force.x > 0f)
         {
-            EnemyGFX.localScale = new Vector3(1f, 1f, 1f);
+            EnemyGFX.flipX = false;
             //Debug.Log("Moving right!");
         }
         // Enemy is moving left
         else if (rb.velocity.x <= -0.01f && force.x < 0f)
         {
-            EnemyGFX.localScale = new Vector3(-1f, 1f, 1f);
+            EnemyGFX.flipX = true;
             //Debug.Log("Moving left!");
         }
     }

@@ -10,7 +10,7 @@ public class PaissaGun : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
     private List<GameObject> bulletPool = new List<GameObject>();
 
-    private float bulletDelay = .15f;
+    private float bulletDelay = .5f;
     private float bulletTimer = 0f;     // Timer counting time since the last bullet was fired
     private int bulletDmg = 1;
     private ClosestEnemy closestEnemy;

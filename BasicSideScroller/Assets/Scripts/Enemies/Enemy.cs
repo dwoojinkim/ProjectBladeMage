@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Pathfinding;
 
 
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     protected int maxHP;
     protected int currentHP;
+    [SerializeField] protected Slider hpBar;
 
     protected Vector3 startingPos;
  
@@ -37,7 +39,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        hpBar.value = (float)currentHP / maxHP;
     }
 
     private void OnEnable()
