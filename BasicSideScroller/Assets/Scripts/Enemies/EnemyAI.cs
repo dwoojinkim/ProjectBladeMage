@@ -9,7 +9,7 @@ public class EnemyAI : MonoBehaviour
     public Transform target;
     protected SpriteRenderer EnemyGFX;
 
-    public float speed = 200f;
+    [SerializeField] protected float speed = 200f;
     public float nextWaypointDistance = 3f;
 
     protected Path path;

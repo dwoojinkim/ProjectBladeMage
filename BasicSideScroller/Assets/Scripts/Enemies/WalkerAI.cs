@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkerAI : MonoBehaviour
+// Basic walking enemy that just walks back and forth.
+public class WalkerAI : EnemyAI
 {
     [SerializeField] private GameObjectReference playerObject;
-    [SerializeField] private float speed = 10f;
     private float acceleration = 10f;
     private float currentSpeed = 0f;
-
-    private SpriteRenderer EnemyGFX;
+    private int direction = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,20 +22,18 @@ public class WalkerAI : MonoBehaviour
         MoveEnemy();
     }
 
-    private void MoveEnemy()
+    void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Using WalkerAI MoveEnemy() Method!");
-        float direction = playerObject.gameObject.transform.position.x - transform.position.x;
-        Debug.Log("Current direction: " + direction);
+        if (col.gameObject.tag == "Wall")
+            direction *= -1;
+    }
 
-        if (direction != 0)
-            direction = Mathf.Abs(direction) / direction;
-
+    override protected void MoveEnemy()
+    {
         currentSpeed = AccelerateVelocity(currentSpeed, direction);
 
         float force = currentSpeed * Time.deltaTime;
     
-        // Will need to add air drag to rigidbody in order for the enemy to come to a stop.
         transform.position += Vector3.right * force;
 
         
@@ -54,9 +51,6 @@ public class WalkerAI : MonoBehaviour
         if (Mathf.Abs(currentSpeed) > speed)
             currentSpeed = direction * speed;
 
-
-        //Debug.Log("Current direction: " + direction);
-        Debug.Log("Current speed: " + currentSpeed);
         return currentSpeed;
     }
 }

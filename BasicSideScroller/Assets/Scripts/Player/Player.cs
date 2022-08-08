@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     private const float MAX_SPEED_CAP = 25.0f;
     private const float INIT_CAMERA_MOVESPEED = 5.0f;
+    private const float MAX_FALLING_SPEED = -50.0f;
 
     public FloatPositionVariable playerPositionTracker;
 
@@ -131,6 +132,9 @@ public class Player : MonoBehaviour
     public void MovePlayer()
     {
         transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
+
+        if (playerRigidbody.velocity.y < MAX_FALLING_SPEED)
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, MAX_FALLING_SPEED);
     }
 
     public void Move(float direction)
