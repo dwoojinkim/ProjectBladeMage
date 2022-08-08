@@ -78,7 +78,8 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground")
         {
-            jumping = false;
+            if (transform.position.y > col.transform.position.y)
+                jumping = false;
         }
         else if (col.gameObject.tag == "Enemy" && col.enabled)
         {

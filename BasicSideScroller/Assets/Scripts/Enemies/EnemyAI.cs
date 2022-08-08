@@ -7,27 +7,22 @@ public class EnemyAI : MonoBehaviour
 {
 
     public Transform target;
-    private SpriteRenderer EnemyGFX;
+    protected SpriteRenderer EnemyGFX;
 
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
 
-    private Path path;
-    private int currentWaypoint = 0;
-    private bool reachedEndOfPath = false;
+    protected Path path;
+    protected int currentWaypoint = 0;
+    protected bool reachedEndOfPath = false;
 
-    private Seeker seeker;
-    private Rigidbody2D rb;
+    protected Seeker seeker;
+    protected Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        EnemyGFX = this.gameObject.GetComponent<SpriteRenderer>();
-
-        seeker = GetComponent<Seeker>();
-        rb = GetComponent<Rigidbody2D>();
-
-        InvokeRepeating("UpdatePath", 0f, .5f);
+        OnStart();
     }
 
     void UpdatePath()
@@ -48,6 +43,21 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateLoop();
+    }
+
+    protected void OnStart()
+    {
+        EnemyGFX = GetComponent<SpriteRenderer>();
+
+        seeker = GetComponent<Seeker>();
+        rb = GetComponent<Rigidbody2D>();
+
+        InvokeRepeating("UpdatePath", 0f, .5f);
+    }
+
+    protected void UpdateLoop()
+    {
         if (path == null)
             return;
         
@@ -57,10 +67,13 @@ public class EnemyAI : MonoBehaviour
             return;
         }
         else
-        {
             reachedEndOfPath = false;
-        }
 
+        MoveEnemy();
+    }
+
+    virtual protected void MoveEnemy()
+    {
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
     
@@ -70,21 +83,11 @@ public class EnemyAI : MonoBehaviour
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
 
         if (distance < nextWaypointDistance)
-        {
             currentWaypoint++;
-        }
-
-        // Enemy is moving right
-        if (rb.velocity.x >= 0.01f && force.x > 0f)
-        {
+        
+        if (rb.velocity.x >= 0.01f && force.x > 0f)         // Enemy is moving right
             EnemyGFX.flipX = false;
-            //Debug.Log("Moving right!");
-        }
-        // Enemy is moving left
-        else if (rb.velocity.x <= -0.01f && force.x < 0f)
-        {
+        else if (rb.velocity.x <= -0.01f && force.x < 0f)   // Enemy is moving left
             EnemyGFX.flipX = true;
-            //Debug.Log("Moving left!");
-        }
     }
 }
