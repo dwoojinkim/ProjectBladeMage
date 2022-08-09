@@ -26,10 +26,10 @@ TagManager:
   - Enemy
   - UnpassableEnvironment
   - CameraBoundary
-  - 
-  - 
-  - 
-  - 
+  - Parallax0
+  - Parallax1
+  - Parallax2
+  - Parallax3
   - 
   - 
   - 
@@ -48,6 +48,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1886328561
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

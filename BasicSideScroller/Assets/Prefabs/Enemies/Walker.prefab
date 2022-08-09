@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 200
+  speed: 5
   nextWaypointDistance: 1
+  playerObject: {fileID: 11400000, guid: b4d155c91185959458834088b191f321, type: 2}
 --- !u!1001 &2629062474120446878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47,10 +48,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6248698276573809173, guid: 33df062546594534887b99e035493863,
         type: 3}
+    - target: {fileID: 8294334433209375923, guid: edb6016eccbf60247b939746db44285d,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8876430399230884661, guid: edb6016eccbf60247b939746db44285d,
         type: 3}
       propertyPath: m_GravityScale
-      value: 9
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 9139961831626748917, guid: edb6016eccbf60247b939746db44285d,
         type: 3}
