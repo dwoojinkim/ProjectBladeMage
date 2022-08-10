@@ -8,6 +8,7 @@ public class EnemyAI : MonoBehaviour
 
     public Transform target;
     protected SpriteRenderer EnemyGFX;
+    protected Collider2D enemyCollider;
 
     [SerializeField] protected float speed = 200f;
     public float nextWaypointDistance = 3f;
@@ -49,6 +50,7 @@ public class EnemyAI : MonoBehaviour
     protected void OnStart()
     {
         EnemyGFX = GetComponent<SpriteRenderer>();
+        enemyCollider = GetComponent<Collider2D>();
 
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();

@@ -9,25 +9,33 @@ public class WalkerAI : EnemyAI
     private float acceleration = 20f;
     private float currentSpeed = 0f;
     private int direction = 1;
+    private LayerMask unpassableMask;
 
     // Start is called before the first frame update
     void Start()
     {
         EnemyGFX = GetComponent<SpriteRenderer>();
+        enemyCollider = GetComponent<Collider2D>();
+        unpassableMask = LayerMask.GetMask("UnpassableEnvironment");
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveEnemy();
-        CheckFront();
+        //CheckFront();
         CheckFloor();
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Wall")
-            FlipDirection();
+        // Referenced this post on LayerMasks
+        // https://answers.unity.com/questions/422472/how-can-i-compare-colliders-layer-to-my-layermask.html
+        if (((1 << col.gameObject.layer) & unpassableMask) != 0)
+        {
+            if (col.collider.bounds.max.y > enemyCollider.bounds.min.y)
+                FlipDirection();
+        }
     }
 
     override protected void MoveEnemy()
@@ -64,11 +72,12 @@ public class WalkerAI : EnemyAI
     // Checks 
     private void CheckFront()
     {
-        LayerMask mask = LayerMask.GetMask("UnpassableEnvironment");
-        //float verticalOffset = 
+        float verticalOffset = enemyCollider.bounds.max.y - transform.position.y;
+        float horizontalOffset = direction * (enemyCollider.bounds.max.x - transform.position.x);
+        Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);        
         
-        Debug.DrawRay(transform.position, Vector2.right * direction, Color.green, 0, false);
-        if (Physics2D.Raycast(transform.position, Vector3.right * direction, 1.5f, mask))
+        Debug.DrawRay(checkStartPos, Vector2.right * direction, Color.green, 0, false);
+        if (Physics2D.Raycast(checkStartPos, Vector3.right * direction, 1.5f, unpassableMask))
             FlipDirection();
 
     }
