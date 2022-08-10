@@ -72,21 +72,21 @@ public class Enemy : MonoBehaviour
         playerTransform = playerObject.GetTransform();
     }
 
-    void OnTriggerEnter2D(Collider2D obj)
-    {
-        if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Player")
-        {
-            if (currentHP > 0)
-            {
-                if (currentHP >= maxHP)
-                    hpBar.gameObject.SetActive(true);
+    // void OnTriggerEnter2D(Collider2D obj)
+    // {
+    //     if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Player")
+    //     {
+    //         if (currentHP > 0)
+    //         {
+    //             if (currentHP >= maxHP)
+    //                 hpBar.gameObject.SetActive(true);
 
-                currentHP -= obj.GetComponent<Projectile>().Damage;
-                if (currentHP <= 0)
-                    KillEnemy();
-            }
-        }
-    }
+    //             currentHP -= obj.GetComponent<Projectile>().Damage;
+    //             if (currentHP <= 0)
+    //                 KillEnemy();
+    //         }
+    //     }
+    // }
 
     // Currently just passing in each stat that I need set for different enemies as a parameter, but I may change this 
     // since I'm expecting more stats to be set in here in the future.
@@ -95,6 +95,19 @@ public class Enemy : MonoBehaviour
     {
         maxHP = maxHealth;
         currentHP = maxHealth;
+    }
+
+    public void DamageEnemy(float damage)
+    {
+        if (currentHP > 0)
+            {
+                if (currentHP >= maxHP)
+                    hpBar.gameObject.SetActive(true);
+
+                currentHP -= Mathf.RoundToInt(damage);
+                if (currentHP <= 0)
+                    KillEnemy();
+            }
     }
 
     public void KillEnemy()

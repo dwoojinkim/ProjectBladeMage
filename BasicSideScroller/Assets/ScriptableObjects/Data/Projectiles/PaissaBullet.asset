@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PaissaBullet
   m_EditorClassIdentifier: 
   projectileSpeed: 50
-  baseDamage: 5
+  baseDamage: 1
   maxNumHits: 0

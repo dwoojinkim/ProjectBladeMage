@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     protected int maxNumHits;
     protected float speed;
     protected Vector3 direction = Vector3.right;
+    protected Collider2D projectileCollider;
 
     void Awake()
     {
@@ -35,8 +36,11 @@ public class Projectile : MonoBehaviour
         // Now taking into consideration any piercing projectiles with numHits
         if (Owner == "Player")
         {
-            if (obj.tag == "Enemy")
+            if (IsEnabled && obj.tag == "Enemy")
+            {
                 ReduceProjectileHits();
+                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+            }
         }
         else if (Owner == "Enemy")
         {
@@ -63,6 +67,8 @@ public class Projectile : MonoBehaviour
         baseDamage = projectileData.baseDamage;
         maxNumHits = projectileData.maxNumHits;
         speed = projectileData.projectileSpeed;
+        projectileCollider = GetComponent<Collider2D>();
+        projectileCollider.enabled = false;
 
         numHits = maxNumHits;
     }
@@ -72,6 +78,7 @@ public class Projectile : MonoBehaviour
         IsEnabled = false;
         transform.position = new Vector3(1000, 1000, 0);
         numHits = maxNumHits;
+        projectileCollider.enabled = false;
 
         this.gameObject.SetActive(false);
     }
@@ -84,6 +91,7 @@ public class Projectile : MonoBehaviour
 
     public void FireProjectile(Vector3 dir)
     {
+        projectileCollider.enabled = true;
         direction = dir;
 
         transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
