@@ -66,6 +66,7 @@ public class Enemy : MonoBehaviour
         maxHP = enemyData.maxHP;
         currentHP = maxHP;
         Damage = enemyData.damage;
+        hpBar.gameObject.SetActive(false);
         IsAlive = false;
 
         playerTransform = playerObject.GetTransform();
@@ -73,20 +74,16 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D obj)
     {
-        //Debug.Log(obj.name + " has touched" + this.name);
-
         if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Player")
         {
-            //Debug.Log("Player has hit an enemy!");
-
             if (currentHP > 0)
             {
+                if (currentHP >= maxHP)
+                    hpBar.gameObject.SetActive(true);
+
                 currentHP -= obj.GetComponent<Projectile>().Damage;
                 if (currentHP <= 0)
-                {
-                    //Debug.Log(this.name + " has died!");
                     KillEnemy();
-                }
             }
         }
     }

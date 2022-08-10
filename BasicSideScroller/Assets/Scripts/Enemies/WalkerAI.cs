@@ -6,7 +6,7 @@ using UnityEngine;
 public class WalkerAI : EnemyAI
 {
     [SerializeField] private GameObjectReference playerObject;
-    private float acceleration = 10f;
+    private float acceleration = 20f;
     private float currentSpeed = 0f;
     private int direction = 1;
 
@@ -20,12 +20,14 @@ public class WalkerAI : EnemyAI
     void Update()
     {
         MoveEnemy();
+        CheckFront();
+        CheckFloor();
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Wall")
-            direction *= -1;
+            FlipDirection();
     }
 
     override protected void MoveEnemy()
@@ -52,5 +54,27 @@ public class WalkerAI : EnemyAI
             currentSpeed = direction * speed;
 
         return currentSpeed;
+    }
+
+    private void FlipDirection()
+    {
+        direction *= -1;
+    }
+
+    // Checks 
+    private void CheckFront()
+    {
+        LayerMask mask = LayerMask.GetMask("UnpassableEnvironment");
+        //float verticalOffset = 
+        
+        Debug.DrawRay(transform.position, Vector2.right * direction, Color.green, 0, false);
+        if (Physics2D.Raycast(transform.position, Vector3.right * direction, 1.5f, mask))
+            FlipDirection();
+
+    }
+
+    private void CheckFloor()
+    {
+
     }
 }

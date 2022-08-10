@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 79b33c3cf06f34447a0eebd2705d34a8, type: 2}
-  ActiveEnemiesSet: {fileID: 11400000, guid: 51e04bb01c5c5d1449c4d9271955a7aa, type: 2}
+  ActiveEnemiesSet: {fileID: 11400000, guid: 243f90c99847c8648a7fbb997a69ead1, type: 2}
   playerObject: {fileID: 11400000, guid: b4d155c91185959458834088b191f321, type: 2}
   hpBar: {fileID: 3182473903861663719}
   numberOfBullets: 1

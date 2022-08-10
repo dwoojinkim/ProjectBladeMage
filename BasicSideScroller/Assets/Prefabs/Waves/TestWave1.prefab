@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveData: {fileID: 11400000, guid: 9af6d97cfda0ff54692a3b02c46fed04, type: 2}
+  activeWaveSet: {fileID: 11400000, guid: 2e34d4618c2399e46a6569832e301934, type: 2}

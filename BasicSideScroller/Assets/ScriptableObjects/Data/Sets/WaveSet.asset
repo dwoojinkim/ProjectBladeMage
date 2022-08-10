@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fcdc32e8cca6364f95f971667664974, type: 3}
-  m_Name: 2-2_LevelSet
+  m_Name: WaveSet
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 0}
+  Items: []
