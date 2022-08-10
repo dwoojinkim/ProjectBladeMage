@@ -10,6 +10,7 @@ public class WalkerAI : EnemyAI
     private float currentSpeed = 0f;
     private int direction = 1;
     private LayerMask unpassableMask;
+    private bool onGround = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +34,19 @@ public class WalkerAI : EnemyAI
         // https://answers.unity.com/questions/422472/how-can-i-compare-colliders-layer-to-my-layermask.html
         if (((1 << col.gameObject.layer) & unpassableMask) != 0)
         {
+            if (!onGround && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
+                onGround = true;
+
             if (col.collider.bounds.max.y > enemyCollider.bounds.min.y)
                 FlipDirection();
+
         }
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (onGround && ((1 << col.gameObject.layer) & unpassableMask) != 0 && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
+            onGround = false;
     }
 
     override protected void MoveEnemy()
@@ -84,6 +95,15 @@ public class WalkerAI : EnemyAI
 
     private void CheckFloor()
     {
-
+        float verticalOffset = enemyCollider.bounds.min.y - transform.position.y;
+        float horizontalOffset = direction * (1f + enemyCollider.bounds.max.x - transform.position.x);
+        Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);        
+        
+        Debug.DrawRay(checkStartPos, Vector2.down, Color.green, 0, false);
+        if (onGround && !Physics2D.Raycast(checkStartPos, Vector3.down, 1f, unpassableMask))
+        {
+            Debug.Log("CheckFloor clipping direction");
+            FlipDirection();
+        }
     }
 }
