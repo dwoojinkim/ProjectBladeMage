@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
         currentHP = maxHP;
         IsAlive = true;
 
-        Debug.Log("Spawning enemy!");
+        //Debug.Log("Spawning enemy!");
     }
 
     // WARNING: This method is used to detroy the enemy GameObject. Use KillEnemy() when enemy is killed.

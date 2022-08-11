@@ -36,10 +36,19 @@ public class Projectile : MonoBehaviour
         // Now taking into consideration any piercing projectiles with numHits
         if (Owner == "Player")
         {
-            if (IsEnabled && obj.tag == "Enemy")
+            if (IsEnabled)
             {
-                ReduceProjectileHits();
-                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+                if (obj.tag == "Enemy")
+                {
+                    ReduceProjectileHits();
+                    obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+                }
+                else if (obj.tag == "Barrier");     // For some reason the player is getting hit with the projectile first with "Barrier" tag...
+                {
+                    Debug.Log("Barrier hit! - " + obj.name);
+                    Reset();
+                }
+
             }
         }
         else if (Owner == "Enemy")
@@ -91,11 +100,11 @@ public class Projectile : MonoBehaviour
 
     public void FireProjectile(Vector3 dir)
     {
-        projectileCollider.enabled = true;
         direction = dir;
 
         transform.rotation = Quaternion.FromToRotation(Vector3.up, direction);
         transform.rotation *= Quaternion.Euler(0, 0, -90);
+        projectileCollider.enabled = true;
     }
 
     // Updates position of bullet

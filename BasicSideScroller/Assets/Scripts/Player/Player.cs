@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public GameObject SlashHitbox;
     public GameObject SmashHitbox;
     public FloatVariable playerHP;
+    public FloatVariable playerMaxHP;
     public GameObjectReference playerObject;
 
     public float jumpVelocity = 7.5f;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D playerRigidbody;
 
+    private int baseMaxHP = 100;    // Base Max HP before any mods to it via additional levels, upgrades, etc.
+    private int maxHP;              // True Max HP after all mods via level,s buffs/debuffs, upgrades, etc. But so far, just using this since those mechanics haven't been added yet.
     private Text debugText;
     private bool jumping = true;
     private bool slashRequest = false;
@@ -57,7 +60,8 @@ public class Player : MonoBehaviour
         playerRigidbody.gravityScale = normalGravity;
         playerObject.SetGameObject(this.gameObject);
 
-        HP = 100;
+        maxHP = 100;
+        HP = maxHP;
     }
 
     // Update is called once per frame
@@ -65,6 +69,7 @@ public class Player : MonoBehaviour
     {
         playerPositionTracker.SetVector3Value(transform.position);
         playerHP.SetValue(HP);
+        playerMaxHP.SetValue(maxHP);
         
         SlashCheck();
         SmashCheck();
