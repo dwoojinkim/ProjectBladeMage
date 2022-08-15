@@ -26,6 +26,7 @@ public class Ricochet : MonoBehaviour
     public void ThrowWeapon()
     {
         weapon.transform.position = transform.position;
+        bladerang.ThrowBladerang();
         weapon.SetActive(true);
     }
     

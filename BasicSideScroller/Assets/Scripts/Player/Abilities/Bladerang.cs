@@ -6,16 +6,24 @@ using UnityEngine;
 
 public class Bladerang : MonoBehaviour
 {
-    public enum BladerangDirection
+    private enum BladerangDirection
     {
         Right = 1,
         Left = -1
     }
 
+    private enum BladerangState
+    {
+        Idle,
+        Thrown,
+        Ricocheted
+    }
+
     private float rotationSpeed;
     private float movementSpeed;
     private int baseDamage;
-    public BladerangDirection direction = BladerangDirection.Right;
+    private BladerangDirection direction = BladerangDirection.Right;
+    private BladerangState bladerangState = BladerangState.Idle;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +42,23 @@ public class Bladerang : MonoBehaviour
 
      void OnTriggerEnter2D(Collider2D obj)
     {
-        if (obj.tag == "Enemy")
+        if (bladerangState == BladerangState.Thrown)
         {
-            obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
-            Reset();
+            if (obj.tag == "Enemy")
+            {
+                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+                RicochetBladerang();
+                //Reset();
+            }
         }
+        else if (bladerangState == BladerangState.Ricocheted)
+        {
+            if (obj.tag == "Player")
+            {
+                Reset();
+            }
+        }
+
     }
 
     private void RotateBladerang()
@@ -61,9 +81,24 @@ public class Bladerang : MonoBehaviour
         direction = BladerangDirection.Right;
     }
 
+    // Launches Bladerang towards player
+    private void RicochetBladerang()
+    {
+        bladerangState = BladerangState.Ricocheted;
+        SetLeftRotation();
+    }
+
+    public void ThrowBladerang()
+    {
+        SetRightRotation();
+        bladerangState = BladerangState.Thrown;
+    }
+
     public void Reset()
     {
         transform.position = new Vector3(1000, 1000, 0);
+        bladerangState = BladerangState.Idle;
+        SetRightRotation();
         this.gameObject.SetActive(false);
     }
 }
