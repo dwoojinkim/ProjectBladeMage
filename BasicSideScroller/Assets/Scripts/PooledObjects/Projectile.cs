@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
                 else if (obj.tag == "Barrier");     // For some reason the player is getting hit with the projectile first with "Barrier" tag...
                 {
                     Debug.Log("Barrier hit! - " + obj.name);
-                    Reset();
+                    //Reset();
                 }
 
             }

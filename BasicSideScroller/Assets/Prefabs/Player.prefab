@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1227493295315930010}
   - component: {fileID: 1227493295315930009}
   - component: {fileID: 1227493295315930008}
+  - component: {fileID: 142874149}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227493295315930007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1c6f410988142c4dac55e2e9180ba5c, type: 3}
   m_Name: 
@@ -207,13 +208,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227493295315930007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d707102448456dc4594611ba7ec5b053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   poolCount: 10
   bulletPrefab: {fileID: 6778313813630796566, guid: 6ccaf77c4f9fc1d42b0a8fd423f3bb0c,
+    type: 3}
+--- !u!114 &142874149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227493295315930007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f992de71af3013e46909016e77ad0738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponPrefab: {fileID: 6294156681510002001, guid: 3e3ae8d82355a464998da91c9c9fe99a,
     type: 3}
 --- !u!1 &1227493296227687694
 GameObject:

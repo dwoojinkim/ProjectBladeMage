@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
     private float speedIncreaseTimer = 0.0f;
     private float increaseSpeedAmount = 1.0f;
 
+    private Ricochet ricochetAbility;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,8 @@ public class Player : MonoBehaviour
         playerRigidbody = this.GetComponent<Rigidbody2D>();
         playerRigidbody.gravityScale = normalGravity;
         playerObject.SetGameObject(this.gameObject);
+        if (GetComponent<Ricochet>() != null)
+            ricochetAbility = GetComponent<Ricochet>();
 
         maxHP = 100;
         HP = maxHP;
@@ -188,6 +192,13 @@ public class Player : MonoBehaviour
         {
             // Event for next level
             Debug.Log("Player has entered the portal!");
+        }
+        else
+        {
+            if (ricochetAbility != null)
+            {
+                ricochetAbility.ThrowWeapon();
+            }
         }
     }
 
