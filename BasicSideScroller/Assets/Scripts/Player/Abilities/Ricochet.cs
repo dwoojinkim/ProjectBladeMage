@@ -8,6 +8,8 @@ public class Ricochet : MonoBehaviour
     private GameObject weapon;
     private Bladerang bladerang;
 
+    private Vector3 mousePosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +22,24 @@ public class Ricochet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 
     public void ThrowWeapon()
     {
+        Vector3 throwDirection = mousePosition - transform.position;
+        throwDirection.Normalize();
+
         weapon.transform.position = transform.position;
-        bladerang.ThrowBladerang();
+        bladerang.ThrowBladerang(throwDirection);
+        weapon.SetActive(true);
+    }
+
+    public void ThrowWeapon(int direction)
+    {
+        weapon.transform.position = transform.position;
+        bladerang.ThrowBladerang(direction);
         weapon.SetActive(true);
     }
     

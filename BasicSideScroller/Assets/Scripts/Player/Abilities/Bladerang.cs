@@ -19,17 +19,26 @@ public class Bladerang : MonoBehaviour
         Ricocheted
     }
 
+    [SerializeField] GameObjectReference playerObj;
+
     private float rotationSpeed;
     private float movementSpeed;
+    private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
+    private float initRicochetVelocity;
+    private float ricochetVelocityX;
+    private float ricochetVelocityY;
     private int baseDamage;
     private BladerangDirection direction = BladerangDirection.Right;
     private BladerangState bladerangState = BladerangState.Idle;
+    private Vector3 throwDirection = Vector3.right;
+    private Vector3 ricochetDirection = Vector3.up;
+    private float gravity = 80f;
 
     // Start is called before the first frame update
     void Start()
     {
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
-        movementSpeed = 10f;
+        movementSpeed = 20f;
         baseDamage = 1;
     }
 
@@ -37,7 +46,17 @@ public class Bladerang : MonoBehaviour
     void Update()
     {
         RotateBladerang();
-        MoveBladerang();
+
+        if (bladerangState == BladerangState.Thrown)
+        {
+            MoveBladerang();
+            //MoveBladerang2D(throwDirection);
+        }
+        else if (bladerangState == BladerangState.Ricocheted)
+        {
+            RicochetMovement();
+        }
+
     }
 
      void OnTriggerEnter2D(Collider2D obj)
@@ -57,6 +76,10 @@ public class Bladerang : MonoBehaviour
             {
                 Reset();
             }
+            else if (obj.tag == "Ground")
+            {
+                Reset();
+            }
         }
 
     }
@@ -71,6 +94,25 @@ public class Bladerang : MonoBehaviour
         transform.position += Vector3.right * (int)direction * movementSpeed * Time.deltaTime;
     }
 
+    // After a bit of testing, it doesn't feel good because it's hard to aim with the camera moving and jumping around.
+    private void MoveBladerang2D(Vector3 dir)
+    {
+        float throwAngle = Vector3.Angle(Vector3.right, dir);
+        float movementSpeedX = Mathf.Cos(throwAngle * Mathf.Deg2Rad) * movementSpeed;
+        float movementSpeedY = Mathf.Sin(throwAngle * Mathf.Deg2Rad) * movementSpeed;
+
+
+        transform.position += Vector3.right  * movementSpeedX * Time.deltaTime;
+        transform.position += Vector3.up * movementSpeedY * Time.deltaTime;
+    }
+
+    private void RicochetMovement()
+    {
+        ricochetVelocityY -= gravity * Time.deltaTime;
+
+        transform.position += Vector3.up * ricochetVelocityY * Time.deltaTime;
+    }
+
     private void SetLeftRotation()
     {
         direction = BladerangDirection.Left;
@@ -81,17 +123,40 @@ public class Bladerang : MonoBehaviour
         direction = BladerangDirection.Right;
     }
 
+    private void SetRotation(float dir)
+    {
+        if (dir < 0)
+            direction = BladerangDirection.Left;
+        else
+            direction = BladerangDirection.Right;
+    }
+
     // Launches Bladerang towards player
     private void RicochetBladerang()
     {
+        distanceDiff = playerObj.gameObject.transform.position.x - transform.position.x;
+        ricochetVelocityY = 45f;
         bladerangState = BladerangState.Ricocheted;
-        SetLeftRotation();
+
+        SetRotation(distanceDiff);
     }
 
-    public void ThrowBladerang()
+    public void ThrowBladerang(Vector3 directionVector)
     {
         SetRightRotation();
         bladerangState = BladerangState.Thrown;
+        throwDirection = directionVector;
+    }
+
+    public void ThrowBladerang(int dir)
+    {
+        direction = (BladerangDirection)dir;
+        bladerangState = BladerangState.Thrown;
+
+        if (direction > 0)
+            SetRightRotation();
+        else
+            SetLeftRotation();
     }
 
     public void Reset()

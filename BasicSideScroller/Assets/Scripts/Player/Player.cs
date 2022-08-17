@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
     public float extraGravity = 20f;
 
     public int HP {get; private set;}
+    public int FaceDirection {get; private set;}
 
     private Rigidbody2D playerRigidbody;
+    private SpriteRenderer playerSprite;
 
     private int baseMaxHP = 100;    // Base Max HP before any mods to it via additional levels, upgrades, etc.
     private int maxHP;              // True Max HP after all mods via level,s buffs/debuffs, upgrades, etc. But so far, just using this since those mechanics haven't been added yet.
@@ -59,6 +61,7 @@ public class Player : MonoBehaviour
         }
         
         playerRigidbody = this.GetComponent<Rigidbody2D>();
+        playerSprite = GetComponent<SpriteRenderer>();
         playerRigidbody.gravityScale = normalGravity;
         playerObject.SetGameObject(this.gameObject);
         if (GetComponent<Ricochet>() != null)
@@ -66,6 +69,7 @@ public class Player : MonoBehaviour
 
         maxHP = 100;
         HP = maxHP;
+        FaceDirection = 1;
     }
 
     // Update is called once per frame
@@ -149,9 +153,17 @@ public class Player : MonoBehaviour
     public void Move(float direction)
     {
         if (direction < 0)      //Move left
+        {
             playerMovespeed = -playerMovespeedValue;
+            playerSprite.flipX = false;
+            FaceDirection = -1;
+        }
         else if (direction > 0) // Move right
+        {
             playerMovespeed = playerMovespeedValue;
+            playerSprite.flipX = true;
+            FaceDirection = 1;
+        }
         else
             playerMovespeed = 0;
     }
@@ -197,7 +209,7 @@ public class Player : MonoBehaviour
         {
             if (ricochetAbility != null)
             {
-                ricochetAbility.ThrowWeapon();
+                ricochetAbility.ThrowWeapon(FaceDirection);
             }
         }
     }
