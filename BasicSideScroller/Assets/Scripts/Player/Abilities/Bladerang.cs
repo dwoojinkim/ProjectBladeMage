@@ -24,7 +24,7 @@ public class Bladerang : MonoBehaviour
     private float rotationSpeed;
     private float movementSpeed;
     private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
-    private float initRicochetVelocity;
+    private float initRicochetVelocity = 50f;
     private float ricochetVelocityX;
     private float ricochetVelocityY;
     private int baseDamage;
@@ -78,7 +78,7 @@ public class Bladerang : MonoBehaviour
             }
             else if (obj.tag == "Ground")
             {
-                Reset();
+                //Reset();
             }
         }
 
@@ -111,6 +111,7 @@ public class Bladerang : MonoBehaviour
         ricochetVelocityY -= gravity * Time.deltaTime;
 
         transform.position += Vector3.up * ricochetVelocityY * Time.deltaTime;
+        transform.position += Vector3.right * ricochetVelocityX * Time.deltaTime;
     }
 
     private void SetLeftRotation()
@@ -135,10 +136,61 @@ public class Bladerang : MonoBehaviour
     private void RicochetBladerang()
     {
         distanceDiff = playerObj.gameObject.transform.position.x - transform.position.x;
-        ricochetVelocityY = 45f;
+
+        //ricochetVelocityX = Mathf.Cos(CalculateAngle(distanceDiff)) * initRicochetVelocity * (distanceDiff / Mathf.Abs(distanceDiff));
+        //ricochetVelocityY = Mathf.Sin(CalculateAngle(distanceDiff)) * initRicochetVelocity;
+
+        //ricochetVelocityX = Mathf.Cos(CalculateFakeAngle(distanceDiff)) * initRicochetVelocity * (distanceDiff / Mathf.Abs(distanceDiff));
+        //ricochetVelocityY = Mathf.Sin(CalculateFakeAngle(distanceDiff)) * initRicochetVelocity;
+
+        Vector2 initVel = CalculateVelocity(distanceDiff, 0.85f);
+
+        ricochetVelocityX = initVel.x;
+        ricochetVelocityY = initVel.y;
+
+        //Debug.Log("Angle = " + CalculateAngle(distanceDiff));
+        
         bladerangState = BladerangState.Ricocheted;
+        
 
         SetRotation(distanceDiff);
+    }
+
+    private float CalculateAngle(float range)
+    {
+        float time = 2f;
+        float insideASin = gravity * Mathf.Abs(range) / Mathf.Pow(initRicochetVelocity, 2);
+        float offset = 150;
+        float angleInDegrees = insideASin / 2f * offset;
+
+        //Debug.Log("Inside Arc Sin = " + insideASin);
+
+        return angleInDegrees * Mathf.Deg2Rad;
+        //return Mathf.Asin((time * gravity) / (2f * initRicochetVelocity));
+    }
+
+    private float CalculateFakeAngle(float range)
+    {
+        int minAngle = 45;
+        int maxAngle = 90;
+
+        Debug.Log("Range: " + range);
+
+        return 45f;
+    }
+
+    private Vector2 CalculateVelocity(float range, float time)
+    {
+        float minHeightOffset = 0.5f;
+        float maxHeightOffset = 10f;
+        Vector2 Vo;
+        float Vox = range / time;
+        float Voy = (Random.Range(minHeightOffset, maxHeightOffset) / time) + 0.5f * gravity * time;
+
+        Vo = new Vector2(Vox, Voy);
+
+        return Vo;
+
     }
 
     public void ThrowBladerang(Vector3 directionVector)
