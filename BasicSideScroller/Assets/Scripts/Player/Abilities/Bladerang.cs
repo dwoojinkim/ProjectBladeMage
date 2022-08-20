@@ -38,7 +38,7 @@ public class Bladerang : MonoBehaviour
     void Start()
     {
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
-        movementSpeed = 20f;
+        movementSpeed = 50f;
         baseDamage = 1;
     }
 

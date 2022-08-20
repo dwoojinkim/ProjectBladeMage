@@ -20,9 +20,6 @@ MonoBehaviour:
   SuccessiveUnitDelay: 0.25
   enemies:
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   - {fileID: 9139961831626748919, guid: b7ba653477bcea6419592bd27f92cf5f, type: 3}
   spawns:
@@ -35,6 +32,15 @@ MonoBehaviour:
   - width: 3
     height: 3
     position: {x: -20.1, y: -3.48}
+  - width: 3
+    height: 3
+    position: {x: 20.1, y: -3.48}
+  - width: 3
+    height: 3
+    position: {x: 20.1, y: 1.67}
+  - width: 3
+    height: 3
+    position: {x: 20.1, y: 6.36}
   spawnBoxPosX: -12.82
   spawnBoxPosY: 1.49
   spawnBoxWidth: 2.27

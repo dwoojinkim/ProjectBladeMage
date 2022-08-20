@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public GameObject SmashHitbox;
     public FloatVariable playerHP;
     public FloatVariable playerMaxHP;
+    public FloatVariable playerMP;
+    public FloatVariable playerMaxMP;
     public GameObjectReference playerObject;
 
     public float jumpVelocity = 7.5f;
@@ -23,14 +25,19 @@ public class Player : MonoBehaviour
     public float normalGravity = 10f;
     public float extraGravity = 20f;
 
-    public int HP {get; private set;}
+    public float HP {get; private set;}
+    public float MP {get; private set;}
     public int FaceDirection {get; private set;}
 
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSprite;
 
     private int baseMaxHP = 100;    // Base Max HP before any mods to it via additional levels, upgrades, etc.
+    private int baseMaxMP = 100;
     private int maxHP;              // True Max HP after all mods via level,s buffs/debuffs, upgrades, etc. But so far, just using this since those mechanics haven't been added yet.
+    private int maxMP;
+    private int hpRegenRate = 5;
+    private int mpRegenRate = 5;
     private Text debugText;
     private bool jumping = true;
     private bool slashRequest = false;
@@ -67,8 +74,10 @@ public class Player : MonoBehaviour
         if (GetComponent<Ricochet>() != null)
             ricochetAbility = GetComponent<Ricochet>();
 
-        maxHP = 100;
+        maxHP = baseMaxHP;
+        maxMP = baseMaxMP;
         HP = maxHP;
+        MP = maxMP;
         FaceDirection = 1;
     }
 
@@ -78,9 +87,13 @@ public class Player : MonoBehaviour
         playerPositionTracker.SetVector3Value(transform.position);
         playerHP.SetValue(HP);
         playerMaxHP.SetValue(maxHP);
+        playerMP.SetValue(MP);
+        playerMaxMP.SetValue(maxMP);
         
         SlashCheck();
         SmashCheck();
+
+        PlayerRegen();
     }
 
     void FixedUpdate()
@@ -209,7 +222,11 @@ public class Player : MonoBehaviour
         {
             if (ricochetAbility != null)
             {
-                ricochetAbility.ThrowWeapon(FaceDirection);
+                if (MP >= ricochetAbility.ManaCost)
+                {
+                    ricochetAbility.ThrowWeapon(FaceDirection);
+                    MP -= ricochetAbility.ManaCost;
+                }
             }
         }
     }
@@ -247,6 +264,12 @@ public class Player : MonoBehaviour
 
             attackTimer += Time.deltaTime;
         }
+    }
+
+    private void PlayerRegen()
+    {
+        HP += hpRegenRate * Time.deltaTime;
+        MP += mpRegenRate * Time.deltaTime;
     }
 
     public void Smash()

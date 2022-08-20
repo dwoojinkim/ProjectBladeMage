@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ricochet : MonoBehaviour
 {
+    public int ManaCost {get; private set;}
+
     public GameObject WeaponPrefab;
     private GameObject weapon;
     private Bladerang bladerang;
@@ -17,6 +19,8 @@ public class Ricochet : MonoBehaviour
         bladerang = weapon.GetComponent<Bladerang>();
 
         weapon.SetActive(false);
+
+        ManaCost = 25;
     }
 
     // Update is called once per frame
