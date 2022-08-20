@@ -21,6 +21,8 @@ public class Bladerang : MonoBehaviour
 
     [SerializeField] GameObjectReference playerObj;
 
+    public int ManaCost {get; private set;}
+
     private float rotationSpeed;
     private float movementSpeed;
     private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
@@ -33,6 +35,12 @@ public class Bladerang : MonoBehaviour
     private Vector3 throwDirection = Vector3.right;
     private Vector3 ricochetDirection = Vector3.up;
     private float gravity = 80f;
+    private float manaRecoveryPercent = 0.5f;              // Percent of mana cost recovered when caught;
+
+    void Awake()
+    {
+        ManaCost = 25;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +48,7 @@ public class Bladerang : MonoBehaviour
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
         movementSpeed = 50f;
         baseDamage = 1;
+
     }
 
     // Update is called once per frame
@@ -74,6 +83,7 @@ public class Bladerang : MonoBehaviour
         {
             if (obj.tag == "Player")
             {
+                obj.GetComponent<Player>().CatchWeapon(ManaCost);
                 Reset();
             }
             else if (obj.tag == "Ground")

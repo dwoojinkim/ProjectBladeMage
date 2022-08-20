@@ -313,4 +313,9 @@ public class Player : MonoBehaviour
         playerMovespeed = 0;
         LevelManager.LMinstance.ResetGame();
     }
+
+    public void CatchWeapon(float manaRecovery)
+    {
+        MP += manaRecovery;
+    }
 }

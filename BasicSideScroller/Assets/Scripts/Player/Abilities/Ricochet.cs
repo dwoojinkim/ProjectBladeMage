@@ -20,7 +20,7 @@ public class Ricochet : MonoBehaviour
 
         weapon.SetActive(false);
 
-        ManaCost = 25;
+        ManaCost = bladerang.ManaCost;
     }
 
     // Update is called once per frame
