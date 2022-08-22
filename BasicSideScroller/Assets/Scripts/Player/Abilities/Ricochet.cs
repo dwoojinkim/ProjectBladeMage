@@ -2,49 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ricochet : MonoBehaviour
+public class Ricochet: MonoBehaviour
 {
-    public int ManaCost {get; private set;}
-
     public GameObject WeaponPrefab;
+    public FloatVariable BladerangManaCost;
+    private Weapon weaponType;
+    private string weaponTypeString;
     private GameObject weapon;
+    private List<Weapon> activeWeapons;
     private Bladerang bladerang;
+    private int initWeaponPoolSize = 2;
+    private int manaCost = 0;
 
     private Vector3 mousePosition;
+
+    void Awake()
+    {
+        BladerangManaCost.SetValue(manaCost);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        weapon = Instantiate(WeaponPrefab, new Vector3(1000, 1000, 0), Quaternion.identity);
-        bladerang = weapon.GetComponent<Bladerang>();
+        weaponType = WeaponPrefab.GetComponent<Weapon>();
+        weaponTypeString = weaponType.GetType().Name;
 
-        weapon.SetActive(false);
-
-        ManaCost = bladerang.ManaCost;
+        ObjectPooler.AddPool(this.gameObject, weaponTypeString, WeaponPrefab, initWeaponPoolSize);
     }
 
     // Update is called once per frame
     void Update()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
+        //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
 
-    public void ThrowWeapon()
-    {
-        Vector3 throwDirection = mousePosition - transform.position;
-        throwDirection.Normalize();
+    // public void ThrowWeapon()
+    // {
+    //     Vector3 throwDirection = mousePosition - transform.position;
+    //     throwDirection.Normalize();
 
-        weapon.transform.position = transform.position;
-        bladerang.ThrowBladerang(throwDirection);
-        weapon.SetActive(true);
-    }
+    //     weapon.transform.position = transform.position;
+    //     bladerang.ThrowBladerang(throwDirection);
+    //     weapon.SetActive(true);
+    // }
 
     public void ThrowWeapon(int direction)
     {
-        weapon.transform.position = transform.position;
+        weapon = ObjectPooler.SpawnFromPool(this.gameObject, weaponTypeString, transform.position, Quaternion.identity);
+        bladerang = weapon.GetComponent<Bladerang>();
+        //weapon.transform.position = transform.position;
         bladerang.ThrowBladerang(direction);
-        weapon.SetActive(true);
+        //weapon.SetActive(true);
     }
     
+    public int GetManaCost()
+    {
+        return manaCost;
+    }
 }

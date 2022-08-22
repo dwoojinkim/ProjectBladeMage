@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class Bladerang : MonoBehaviour
+public class Bladerang : MonoBehaviour, Weapon
 {
     private enum BladerangDirection
     {
@@ -19,10 +19,9 @@ public class Bladerang : MonoBehaviour
         Ricocheted
     }
 
-    [SerializeField] GameObjectReference playerObj;
-
-    public int ManaCost {get; private set;}
-
+    [SerializeField] private GameObjectReference playerObj;
+    [SerializeField] private FloatVariable BladerangManaCost;
+    
     private float rotationSpeed;
     private float movementSpeed;
     private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
@@ -35,12 +34,10 @@ public class Bladerang : MonoBehaviour
     private Vector3 throwDirection = Vector3.right;
     private Vector3 ricochetDirection = Vector3.up;
     private float gravity = 80f;
-    private float manaRecoveryPercent = 0.5f;              // Percent of mana cost recovered when caught;
+    private float manaRecoveryPercent = 0.5f;               // Percent of mana cost recovered when caught;
+    private float maxRange = 25f;
+    private float currentDistance = 0;                      // Distance bladerang has moved so far after being thrown.
 
-    void Awake()
-    {
-        ManaCost = 25;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +45,6 @@ public class Bladerang : MonoBehaviour
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
         movementSpeed = 50f;
         baseDamage = 1;
-
     }
 
     // Update is called once per frame
@@ -83,12 +79,12 @@ public class Bladerang : MonoBehaviour
         {
             if (obj.tag == "Player")
             {
-                obj.GetComponent<Player>().CatchWeapon(ManaCost);
+                obj.GetComponent<Player>().CatchWeapon(BladerangManaCost.Value);
                 Reset();
             }
             else if (obj.tag == "Ground")
             {
-                //Reset();
+                Reset();
             }
         }
 
@@ -102,6 +98,9 @@ public class Bladerang : MonoBehaviour
     private void MoveBladerang()
     {
         transform.position += Vector3.right * (int)direction * movementSpeed * Time.deltaTime;
+        currentDistance += movementSpeed * Time.deltaTime;
+        if (currentDistance >= maxRange)
+            Reset();
     }
 
     // After a bit of testing, it doesn't feel good because it's hard to aim with the camera moving and jumping around.
@@ -227,5 +226,6 @@ public class Bladerang : MonoBehaviour
         bladerangState = BladerangState.Idle;
         SetRightRotation();
         this.gameObject.SetActive(false);
+        currentDistance = 0;
     }
 }

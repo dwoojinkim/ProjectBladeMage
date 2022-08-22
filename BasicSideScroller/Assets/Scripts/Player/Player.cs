@@ -222,10 +222,10 @@ public class Player : MonoBehaviour
         {
             if (ricochetAbility != null)
             {
-                if (MP >= ricochetAbility.ManaCost)
+                if (MP >= ricochetAbility.GetManaCost())
                 {
                     ricochetAbility.ThrowWeapon(FaceDirection);
-                    MP -= ricochetAbility.ManaCost;
+                    MP -= ricochetAbility.GetManaCost();
                 }
             }
         }
@@ -317,5 +317,7 @@ public class Player : MonoBehaviour
     public void CatchWeapon(float manaRecovery)
     {
         MP += manaRecovery;
+        if (MP >= maxMP)
+            MP = maxMP;
     }
 }
