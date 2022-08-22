@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 5272709463832429065}
   - component: {fileID: 6640492466146038817}
   - component: {fileID: 37218353}
+  - component: {fileID: -5870110969111694483}
   m_Layer: 8
   m_Name: Walker
   m_TagString: Enemy
@@ -700,3 +701,17 @@ MonoBehaviour:
   speed: 5
   nextWaypointDistance: 1
   playerObject: {fileID: 11400000, guid: b4d155c91185959458834088b191f321, type: 2}
+--- !u!114 &-5870110969111694483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533567164245340265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408722f269e8d3146933b06e2327becc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 33ad40efb945129428a29e5816d623a7, type: 2}
+  duration: 0.2

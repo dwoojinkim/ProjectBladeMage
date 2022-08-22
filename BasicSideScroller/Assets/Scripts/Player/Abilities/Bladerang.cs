@@ -50,7 +50,7 @@ public class Bladerang : MonoBehaviour, Weapon
     // Update is called once per frame
     void Update()
     {
-        RotateBladerang();
+        
 
         if (bladerangState == BladerangState.Thrown)
         {
@@ -60,6 +60,7 @@ public class Bladerang : MonoBehaviour, Weapon
         else if (bladerangState == BladerangState.Ricocheted)
         {
             RicochetMovement();
+            RotateBladerang();
         }
 
     }

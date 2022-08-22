@@ -11,6 +11,8 @@ public class WalkerAI : EnemyAI
     private int direction = 1;
     private LayerMask unpassableMask;
     private bool onGround = false;
+    private ColoredFlash flashFeedback;
+
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +20,7 @@ public class WalkerAI : EnemyAI
         EnemyGFX = GetComponent<SpriteRenderer>();
         enemyCollider = GetComponent<Collider2D>();
         unpassableMask = LayerMask.GetMask("UnpassableEnvironment");
+        flashFeedback = GetComponent<ColoredFlash>();
     }
 
     // Update is called once per frame

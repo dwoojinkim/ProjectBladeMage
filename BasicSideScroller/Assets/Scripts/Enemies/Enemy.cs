@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     protected AIDestinationSetter AIDestinationSetterScript;
     protected EnemyAI enemyAIScript;
+    protected Rigidbody2D enemyRB;
     protected Transform playerTransform;
 
     protected int maxHP;
@@ -28,6 +29,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected Slider hpBar;
 
     protected Vector3 startingPos;
+
+    protected ColoredFlash hitFlash;
  
 
     // Start is called before the first frame update
@@ -54,12 +57,14 @@ public class Enemy : MonoBehaviour
 
     protected void InitializeEnemy()
     {
-        EnemySprite = this.transform.GetComponent<SpriteRenderer>();
-        EnemyCollider = this.transform.GetComponent<Collider2D>();
+        EnemySprite = GetComponent<SpriteRenderer>();
+        EnemyCollider = GetComponent<Collider2D>();
+        hitFlash = GetComponent<ColoredFlash>();
+        enemyRB = GetComponent<Rigidbody2D>();
         //AIPathScript = this.transform.GetComponent<AIPath>();
         //AIDestinationSetterScript = this.transform.GetComponent<AIDestinationSetter>();
-        if (this.transform.GetComponent<EnemyAI>() != null)
-            enemyAIScript = this.transform.GetComponent<EnemyAI>();
+        if (GetComponent<EnemyAI>() != null)
+            enemyAIScript = GetComponent<EnemyAI>();
 
         startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
 
@@ -88,6 +93,16 @@ public class Enemy : MonoBehaviour
     //     }
     // }
 
+
+    // Maybe changing this to be more time based, so I can turn off certain functions furing that time.
+    protected void Knockback()
+    {
+        float force = 750f;
+        Vector3 direction = (transform.position - playerTransform.position).normalized;
+
+        enemyRB.AddForce(direction * force);
+    }
+
     // Currently just passing in each stat that I need set for different enemies as a parameter, but I may change this 
     // since I'm expecting more stats to be set in here in the future.
     // Probably need to change this to extracting the stats from an XML file. I'll need to read up on that though.
@@ -105,6 +120,8 @@ public class Enemy : MonoBehaviour
                     hpBar.gameObject.SetActive(true);
 
                 currentHP -= Mathf.RoundToInt(damage);
+                hitFlash.Flash(Color.white);
+                Knockback();
                 if (currentHP <= 0)
                     KillEnemy();
             }

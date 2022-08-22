@@ -12,7 +12,7 @@ public class Ricochet: MonoBehaviour
     private List<Weapon> activeWeapons;
     private Bladerang bladerang;
     private int initWeaponPoolSize = 2;
-    private int manaCost = 0;
+    private int manaCost = 25;
 
     private Vector3 mousePosition;
 
