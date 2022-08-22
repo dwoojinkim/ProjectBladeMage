@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class Bladerang : MonoBehaviour, Weapon
 {
     private enum BladerangDirection
@@ -22,6 +20,7 @@ public class Bladerang : MonoBehaviour, Weapon
     [SerializeField] private GameObjectReference playerObj;
     [SerializeField] private FloatVariable BladerangManaCost;
     
+    private Ricochet ricochetAbility;   // Definitely a better way to go about this, but doing dumb way for now.
     private float rotationSpeed;
     private float movementSpeed;
     private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
@@ -42,6 +41,7 @@ public class Bladerang : MonoBehaviour, Weapon
     // Start is called before the first frame update
     void Start()
     {
+        ricochetAbility = playerObj.gameObject.GetComponent<Ricochet>();
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
         movementSpeed = 50f;
         baseDamage = 1;
@@ -225,7 +225,13 @@ public class Bladerang : MonoBehaviour, Weapon
         transform.position = new Vector3(1000, 1000, 0);
         bladerangState = BladerangState.Idle;
         SetRightRotation();
-        this.gameObject.SetActive(false);
         currentDistance = 0;
+
+        if (ricochetAbility != null)
+            ricochetAbility.ReturnWeapon(this.gameObject);
+        else
+            Debug.Log("Ricochet Ability is null!");
+
+        this.gameObject.SetActive(false);
     }
 }

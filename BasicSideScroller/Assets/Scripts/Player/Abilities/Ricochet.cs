@@ -56,6 +56,11 @@ public class Ricochet: MonoBehaviour
         //weapon.SetActive(true);
     }
     
+    public void ReturnWeapon(GameObject obj)
+    {
+        ObjectPooler.ReturnToPool(this.gameObject, weaponTypeString, obj);
+    }
+
     public int GetManaCost()
     {
         return manaCost;
