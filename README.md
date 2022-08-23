@@ -1,4 +1,4 @@
-# Game: Project Blade Mage (Name Pending)
+# Game: Project Blade Mage (Placeholder Name)
 
 ## Description
 
