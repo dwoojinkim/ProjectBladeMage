@@ -1,13 +1,13 @@
-# Game: BasicSideScroller
+# Game: Project Blade Mage (Name Pending)
 
 ## Description
 
-A roguelite side-scroller with multiple characters to choose from with unique abilities. Upgrade abilities as you traverse though levels and defeat the final boss!
+A roguelite where you traverse through different stages and defend yourself from waves of enemies. There are multiple different blade mages to choose from with unique weapons and abilities. Upgrade abilities as you traverse though levels and defeat the final boss!
 
 ## Features
 
-* Randomized level generation
 * Randomized upgrades to abilities
+* Choices of proceeding levels are randomly given
 * Choose the next level with randomized rewards
 * Multiple characters and mini bosses
 * Unique abilities for each character and monster
