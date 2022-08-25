@@ -20,8 +20,6 @@ MonoBehaviour:
   SuccessiveUnitDelay: 3
   enemies:
   - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
-  - {fileID: 9139961831626748919, guid: edb6016eccbf60247b939746db44285d, type: 3}
   spawns:
   - width: 3.08
     height: 2.01

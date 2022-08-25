@@ -71,7 +71,7 @@ public class Bladerang : MonoBehaviour, Weapon
         {
             if (obj.tag == "Enemy")
             {
-                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
                 RicochetBladerang();
                 //Reset();
             }
@@ -85,6 +85,7 @@ public class Bladerang : MonoBehaviour, Weapon
             }
             else if (obj.tag == "Ground")
             {
+                playerObj.gameObject.GetComponent<Player>().ResetBuffStack();
                 Reset();
             }
         }

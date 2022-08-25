@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     public float HP {get; private set;}
     public float MP {get; private set;}
     public int FaceDirection {get; private set;}
+    public int BuffStacks {get; private set;}
 
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSprite;
@@ -38,6 +39,7 @@ public class Player : MonoBehaviour
     private int maxMP;
     private int hpRegenRate = 5;
     private int mpRegenRate = 5;
+    private int maxBuffStacks = 5;
     private Text debugText;
     private bool jumping = true;
     private bool slashRequest = false;
@@ -270,6 +272,12 @@ public class Player : MonoBehaviour
     {
         HP += hpRegenRate * Time.deltaTime;
         MP += mpRegenRate * Time.deltaTime;
+
+        if (HP >= maxHP)
+            HP = maxHP;
+
+        if (MP >= maxMP)
+            MP = maxMP;
     }
 
     public void Smash()
@@ -319,5 +327,14 @@ public class Player : MonoBehaviour
         MP += manaRecovery;
         if (MP >= maxMP)
             MP = maxMP;
+
+        BuffStacks++;
+        if (BuffStacks > maxBuffStacks)
+            BuffStacks = maxBuffStacks;
+    }
+
+    public void ResetBuffStack()
+    {
+        BuffStacks = 0;
     }
 }

@@ -98,7 +98,9 @@ public class Enemy : MonoBehaviour
     protected void Knockback()
     {
         float force = 750f;
-        Vector3 direction = (transform.position - playerTransform.position).normalized;
+        Vector3 direction = Vector3.Normalize(transform.position - playerTransform.position);
+
+        Debug.DrawLine(transform.position, direction, Color.red, 2f);
 
         enemyRB.AddForce(direction * force);
     }
