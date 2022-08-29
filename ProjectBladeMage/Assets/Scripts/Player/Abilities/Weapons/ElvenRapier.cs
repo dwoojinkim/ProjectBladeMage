@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bladerang : MonoBehaviour, Weapon
+public class ElvenRapier : MonoBehaviour, Weapon
 {
-    private enum BladerangDirection
+    private enum ElvenRapierDirection
     {
         Right = 1,
         Left = -1
     }
 
-    private enum BladerangState
+    private enum ElvenRapierState
     {
         Idle,
         Thrown,
@@ -18,24 +18,27 @@ public class Bladerang : MonoBehaviour, Weapon
     }
 
     [SerializeField] private GameObjectReference playerObj;
-    [SerializeField] private FloatVariable BladerangManaCost;
+    [SerializeField] private FloatVariable elvenRapierManaCost;
     
     private Ricochet ricochetAbility;   // Definitely a better way to go about this, but doing dumb way for now.
     private float rotationSpeed;
     private float movementSpeed;
-    private float distanceDiff;     // Difference in distance between the player and bladerang on enemy hit
+    private float distanceDiff;     // Difference in distance between the player and elvenRapier on enemy hit
     private float initRicochetVelocity = 50f;
     private float ricochetVelocityX;
     private float ricochetVelocityY;
     private int baseDamage;
-    private BladerangDirection direction = BladerangDirection.Right;
-    private BladerangState bladerangState = BladerangState.Idle;
+    private ElvenRapierDirection direction = ElvenRapierDirection.Right;
+    private ElvenRapierState elvenRapierState = ElvenRapierState.Idle;
     private Vector3 throwDirection = Vector3.right;
     private Vector3 ricochetDirection = Vector3.up;
     private float gravity = 80f;
     private float manaRecoveryPercent = 0.5f;               // Percent of mana cost recovered when caught;
-    private float maxRange = 25f;
-    private float currentDistance = 0;                      // Distance bladerang has moved so far after being thrown.
+    private float maxRange = 15f;
+    private float currentDistance = 0;                      // Distance elvenRapier has moved so far after being thrown.
+
+
+    private bool hitEnemy = false;
 
 
     // Start is called before the first frame update
@@ -52,35 +55,36 @@ public class Bladerang : MonoBehaviour, Weapon
     {
         
 
-        if (bladerangState == BladerangState.Thrown)
+        if (elvenRapierState == ElvenRapierState.Thrown)
         {
-            MoveBladerang();
-            //MoveBladerang2D(throwDirection);
+            MoveElvenRapier();
+            //MoveelvenRapier2D(throwDirection);
         }
-        else if (bladerangState == BladerangState.Ricocheted)
+        else if (elvenRapierState == ElvenRapierState.Ricocheted)
         {
             RicochetMovement();
-            RotateBladerang();
+            RotateElvenRapier();
         }
 
     }
 
      void OnTriggerEnter2D(Collider2D obj)
     {
-        if (bladerangState == BladerangState.Thrown)
+        if (elvenRapierState == ElvenRapierState.Thrown)
         {
             if (obj.tag == "Enemy")
             {
                 obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
-                RicochetBladerang();
+                hitEnemy = true;
+                //RicochetelvenRapier();
                 //Reset();
             }
         }
-        else if (bladerangState == BladerangState.Ricocheted)
+        else if (elvenRapierState == ElvenRapierState.Ricocheted)
         {
             if (obj.tag == "Player")
             {
-                obj.GetComponent<Player>().CatchWeapon(BladerangManaCost.Value);
+                obj.GetComponent<Player>().CatchWeapon(elvenRapierManaCost.Value);
                 Reset();
             }
             else if (obj.tag == "Ground")
@@ -92,21 +96,26 @@ public class Bladerang : MonoBehaviour, Weapon
 
     }
 
-    private void RotateBladerang()
+    private void RotateElvenRapier()
     {
         transform.Rotate(Vector3.forward * (int)direction * rotationSpeed * Time.deltaTime, Space.Self);
     }
 
-    private void MoveBladerang()
+    private void MoveElvenRapier()
     {
         transform.position += Vector3.right * (int)direction * movementSpeed * Time.deltaTime;
         currentDistance += movementSpeed * Time.deltaTime;
         if (currentDistance >= maxRange)
-            Reset();
+        {
+            if (hitEnemy)
+                RicochetElvenRapier();
+            else
+                Reset();
+        }
     }
 
     // After a bit of testing, it doesn't feel good because it's hard to aim with the camera moving and jumping around.
-    private void MoveBladerang2D(Vector3 dir)
+    private void MoveElvenRapier2D(Vector3 dir)
     {
         float throwAngle = Vector3.Angle(Vector3.right, dir);
         float movementSpeedX = Mathf.Cos(throwAngle * Mathf.Deg2Rad) * movementSpeed;
@@ -127,24 +136,24 @@ public class Bladerang : MonoBehaviour, Weapon
 
     private void SetLeftRotation()
     {
-        direction = BladerangDirection.Left;
+        direction = ElvenRapierDirection.Left;
     }
 
     private void SetRightRotation()
     {
-        direction = BladerangDirection.Right;
+        direction = ElvenRapierDirection.Right;
     }
 
     private void SetRotation(float dir)
     {
         if (dir < 0)
-            direction = BladerangDirection.Left;
+            direction = ElvenRapierDirection.Left;
         else
-            direction = BladerangDirection.Right;
+            direction = ElvenRapierDirection.Right;
     }
 
-    // Launches Bladerang towards player
-    private void RicochetBladerang()
+    // Launches elvenRapier towards player
+    private void RicochetElvenRapier()
     {
         distanceDiff = playerObj.gameObject.transform.position.x - transform.position.x;
 
@@ -161,8 +170,9 @@ public class Bladerang : MonoBehaviour, Weapon
 
         //Debug.Log("Angle = " + CalculateAngle(distanceDiff));
         
-        bladerangState = BladerangState.Ricocheted;
+        elvenRapierState = ElvenRapierState.Ricocheted;
         
+        hitEnemy = false;
 
         SetRotation(distanceDiff);
     }
@@ -204,17 +214,17 @@ public class Bladerang : MonoBehaviour, Weapon
 
     }
 
-    public void ThrowBladerang(Vector3 directionVector)
+    public void ThrowWeapon(Vector3 directionVector)
     {
         SetRightRotation();
-        bladerangState = BladerangState.Thrown;
+        elvenRapierState = ElvenRapierState.Thrown;
         throwDirection = directionVector;
     }
 
-    public void ThrowBladerang(int dir)
+    public void ThrowWeapon(int dir)
     {
-        direction = (BladerangDirection)dir;
-        bladerangState = BladerangState.Thrown;
+        direction = (ElvenRapierDirection)dir;
+        elvenRapierState = ElvenRapierState.Thrown;
 
         if (direction > 0)
             SetRightRotation();
@@ -225,7 +235,7 @@ public class Bladerang : MonoBehaviour, Weapon
     public void Reset()
     {
         transform.position = new Vector3(1000, 1000, 0);
-        bladerangState = BladerangState.Idle;
+        elvenRapierState = ElvenRapierState.Idle;
         SetRightRotation();
         currentDistance = 0;
 

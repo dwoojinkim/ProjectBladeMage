@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6294156681510002002}
   - component: {fileID: 6294156681510002005}
   m_Layer: 0
-  m_Name: Bladerang
+  m_Name: Broadsword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

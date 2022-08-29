@@ -5,12 +5,12 @@ using UnityEngine;
 public class Ricochet: MonoBehaviour
 {
     public GameObject WeaponPrefab;
-    public FloatVariable BladerangManaCost;
+    public FloatVariable WeaponManaCost;
     private Weapon weaponType;
     private string weaponTypeString;
     private GameObject weapon;
     private List<Weapon> activeWeapons;
-    private Bladerang bladerang;
+    private Weapon weaponScript;
     private int initWeaponPoolSize = 2;
     private int manaCost = 25;
 
@@ -18,7 +18,7 @@ public class Ricochet: MonoBehaviour
 
     void Awake()
     {
-        BladerangManaCost.SetValue(manaCost);
+        WeaponManaCost.SetValue(manaCost);
     }
 
     // Start is called before the first frame update
@@ -50,9 +50,9 @@ public class Ricochet: MonoBehaviour
     public void ThrowWeapon(int direction)
     {
         weapon = ObjectPooler.SpawnFromPool(this.gameObject, weaponTypeString, transform.position, Quaternion.identity);
-        bladerang = weapon.GetComponent<Bladerang>();
+        weaponScript = weapon.GetComponent<Weapon>();
         //weapon.transform.position = transform.position;
-        bladerang.ThrowBladerang(direction);
+        weaponScript.ThrowWeapon(direction);
         //weapon.SetActive(true);
     }
     

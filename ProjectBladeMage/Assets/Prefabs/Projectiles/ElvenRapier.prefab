@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6294156681510002003}
   - component: {fileID: 6294156681510002000}
   - component: {fileID: 6294156681510002002}
-  - component: {fileID: 6294156681510002005}
+  - component: {fileID: 6423079643310572831}
   m_Layer: 0
   m_Name: ElvenRapier
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6294156681510002001}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1000, y: 1000, z: 0}
   m_LocalScale: {x: 3, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,7 +109,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &6294156681510002005
+--- !u!114 &6423079643310572831
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,8 +118,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6294156681510002001}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2a66b781f0cc044880d8ed1dc378ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 803a8ccf31110394eb61f9ef5b70b841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerObj: {fileID: 11400000, guid: b4d155c91185959458834088b191f321, type: 2}
-  BladerangManaCost: {fileID: 11400000, guid: c1e92da8ff32eec44a99f97c2bd0c0aa, type: 2}
+  elvenRapierManaCost: {fileID: 11400000, guid: f1f28ea5efe56b34db62f249b3e64735,
+    type: 2}
