@@ -1,4 +1,4 @@
-# Game: Project Blade Mage (Placeholder Name)
+# Game: Project Blade Mage
 
 ## Description
 
