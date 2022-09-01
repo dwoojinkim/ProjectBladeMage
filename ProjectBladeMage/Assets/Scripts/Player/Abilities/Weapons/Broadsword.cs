@@ -72,7 +72,7 @@ public class Broadsword : MonoBehaviour, Weapon
             if (obj.tag == "Enemy")
             {
                 obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
-                Ricochetbroadsword();
+                RicochetBroadsword();
                 //Reset();
             }
         }
@@ -144,7 +144,7 @@ public class Broadsword : MonoBehaviour, Weapon
     }
 
     // Launches broadsword towards player
-    private void Ricochetbroadsword()
+    private void RicochetBroadsword()
     {
         distanceDiff = playerObj.gameObject.transform.position.x - transform.position.x;
 

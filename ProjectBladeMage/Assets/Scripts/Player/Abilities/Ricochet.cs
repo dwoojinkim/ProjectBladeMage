@@ -6,11 +6,11 @@ public class Ricochet: MonoBehaviour
 {
     public GameObject WeaponPrefab;
     public FloatVariable WeaponManaCost;
-    private Weapon weaponType;
+    private Weapon weaponPoolType;                  // weaponType of the whole weapon pool
     private string weaponTypeString;
     private GameObject weapon;
     private List<Weapon> activeWeapons;
-    private Weapon weaponScript;
+    private Weapon weaponScript;                // differs from weaponType, as weaponScript is for the individual weapon being thrown
     private int initWeaponPoolSize = 2;
     private int manaCost = 25;
 
@@ -24,8 +24,8 @@ public class Ricochet: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weaponType = WeaponPrefab.GetComponent<Weapon>();
-        weaponTypeString = weaponType.GetType().Name;
+        weaponPoolType = WeaponPrefab.GetComponent<Weapon>();
+        weaponTypeString = weaponPoolType.GetType().Name;
 
         ObjectPooler.AddPool(this.gameObject, weaponTypeString, WeaponPrefab, initWeaponPoolSize);
     }
@@ -33,6 +33,7 @@ public class Ricochet: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("weaponTypeString: " + weaponTypeString);
         //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
     }
@@ -49,6 +50,8 @@ public class Ricochet: MonoBehaviour
 
     public void ThrowWeapon(int direction)
     {
+        Debug.Log("weaponTypeString thrown: " + weaponTypeString);
+
         weapon = ObjectPooler.SpawnFromPool(this.gameObject, weaponTypeString, transform.position, Quaternion.identity);
         weaponScript = weapon.GetComponent<Weapon>();
         //weapon.transform.position = transform.position;

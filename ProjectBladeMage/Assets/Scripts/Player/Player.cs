@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public FloatVariable playerMP;
     public FloatVariable playerMaxMP;
     public GameObjectReference playerObject;
+    public Animator playerAnimator;
 
     public float jumpVelocity = 7.5f;
     public float jumpGravity = 1f;
@@ -52,7 +53,7 @@ public class Player : MonoBehaviour
     private float attackCooldown = 1f;
     private float attackTimer = 0f;
     private float playerMovespeedValue = 10; // Magnitude of speed when left/right is input
-    private float playerMovespeed = 0;      // Actual player's speed in reference to the camera
+    private float playerMovespeed = 0;      // Actual player's speed
     private float cameraMovespeed = INIT_CAMERA_MOVESPEED;
     private float timeToIncreaseSpeed = 1.0f;
     private float speedIncreaseTimer = 0.0f;
@@ -91,6 +92,9 @@ public class Player : MonoBehaviour
         playerMaxHP.SetValue(maxHP);
         playerMP.SetValue(MP);
         playerMaxMP.SetValue(maxMP);
+
+        playerAnimator.SetFloat("Speed", Mathf.Abs(playerMovespeed));
+        playerAnimator.SetFloat("FallSpeed", playerRigidbody.velocity.y);
         
         SlashCheck();
         SmashCheck();
@@ -170,13 +174,13 @@ public class Player : MonoBehaviour
         if (direction < 0)      //Move left
         {
             playerMovespeed = -playerMovespeedValue;
-            playerSprite.flipX = false;
+            playerSprite.flipX = true;
             FaceDirection = -1;
         }
         else if (direction > 0) // Move right
         {
             playerMovespeed = playerMovespeedValue;
-            playerSprite.flipX = true;
+            playerSprite.flipX = false;
             FaceDirection = 1;
         }
         else
