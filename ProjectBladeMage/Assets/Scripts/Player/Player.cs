@@ -112,7 +112,10 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Ground")
         {
             if (transform.position.y > col.transform.position.y)
+            {
                 jumping = false;
+                playerAnimator.SetBool("OnGround", true);
+            }
         }
         else if (col.gameObject.tag == "Enemy" && col.enabled)
         {
@@ -132,6 +135,17 @@ public class Player : MonoBehaviour
         {
             inPortal = true;
             Debug.Log("Player is at " + obj.gameObject.name);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Ground")
+        {
+            if (transform.position.y > col.transform.position.y)
+            {
+                playerAnimator.SetBool("OnGround", false);
+            }
         }
     }
 
@@ -230,6 +244,7 @@ public class Player : MonoBehaviour
             {
                 if (MP >= ricochetAbility.GetManaCost())
                 {
+                    playerAnimator.SetTrigger("ThrowWeapon");
                     ricochetAbility.ThrowWeapon(FaceDirection);
                     MP -= ricochetAbility.GetManaCost();
                 }

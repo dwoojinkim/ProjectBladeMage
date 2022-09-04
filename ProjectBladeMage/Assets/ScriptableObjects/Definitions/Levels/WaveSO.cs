@@ -4,7 +4,8 @@ public enum SpawnType
 {
     Timer,                  // Timer wave spawns will start their timer once the previous wave spawns.
     EndOfWave,              // EndOfWave wave spawns will start once the previous wave is complete. Can still use a timer to spawn after a short delay.
-    HealthPercentage        // HealthPercentage wave spawns will spawn after the key unit of the wave reaches a certain percentage.
+    HealthPercentage,       // HealthPercentage wave spawns will spawn after the key unit of the wave reaches a certain percentage.
+    Trigger                 // Wave starts from a trigger
 };
 
 public enum SpawnLocation
