@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;   //Remove this once I no longer need the debug text
+using DG.Tweening;
 
 public class Player : MonoBehaviour
 {
@@ -68,6 +69,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DOTween.Init();
+
         if (DebugTextObj != null)
         {
             debugText = DebugTextObj.GetComponent<Text>();
@@ -151,6 +154,7 @@ public class Player : MonoBehaviour
             Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
             DamagePlayer(obj.gameObject.GetComponent<EnemyHitbox>().DoDamage()); // GetComponent call is bad okay? Find another method to extract this data?
             hitInvulnerability = true;
+            playerSprite.DOFade(0, hitInvulnerabilityDuration).SetEase(Ease.Flash, 16, 0);
         }
     }
 
@@ -279,6 +283,7 @@ public class Player : MonoBehaviour
                 hitInvulnerabilityTimer = 0;
                 hitInvulnerability = false;
             }
+
         }
     }
 
