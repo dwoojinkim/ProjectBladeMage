@@ -48,6 +48,9 @@ public class Player : MonoBehaviour
     private bool smashRequest = false;
     private bool smashing = false;
     private bool inPortal = false;
+    private bool hitInvulnerability = false;
+    private float hitInvulnerabilityDuration = 1f;
+    private float hitInvulnerabilityTimer = 0f;
     private float hitboxStartup = 0.05f;
     private float hitboxDuration = 0.05f;
     private float attackCooldown = 1f;
@@ -100,6 +103,8 @@ public class Player : MonoBehaviour
         SmashCheck();
 
         PlayerRegen();
+
+        CheckPlayerInvulnerability();
     }
 
     void FixedUpdate()
@@ -107,7 +112,7 @@ public class Player : MonoBehaviour
         MovePlayer();
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Ground")
         {
@@ -117,14 +122,15 @@ public class Player : MonoBehaviour
                 playerAnimator.SetBool("OnGround", true);
             }
         }
-        else if (col.gameObject.tag == "Enemy" && col.enabled)
-        {
-            Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
-            DamagePlayer(col.gameObject.GetComponent<Enemy>().Damage); // GetComponent call is bad okay? Find another method to extract this data?
-        }
+        // Added a trigger hitbox to enemies to detect when they hurt the player.
+        //else if (col.gameObject.tag == "Enemy" && col.enabled)
+        //{
+        //    Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
+        //    DamagePlayer(col.gameObject.GetComponent<Enemy>().Damage); // GetComponent call is bad okay? Find another method to extract this data?
+        //}
     }
     
-    private void OnTriggerEnter2D(Collider2D obj)
+    void OnTriggerEnter2D(Collider2D obj)
     {
         if (obj.gameObject.tag == "Projectile" && obj.GetComponent<Projectile>().Owner == "Enemy")
         {
@@ -135,6 +141,16 @@ public class Player : MonoBehaviour
         {
             inPortal = true;
             Debug.Log("Player is at " + obj.gameObject.name);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D obj)
+    {
+        if (!hitInvulnerability && obj.gameObject.tag == "Enemy" && obj.enabled)
+        {
+            Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
+            DamagePlayer(obj.gameObject.GetComponent<EnemyHitbox>().DoDamage()); // GetComponent call is bad okay? Find another method to extract this data?
+            hitInvulnerability = true;
         }
     }
 
@@ -248,6 +264,20 @@ public class Player : MonoBehaviour
                     ricochetAbility.ThrowWeapon(FaceDirection);
                     MP -= ricochetAbility.GetManaCost();
                 }
+            }
+        }
+    }
+
+    private void CheckPlayerInvulnerability()
+    {
+        if (hitInvulnerability && hitInvulnerabilityTimer < hitInvulnerabilityDuration)
+        {
+            hitInvulnerabilityTimer += Time.deltaTime;
+
+            if (hitInvulnerabilityTimer >= hitInvulnerabilityDuration)
+            {
+                hitInvulnerabilityTimer = 0;
+                hitInvulnerability = false;
             }
         }
     }
