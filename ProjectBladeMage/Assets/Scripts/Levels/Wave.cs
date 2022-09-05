@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public delegate void Notify();  // delegate
 
@@ -20,6 +21,7 @@ public class Wave : MonoBehaviour
 
     [SerializeField] private WaveSO waveData;
     [SerializeField] private WaveRuntimeSet activeWaveSet;
+    [SerializeField] private GameObject spawnPortalPrefab;
 
     private SpawnType waveSpawnType;
     private SpawnLocation spawnLocationType;
@@ -29,6 +31,7 @@ public class Wave : MonoBehaviour
     private List<GameObject> spawnEnemies = new List<GameObject>();             // List of enemies for 1 particular spawn point/box.
     private List<List<GameObject>> enemies = new List<List<GameObject>>();      // List of list of spawnEnemies. Full list of enemies.
     private SizePostion2D[] spawnLocations;
+    private List<GameObject> spawnPortals = new List<GameObject>();
     private Vector2 spawnBoxDimensions;
     private Vector2 spawnBoxPosition;
 
@@ -61,16 +64,29 @@ public class Wave : MonoBehaviour
         enemies = InstantiateEnemies(waveData.enemies);
     }
 
+    void Start()
+    {
+        InstantiateSpawnPortals();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (CurrentWaveState == WaveState.Initiated) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
         {
             timer += Time.deltaTime;
+
+            foreach (GameObject spawnPortObj in spawnPortals)
+            {
+                spawnPortObj.SetActive(true);
+                spawnPortObj.GetComponent<SpawnPortal>().StartSpawn();
+            }
+
             if (timer > timeUntilSpawn)
             {
                 Debug.Log("Spawning Wave!");
                 CurrentWaveState = WaveState.WaveStarted;
+
                 StartCoroutine(SpawnWave());
             }
         }
@@ -101,7 +117,7 @@ public class Wave : MonoBehaviour
     {
         if (waveData.spawnLocationType == SpawnLocation.SpawnBox)
         {
-            if (waveData.spawns.Length != null)
+            if (waveData.spawns.Length != 0)
             {
                 for (int i = 0; i < waveData.spawns.Length; i++)
                 {
@@ -125,14 +141,16 @@ public class Wave : MonoBehaviour
         }
         else if (waveData.spawnLocationType == SpawnLocation.SpawnPoint)
         {
-            if (waveData.spawns.Length != null)
+            if (waveData.spawns.Length != 0)
             {
                 for (int i = 0; i < waveData.spawns.Length; i++)
                 {
                     Vector3 spawnPos = new Vector3(waveData.spawns[i].position.x, waveData.spawns[i].position.y, 1f);
 
+                    #if UNITY_EDITOR
                     UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 0.15f);
                     UnityEditor.Handles.DrawWireDisc(spawnPos ,Vector3.back, 0.25f);
+                    #endif
 
                 }
             }
@@ -177,7 +195,23 @@ public class Wave : MonoBehaviour
 
         return spawnEnemiesList;
     }
-    
+    private void InstantiateSpawnPortals()
+    {
+        for (int i = 0; i < spawnLocations.Length; i++)
+        {
+            GameObject spawnPortalObj;
+            Vector3 spawnLocationPos;
+
+            spawnLocationPos = new Vector3(spawnLocations[i].position.x, spawnLocations[i].position.y, 0);
+
+            spawnPortalObj = Instantiate(spawnPortalPrefab, spawnLocationPos, Quaternion.identity);
+            spawnPortalObj.SetActive(false);
+
+            spawnPortals.Add(spawnPortalObj);
+        }
+    }
+
+
     IEnumerator SpawnWave()
     {
         if (enemies.Count > 0)
@@ -188,6 +222,7 @@ public class Wave : MonoBehaviour
                 for (int j = 0; j < enemies.Count; j++)
                 {
                     Debug.Log("Spawning Enemy in SpawnWave method!");
+
                     if (enemySpawnOrder == SpawnOrder.Simultaneous)
                     {
                         if (spawnLocationType == SpawnLocation.SpawnBox)
@@ -211,14 +246,19 @@ public class Wave : MonoBehaviour
                 }
 
                 // successiveUnitDelay is set in seconds, so multiplying by 1000 for milliseconds.
-                yield return new WaitForSeconds(successiveUnitDelay);
+                if (i < waveData.enemies.Length - 1)
+                    yield return new WaitForSeconds(successiveUnitDelay);
             }
+
+            foreach (GameObject spawnPort in spawnPortals)
+                spawnPort.GetComponent<SpawnPortal>().EndSpawn();
         }
 
-            CurrentWaveState = WaveState.WaveSpawnComplete;
-            WaveStart?.Invoke();
+        CurrentWaveState = WaveState.WaveSpawnComplete;
+        WaveStart?.Invoke();
             
     }
+
 
     private bool IsWaveOver()
     {

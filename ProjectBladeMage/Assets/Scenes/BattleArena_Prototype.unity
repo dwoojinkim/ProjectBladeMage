@@ -1646,7 +1646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &452884374
 Animator:
   serializedVersion: 3
@@ -7567,10 +7567,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 573913927, guid: de0987316c801534593b2e89dee7df68, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 9019e86a857bd0b479b51dbeabbc34a8, type: 2}
     - target: {fileID: 1227493295315930007, guid: de0987316c801534593b2e89dee7df68,
         type: 3}
       propertyPath: m_Name
@@ -7581,16 +7577,6 @@ PrefabInstance:
       propertyPath: MainCamera
       value: 
       objectReference: {fileID: 830226639}
-    - target: {fileID: 1227493295315930014, guid: de0987316c801534593b2e89dee7df68,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.3333333
-      objectReference: {fileID: 0}
-    - target: {fileID: 1227493295315930014, guid: de0987316c801534593b2e89dee7df68,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 2.4666667
-      objectReference: {fileID: 0}
     - target: {fileID: 1227493295315930016, guid: de0987316c801534593b2e89dee7df68,
         type: 3}
       propertyPath: m_RootOrder
