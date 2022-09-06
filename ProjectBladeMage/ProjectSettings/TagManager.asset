@@ -15,6 +15,7 @@ TagManager:
   - Portal
   - Wall
   - Barrier
+  - EnemyHitbox
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Characters
+    uniqueID: 4236541473
     locked: 0

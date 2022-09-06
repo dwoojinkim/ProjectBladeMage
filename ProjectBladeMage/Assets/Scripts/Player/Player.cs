@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     private int baseMaxMP = 100;
     private int maxHP;              // True Max HP after all mods via level,s buffs/debuffs, upgrades, etc. But so far, just using this since those mechanics haven't been added yet.
     private int maxMP;
-    private int hpRegenRate = 5;
+    private int hpRegenRate = 1;
     private int mpRegenRate = 5;
     private int maxBuffStacks = 5;
     private Text debugText;
@@ -149,12 +149,11 @@ public class Player : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D obj)
     {
-        if (!hitInvulnerability && obj.gameObject.tag == "Enemy" && obj.enabled)
+        if (!hitInvulnerability && obj.gameObject.tag == "EnemyHitbox" && obj.enabled)
         {
             Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
             DamagePlayer(obj.gameObject.GetComponent<EnemyHitbox>().DoDamage()); // GetComponent call is bad okay? Find another method to extract this data?
-            hitInvulnerability = true;
-            playerSprite.DOFade(0, hitInvulnerabilityDuration).SetEase(Ease.Flash, 16, 0);
+            PlayerKnockback(obj.transform.position);
         }
     }
 
@@ -182,11 +181,24 @@ public class Player : MonoBehaviour
     {
         HP -= damage;
 
+        hitInvulnerability = true;
+        playerSprite.DOFade(0, hitInvulnerabilityDuration).SetEase(Ease.Flash, 16, 0);
+
         if (HP <= 0)
         {
             // Kill Player
             Debug.Log("Player has died!");
         }
+    }
+
+    private void PlayerKnockback(Vector3 sourcePosition)
+    {
+        float force = 1000f;
+        Vector3 direction = Vector3.Normalize(transform.position - sourcePosition);
+
+        Debug.DrawLine(transform.position, direction, Color.red, 2f);
+
+        playerRigidbody.AddForce(direction * force);
     }
 
     public void SetDebugText(string text)
@@ -221,6 +233,8 @@ public class Player : MonoBehaviour
             playerMovespeed = 0;
     }
 
+    // TODO: Change jumping so it applies additional force as the jump button is held down, instead of an instantaneous velocity.
+    // Use Hollow Knight as a reference.
     public void Jump()
     {
         SetDebugText("Jumping");

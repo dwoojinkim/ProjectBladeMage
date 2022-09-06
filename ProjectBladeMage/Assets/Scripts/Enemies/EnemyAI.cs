@@ -9,6 +9,7 @@ public class EnemyAI : MonoBehaviour
     public Transform target;
     protected SpriteRenderer EnemyGFX;
     protected Collider2D enemyCollider;
+    protected Animator enemyAnimator;
 
     [SerializeField] protected float speed = 200f;
     public float nextWaypointDistance = 3f;

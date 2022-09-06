@@ -76,8 +76,6 @@ public class ElvenRapier : MonoBehaviour, Weapon
             {
                 obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
                 hitEnemy = true;
-                //RicochetelvenRapier();
-                //Reset();
             }
         }
         else if (elvenRapierState == ElvenRapierState.Ricocheted)

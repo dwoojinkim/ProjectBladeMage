@@ -83,7 +83,8 @@ public class WalkerAI : EnemyAI
         direction *= -1;
     }
 
-    // Checks 
+    // Checks for unpassable objects in front of the enemy, but no longer used.
+    // Now I'm using colliders instead.
     private void CheckFront()
     {
         float verticalOffset = enemyCollider.bounds.max.y - transform.position.y;
