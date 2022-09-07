@@ -6,9 +6,10 @@ public class SquireAI : EnemyAI
 {
     private enum SquireState
     {
-        Idle,
-        Scout,
-        Attack
+        Idle,               // Standing still
+        Scout,              // Currently moving (not towards anything in particular though)
+        Aggro,              // Aggo to player and walking towards them
+        Attack              // Attack initiated/in the middle of attacking
     };
 
     private SquireState currentState = SquireState.Idle;
@@ -21,6 +22,11 @@ public class SquireAI : EnemyAI
     private float startPositionX;
     private int movementDirection = 1;      // -1 = left; 1 = right;
     private float moveSpeed = 5;
+    private float attackDashDistance = 7;
+    private float attackDashSpeed = 15;
+    private float attackCooldown = 1;
+    private float attackCooldownTimer = 0;
+    private bool canAttack = true;
 
 
     // Start is called before the first frame update
@@ -63,8 +69,21 @@ public class SquireAI : EnemyAI
             enemyAnimator.SetBool("isMoving", true);
             MoveSquire();
         }
+        else if (currentState == SquireState.Attack)
+        {
+            AttackDash();
+        }
 
+        if (!canAttack)
+        {
+            attackCooldownTimer += Time.deltaTime;
 
+            if (attackCooldownTimer >= attackCooldown)
+            {
+                attackCooldownTimer = 0;
+                canAttack = true;
+            }
+        }
     }
 
     public void DetectPlayer()
@@ -79,11 +98,41 @@ public class SquireAI : EnemyAI
         }
     }
 
+    override public void Attack()
+    {
+        if (currentState != SquireState.Attack && canAttack)
+        {
+            movementDirection = enemyScript.playerObject.GetTransform().position.x - transform.position.x < 0 ? -1 : 1;
+            EnemyGFX.flipX = movementDirection == 1 ? false : true;
+
+            // Add in delay before attacking
+            enemyAnimator.SetTrigger("AttackTrigger");
+
+            currentState = SquireState.Attack;
+
+            startPositionX = transform.position.x;
+
+            canAttack = false;
+        }
+    }
+
     private void MoveSquire()
     {
         transform.position += Vector3.right * moveSpeed * movementDirection * Time.deltaTime;
 
         if (Mathf.Abs(transform.position.x - startPositionX) >= setScoutRange)
+        {
+            currentState = SquireState.Idle;
+
+            SetIdleTime();
+        }
+    }
+
+    private void AttackDash()
+    {
+        transform.position += Vector3.right * attackDashSpeed * movementDirection * Time.deltaTime;
+
+        if (Mathf.Abs(transform.position.x - startPositionX) >= attackDashDistance)
         {
             currentState = SquireState.Idle;
 

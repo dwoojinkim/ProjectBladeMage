@@ -93,4 +93,9 @@ public class EnemyAI : MonoBehaviour
         else if (rb.velocity.x <= -0.01f && force.x < 0f)   // Enemy is moving left
             EnemyGFX.flipX = true;
     }
+
+    virtual public void Attack()
+    {
+
+    }
 }
