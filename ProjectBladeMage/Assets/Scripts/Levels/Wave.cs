@@ -38,6 +38,8 @@ public class Wave : MonoBehaviour
     private float timer;
     private float timeUntilSpawn;
     private float successiveUnitDelay;
+
+    private bool waveTrigger = false;
  
  
     // Start is called before the first frame update
@@ -74,20 +76,46 @@ public class Wave : MonoBehaviour
     {
         if (CurrentWaveState == WaveState.Initiated) // || waveState == WaveState.WaveComplete) // It should only check WaveComplete state to restart if it's supposed to re-spawn
         {
-            timer += Time.deltaTime;
 
-            foreach (GameObject spawnPortObj in spawnPortals)
+            if (waveSpawnType == SpawnType.Timer)
             {
-                spawnPortObj.SetActive(true);
-                spawnPortObj.GetComponent<SpawnPortal>().StartSpawn();
+                timer += Time.deltaTime;
+
+                foreach (GameObject spawnPortObj in spawnPortals)
+                {
+                    spawnPortObj.SetActive(true);
+                    spawnPortObj.GetComponent<SpawnPortal>().StartSpawn();
+                }
+
+                if (timer > timeUntilSpawn)
+                {
+                    Debug.Log("Spawning Wave!");
+                    CurrentWaveState = WaveState.WaveStarted;
+
+                    StartCoroutine(SpawnWave());
+                }
             }
-
-            if (timer > timeUntilSpawn)
+            else if (waveSpawnType == SpawnType.Trigger)
             {
-                Debug.Log("Spawning Wave!");
-                CurrentWaveState = WaveState.WaveStarted;
+               if (waveTrigger)
+                {
+                    // Keeping timer so the enemies don't INSTANTLY spawn and gives player some time to realize enemies are spawning.
+                    timer += Time.deltaTime;
 
-                StartCoroutine(SpawnWave());
+                    foreach (GameObject spawnPortObj in spawnPortals)
+                    {
+                        spawnPortObj.SetActive(true);
+                        spawnPortObj.GetComponent<SpawnPortal>().StartSpawn();
+                    }
+
+                    if (timer > timeUntilSpawn)
+                    {
+                        Debug.Log("Spawning Wave!");
+                        CurrentWaveState = WaveState.WaveStarted;
+
+                        StartCoroutine(SpawnWave());
+                    }
+                }
             }
         }
 
@@ -293,5 +321,12 @@ public class Wave : MonoBehaviour
     {
         foreach(GameObject enemy in spawnEnemies)
             enemy.GetComponent<Enemy>().DestroyEnemy();
+    }
+
+
+    // Used when waveSpawnType == SpawnType.Trigger
+    public void TriggerWaveSpawn()
+    {
+        waveTrigger = true;
     }
 }

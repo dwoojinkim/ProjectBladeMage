@@ -12,7 +12,7 @@ public class AttackRange : MonoBehaviour
         enemyAIScript = transform.parent.GetComponent<EnemyAI>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
             enemyAIScript.Attack();

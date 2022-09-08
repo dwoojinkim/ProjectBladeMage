@@ -33,7 +33,7 @@ public class Ricochet: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("weaponTypeString: " + weaponTypeString);
+        //Debug.Log("weaponTypeString: " + weaponTypeString);
         //mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0);
     }

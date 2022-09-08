@@ -9,6 +9,7 @@ public class SquireAI : EnemyAI
         Idle,               // Standing still
         Scout,              // Currently moving (not towards anything in particular though)
         Aggro,              // Aggo to player and walking towards them
+        WindUp,             // Attack wind up state
         Attack              // Attack initiated/in the middle of attacking
     };
 
@@ -24,8 +25,10 @@ public class SquireAI : EnemyAI
     private float moveSpeed = 5;
     private float attackDashDistance = 7;
     private float attackDashSpeed = 15;
-    private float attackCooldown = 1;
+    private float attackCooldown = 2;
     private float attackCooldownTimer = 0;
+    private float attackWindUpDuration = 0.5f;
+    private float attackWindUpTimer = 0;
     private bool canAttack = true;
 
 
@@ -69,6 +72,18 @@ public class SquireAI : EnemyAI
             enemyAnimator.SetBool("isMoving", true);
             MoveSquire();
         }
+        else if (currentState == SquireState.WindUp)
+        {
+            attackWindUpTimer += Time.deltaTime;
+
+            if (attackWindUpTimer >= attackWindUpDuration)
+            {
+                attackWindUpTimer = 0;
+                currentState = SquireState.Attack;
+
+                enemyAnimator.SetTrigger("AttackTrigger");
+            }
+        }
         else if (currentState == SquireState.Attack)
         {
             AttackDash();
@@ -82,6 +97,24 @@ public class SquireAI : EnemyAI
             {
                 attackCooldownTimer = 0;
                 canAttack = true;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Wall")
+        {
+            Debug.Log("Collision on Wall");
+
+            if (currentState == SquireState.Scout || currentState == SquireState.Attack)
+            {
+                currentState = SquireState.Idle;
+
+                idleTimer = 0;
+                SetIdleTime();
+
+                
             }
         }
     }
@@ -106,9 +139,9 @@ public class SquireAI : EnemyAI
             EnemyGFX.flipX = movementDirection == 1 ? false : true;
 
             // Add in delay before attacking
-            enemyAnimator.SetTrigger("AttackTrigger");
+            enemyAnimator.SetTrigger("WindUpTrigger");
 
-            currentState = SquireState.Attack;
+            currentState = SquireState.WindUp;
 
             startPositionX = transform.position.x;
 
@@ -136,6 +169,7 @@ public class SquireAI : EnemyAI
         {
             currentState = SquireState.Idle;
 
+            idleTimer = 0;
             SetIdleTime();
         }
     }
