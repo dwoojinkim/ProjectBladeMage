@@ -24,7 +24,7 @@ public class SquireAI : EnemyAI
     private int movementDirection = 1;      // -1 = left; 1 = right;
     private float moveSpeed = 5;
     private float attackDashDistance = 7;
-    private float attackDashSpeed = 15;
+    private float attackDashSpeed = 20;
     private float attackCooldown = 2;
     private float attackCooldownTimer = 0;
     private float attackWindUpDuration = 0.5f;
@@ -64,7 +64,8 @@ public class SquireAI : EnemyAI
                 currentState = SquireState.Scout;
                 startPositionX = transform.position.x;
                 movementDirection = Random.Range(-1, 1) < 0 ? -1 : 1;
-                EnemyGFX.flipX = movementDirection == 1 ? false : true;
+                //EnemyGFX.flipX = movementDirection == 1 ? false : true;
+                transform.localScale = new Vector3(movementDirection, 1, 1);
             }
         }
         else if (currentState == SquireState.Scout)
@@ -136,7 +137,8 @@ public class SquireAI : EnemyAI
         if (currentState != SquireState.Attack && canAttack)
         {
             movementDirection = enemyScript.playerObject.GetTransform().position.x - transform.position.x < 0 ? -1 : 1;
-            EnemyGFX.flipX = movementDirection == 1 ? false : true;
+            //EnemyGFX.flipX = movementDirection == 1 ? false : true;
+            transform.localScale = new Vector3(movementDirection, 1, 1);
 
             // Add in delay before attacking
             enemyAnimator.SetTrigger("WindUpTrigger");
