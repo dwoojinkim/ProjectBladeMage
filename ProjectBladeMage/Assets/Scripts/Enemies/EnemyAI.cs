@@ -5,26 +5,44 @@ using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {
+    public enum EnemyState
+    {
+        Idle,               // Standing still
+        Scout,              // Currently moving (not towards anything in particular though)
+        Aggro,              // Aggo to player and walking towards them
+        WindUp,             // Attack wind up state
+        Attack              // Attack initiated/in the middle of attacking
+    };
 
-    public Transform target;
+    #region Common variables
+    [SerializeField] protected float moveSpeed = 5f;
+
     protected SpriteRenderer EnemyGFX;
     protected Collider2D enemyCollider;
+    protected Rigidbody2D rb;
+    protected Enemy enemyScript;
     protected Animator enemyAnimator;
+    protected EnemyState currentState = EnemyState.Idle;
+    protected int movementDirection = 1;                      // -1 = left; 1 = right;
+    #endregion
 
-    [SerializeField] protected float speed = 200f;
+    #region Pathfinding Variables
+    // A* Pathfinding variables. TODO: Remove from basic EnemyAI script and move them to enemy scripts that would need pathfinding.
+    public Transform target;
     public float nextWaypointDistance = 3f;
 
     protected Path path;
     protected int currentWaypoint = 0;
     protected bool reachedEndOfPath = false;
-
     protected Seeker seeker;
-    protected Rigidbody2D rb;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         OnStart();
+        seeker = GetComponent<Seeker>();
+        InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
     void UpdatePath()
@@ -52,11 +70,9 @@ public class EnemyAI : MonoBehaviour
     {
         EnemyGFX = GetComponent<SpriteRenderer>();
         enemyCollider = GetComponent<Collider2D>();
-
-        seeker = GetComponent<Seeker>();
+        enemyScript = GetComponent<Enemy>();
+        enemyAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-
-        InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
     protected void UpdateLoop()
@@ -78,7 +94,7 @@ public class EnemyAI : MonoBehaviour
     virtual protected void MoveEnemy()
     {
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * moveSpeed * Time.deltaTime;
     
         // Will need to add air drag to rigidbody in order for the enemy to come to a stop.
         rb.AddForce(force);

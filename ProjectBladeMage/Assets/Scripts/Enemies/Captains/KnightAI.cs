@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquireAI : AttackEnemyAI
+public class KnightAI : AttackEnemyAI
 {
     //private Vector2 scoutRange;         // Range Squire will scout before going idle. Index 0 = min; Index 1 = max;
     //private Vector2 idleTimeRange;      // Range of time Squire will be idle in seconds.
@@ -15,17 +15,13 @@ public class SquireAI : AttackEnemyAI
     //private float attackCooldown = 2;
     //private float attackCooldownTimer = 0;
     //private float attackWindUpDuration = 0.5f;
-    //private float attackWindUpTimer = 0;
+    //private float attackWindUpTimer;
     //private bool canAttack = true;
-
 
     // Start is called before the first frame update
     void Start()
     {
         OnStart();
-
-        SetIdleTime();
-        SetScoutRange();
     }
 
     // Update is called once per frame
@@ -82,36 +78,6 @@ public class SquireAI : AttackEnemyAI
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Wall")
-        {
-            Debug.Log("Collision on Wall");
-
-            if (currentState == EnemyState.Scout || currentState == EnemyState.Attack)
-            {
-                currentState = EnemyState.Idle;
-
-                idleTimer = 0;
-                SetIdleTime();
-
-                
-            }
-        }
-    }
-
-    public void DetectPlayer()
-    {
-        if (currentState !=EnemyState.Attack)
-        {
-            currentState = EnemyState.Attack;
-            idleTimer = 0;
-
-            SetIdleTime();
-            SetScoutRange();
-        }
-    }
-
     override public void Attack()
     {
         if (currentState != EnemyState.Attack && canAttack)
@@ -130,7 +96,6 @@ public class SquireAI : AttackEnemyAI
             canAttack = false;
         }
     }
-
     override protected void MoveEnemy()
     {
         transform.position += Vector3.right * moveSpeed * movementDirection * Time.deltaTime;

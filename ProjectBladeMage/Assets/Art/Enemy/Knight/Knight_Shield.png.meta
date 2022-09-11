@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: fb533cc08e1cf06429a62491b49854a9
+guid: 42a4dd20ba9ae6540a8d0db61dbd9a39
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6991849013916550155
-    second: Death_0
+      213: -6717884257390833292
+    second: Shield_0
   - first:
-      213: -276728812324164698
-    second: Death_1
+      213: -7947067082740497745
+    second: Shield_1
   - first:
-      213: 3156895337291164288
-    second: Death_2
+      213: -4098029715399502762
+    second: Shield_2
   - first:
-      213: 1400002288684528572
-    second: Death_3
+      213: -407368442477547055
+    second: Shield_3
+  - first:
+      213: 5722131696975078943
+    second: Knight_Shield_0
+  - first:
+      213: 3633184041331928485
+    second: Knight_Shield_1
+  - first:
+      213: 4598933910600604783
+    second: Knight_Shield_2
+  - first:
+      213: -6701518120205481350
+    second: Knight_Shield_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +111,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Death_0
+      name: Knight_Shield_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +125,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b0449ad32a9080160800000000000000
-      internalID: 6991849013916550155
+      spriteID: f16e3341678196f40800000000000000
+      internalID: 5722131696975078943
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_1
+      name: Knight_Shield_1
       rect:
         serializedVersion: 2
         x: 150
@@ -134,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ab6d428c9cd82cf0800000000000000
-      internalID: -276728812324164698
+      spriteID: 5ad253bd2a9ab6230800000000000000
+      internalID: 3633184041331928485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_2
+      name: Knight_Shield_2
       rect:
         serializedVersion: 2
         x: 300
@@ -155,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08aa354559b8fcb20800000000000000
-      internalID: 3156895337291164288
+      spriteID: f6cd8d68602b2df30800000000000000
+      internalID: 4598933910600604783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Death_3
+      name: Knight_Shield_3
       rect:
         serializedVersion: 2
         x: 450
@@ -176,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cb376cdf9aecd6310800000000000000
-      internalID: 1400002288684528572
+      spriteID: a7a0f4d96cc6ff2a0800000000000000
+      internalID: -6701518120205481350
       vertices: []
       indices: 
       edges: []

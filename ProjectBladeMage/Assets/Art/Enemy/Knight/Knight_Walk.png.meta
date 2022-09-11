@@ -14,6 +14,18 @@ TextureImporter:
   - first:
       213: -5409570386352685021
     second: Walk_3
+  - first:
+      213: -6373373984769234828
+    second: Knight_Walk_0
+  - first:
+      213: 7005221569576858203
+    second: Knight_Walk_1
+  - first:
+      213: -147612535191686841
+    second: Knight_Walk_2
+  - first:
+      213: -3861644164703779709
+    second: Knight_Walk_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +111,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Walk_0
+      name: Knight_Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +125,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cdce119379b920830800000000000000
-      internalID: 4035959289877228764
+      spriteID: 4782d11e02a3d87a0800000000000000
+      internalID: -6373373984769234828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_1
+      name: Knight_Walk_1
       rect:
         serializedVersion: 2
         x: 150
@@ -134,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d6a1e1dec50c52f0800000000000000
-      internalID: -982904232830982447
+      spriteID: b52788bf6eb873160800000000000000
+      internalID: 7005221569576858203
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_2
+      name: Knight_Walk_2
       rect:
         serializedVersion: 2
         x: 300
@@ -155,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 984096a69a2512bf0800000000000000
-      internalID: -350908408369970039
+      spriteID: 741318b6e2393fdf0800000000000000
+      internalID: -147612535191686841
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Walk_3
+      name: Knight_Walk_3
       rect:
         serializedVersion: 2
         x: 450
@@ -176,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 320c9fd05685de4b0800000000000000
-      internalID: -5409570386352685021
+      spriteID: 3840fd1971fa86ac0800000000000000
+      internalID: -3861644164703779709
       vertices: []
       indices: 
       edges: []

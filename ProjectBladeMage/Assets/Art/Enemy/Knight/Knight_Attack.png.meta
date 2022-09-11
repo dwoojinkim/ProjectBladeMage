@@ -1,19 +1,55 @@
 fileFormatVersion: 2
-guid: 42a4dd20ba9ae6540a8d0db61dbd9a39
+guid: d8248f2913d359e48a1d5677bc2cecca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6717884257390833292
-    second: Shield_0
+      213: -7008412969330441016
+    second: Attack_0
   - first:
-      213: -7947067082740497745
-    second: Shield_1
+      213: -7763475090823894447
+    second: Attack_1
   - first:
-      213: -4098029715399502762
-    second: Shield_2
+      213: 302641331129538988
+    second: Attack_2
   - first:
-      213: -407368442477547055
-    second: Shield_3
+      213: -6329420634031446844
+    second: Attack_3
+  - first:
+      213: -910092549403018386
+    second: Attack_4
+  - first:
+      213: 221524225039350300
+    second: Attack_5
+  - first:
+      213: 1290532464073988732
+    second: Attack_6
+  - first:
+      213: 4780903288873104255
+    second: Attack_7
+  - first:
+      213: 7442079067065649627
+    second: Knight_Attack_0
+  - first:
+      213: 4754036034325592855
+    second: Knight_Attack_1
+  - first:
+      213: -908522120702514673
+    second: Knight_Attack_2
+  - first:
+      213: 8154952217615005867
+    second: Knight_Attack_3
+  - first:
+      213: -842675162766002549
+    second: Knight_Attack_4
+  - first:
+      213: -4511132201064091179
+    second: Knight_Attack_5
+  - first:
+      213: 5948628195922248999
+    second: Knight_Attack_6
+  - first:
+      213: 6585558835922912261
+    second: Knight_Attack_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +135,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shield_0
+      name: Knight_Attack_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +149,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 471d70c5cd745c2a0800000000000000
-      internalID: -6717884257390833292
+      spriteID: bd981de4b73974760800000000000000
+      internalID: 7442079067065649627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shield_1
+      name: Knight_Attack_1
       rect:
         serializedVersion: 2
         x: 150
@@ -134,14 +170,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fa28d07f79856b190800000000000000
-      internalID: -7947067082740497745
+      spriteID: 71b3263d59ab9f140800000000000000
+      internalID: 4754036034325592855
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shield_2
+      name: Knight_Attack_2
       rect:
         serializedVersion: 2
         x: 300
@@ -155,14 +191,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6541e96afafd027c0800000000000000
-      internalID: -4098029715399502762
+      spriteID: f0a21fcd1f74463f0800000000000000
+      internalID: -908522120702514673
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Shield_3
+      name: Knight_Attack_3
       rect:
         serializedVersion: 2
         x: 450
@@ -176,8 +212,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1d1fb655f8cb85af0800000000000000
-      internalID: -407368442477547055
+      spriteID: ba8f93bc5d53c2170800000000000000
+      internalID: 8154952217615005867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b86b94677673e44f0800000000000000
+      internalID: -842675162766002549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d1bfb40a2d3561c0800000000000000
+      internalID: -4511132201064091179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 900
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72581d6b3d5cd8250800000000000000
+      internalID: 5948628195922248999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Attack_7
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 504ce969eda946b50800000000000000
+      internalID: 6585558835922912261
       vertices: []
       indices: 
       edges: []

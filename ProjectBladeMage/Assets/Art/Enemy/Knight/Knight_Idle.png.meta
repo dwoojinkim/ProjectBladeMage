@@ -1,19 +1,31 @@
 fileFormatVersion: 2
-guid: 7cd79300435a5044fa244e7a0f728de8
+guid: aa7d01ec1f448764f8ce0ceb0781c973
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7500690451134026123
-    second: Take Hit_0
+      213: 4723107735738678597
+    second: Idle_0
   - first:
-      213: -889859373511162655
-    second: Take Hit_1
+      213: -7385789195546760866
+    second: Idle_1
   - first:
-      213: -3088938797480143695
-    second: Take Hit_2
+      213: 3234629978573100161
+    second: Idle_2
   - first:
-      213: -9206091644520726168
-    second: Take Hit_3
+      213: 6373048116405451881
+    second: Idle_3
+  - first:
+      213: -3858063850402955622
+    second: Knight_Idle_0
+  - first:
+      213: 4327642080381475721
+    second: Knight_Idle_1
+  - first:
+      213: -5663030001535758309
+    second: Knight_Idle_2
+  - first:
+      213: 2668040235456949442
+    second: Knight_Idle_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -99,7 +111,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Take Hit_0
+      name: Knight_Idle_0
       rect:
         serializedVersion: 2
         x: 0
@@ -113,14 +125,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 57eedf966c138e790800000000000000
-      internalID: -7500690451134026123
+      spriteID: a9eb4f37e57657ac0800000000000000
+      internalID: -3858063850402955622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_1
+      name: Knight_Idle_1
       rect:
         serializedVersion: 2
         x: 150
@@ -134,14 +146,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e4c0dd4d9596a3f0800000000000000
-      internalID: -889859373511162655
+      spriteID: 98b9b241b8fde0c30800000000000000
+      internalID: 4327642080381475721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_2
+      name: Knight_Idle_2
       rect:
         serializedVersion: 2
         x: 300
@@ -155,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b416439782e125d0800000000000000
-      internalID: -3088938797480143695
+      spriteID: b10d416b730e861b0800000000000000
+      internalID: -5663030001535758309
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Take Hit_3
+      name: Knight_Idle_3
       rect:
         serializedVersion: 2
         x: 450
@@ -176,8 +188,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 86186aedc646d3080800000000000000
-      internalID: -9206091644520726168
+      spriteID: 2cc6cd05578c60520800000000000000
+      internalID: 2668040235456949442
       vertices: []
       indices: 
       edges: []

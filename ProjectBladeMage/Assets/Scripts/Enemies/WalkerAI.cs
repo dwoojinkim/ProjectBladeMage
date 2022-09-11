@@ -8,7 +8,6 @@ public class WalkerAI : EnemyAI
     [SerializeField] private GameObjectReference playerObject;
     private float acceleration = 20f;
     private float currentSpeed = 0f;
-    private int direction = 1;
     private LayerMask unpassableMask;
     private bool onGround = false;
     private ColoredFlash flashFeedback;
@@ -17,8 +16,7 @@ public class WalkerAI : EnemyAI
     // Start is called before the first frame update
     void Start()
     {
-        EnemyGFX = GetComponent<SpriteRenderer>();
-        enemyCollider = GetComponent<Collider2D>();
+        OnStart();
         unpassableMask = LayerMask.GetMask("UnpassableEnvironment");
         flashFeedback = GetComponent<ColoredFlash>();
     }
@@ -54,14 +52,14 @@ public class WalkerAI : EnemyAI
 
     override protected void MoveEnemy()
     {
-        currentSpeed = AccelerateVelocity(currentSpeed, direction);
+        currentSpeed = AccelerateVelocity(currentSpeed, movementDirection);
 
         float force = currentSpeed * Time.deltaTime;
     
         transform.position += Vector3.right * force;
 
         
-        if (direction > 0)              // Enemy is moving right
+        if (movementDirection > 0)              // Enemy is moving right
             EnemyGFX.flipX = false;
         else                            // Enemy is moving left
             EnemyGFX.flipX = true;
@@ -72,15 +70,15 @@ public class WalkerAI : EnemyAI
     {
         currentSpeed += direction * acceleration * Time.deltaTime;
 
-        if (Mathf.Abs(currentSpeed) > speed)
-            currentSpeed = direction * speed;
+        if (Mathf.Abs(currentSpeed) > moveSpeed)
+            currentSpeed = direction * moveSpeed;
 
         return currentSpeed;
     }
 
     private void FlipDirection()
     {
-        direction *= -1;
+        movementDirection *= -1;
     }
 
     // Checks for unpassable objects in front of the enemy, but no longer used.
@@ -88,11 +86,11 @@ public class WalkerAI : EnemyAI
     private void CheckFront()
     {
         float verticalOffset = enemyCollider.bounds.max.y - transform.position.y;
-        float horizontalOffset = direction * (enemyCollider.bounds.max.x - transform.position.x);
+        float horizontalOffset = movementDirection * (enemyCollider.bounds.max.x - transform.position.x);
         Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);        
         
-        Debug.DrawRay(checkStartPos, Vector2.right * direction, Color.green, 0, false);
-        if (Physics2D.Raycast(checkStartPos, Vector3.right * direction, 1.5f, unpassableMask))
+        Debug.DrawRay(checkStartPos, Vector2.right * movementDirection, Color.green, 0, false);
+        if (Physics2D.Raycast(checkStartPos, Vector3.right * movementDirection, 1.5f, unpassableMask))
             FlipDirection();
 
     }
@@ -100,7 +98,7 @@ public class WalkerAI : EnemyAI
     private void CheckFloor()
     {
         float verticalOffset = enemyCollider.bounds.min.y - transform.position.y;
-        float horizontalOffset = direction * (1f + enemyCollider.bounds.max.x - transform.position.x);
+        float horizontalOffset = movementDirection * (1f + enemyCollider.bounds.max.x - transform.position.x);
         Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);        
         
         Debug.DrawRay(checkStartPos, Vector2.down, Color.green, 0, false);
