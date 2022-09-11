@@ -40,6 +40,7 @@ public class SquireAI : AttackEnemyAI
             {
                 idleTimer = 0;
                 SetIdleTime();
+                SetScoutRange();
 
                 currentState = EnemyState.Scout;
                 startPositionX = transform.position.x;

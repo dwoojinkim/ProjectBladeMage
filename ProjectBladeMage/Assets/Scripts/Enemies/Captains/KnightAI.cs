@@ -22,6 +22,9 @@ public class KnightAI : AttackEnemyAI
     void Start()
     {
         OnStart();
+
+        SetIdleTime();
+        SetScoutRange();
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class KnightAI : AttackEnemyAI
             {
                 idleTimer = 0;
                 SetIdleTime();
+                SetScoutRange();
 
                 currentState = EnemyState.Scout;
                 startPositionX = transform.position.x;
