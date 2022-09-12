@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using TMPro;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -16,8 +17,16 @@ public class EnemyAI : MonoBehaviour
 
     #region Common variables
     [SerializeField] protected float moveSpeed = 5f;
+    [SerializeField] protected Vector2 scoutRange;          // Range Squire will scout before going idle. Index 0 = min; Index 1 = max;
+    [SerializeField] protected Vector2 idleTimeRange;       // Range of time Squire will be idle in seconds.
 
-    protected SpriteRenderer EnemyGFX;
+    protected float setScoutRange;                          // Scout range set within range of scoutRange;
+    protected float setIdleTime;                            // Idle time set within range of idleTimeRange.
+    protected float idleTimer;                              // Actual timer keeping track of how long player is idle.
+    protected float startPositionX;
+
+    [SerializeField] protected GameObject EnemyGFXObj;
+    protected SpriteRenderer enemyGFX;
     protected Collider2D enemyCollider;
     protected Rigidbody2D rb;
     protected Enemy enemyScript;
@@ -25,6 +34,8 @@ public class EnemyAI : MonoBehaviour
     protected EnemyState currentState = EnemyState.Idle;
     protected int movementDirection = 1;                      // -1 = left; 1 = right;
     #endregion
+
+    public TextMeshProUGUI DebugText;
 
     #region Pathfinding Variables
     // A* Pathfinding variables. TODO: Remove from basic EnemyAI script and move them to enemy scripts that would need pathfinding.
@@ -68,11 +79,14 @@ public class EnemyAI : MonoBehaviour
 
     protected void OnStart()
     {
-        EnemyGFX = GetComponent<SpriteRenderer>();
+        enemyGFX = EnemyGFXObj.GetComponent<SpriteRenderer>();
+        enemyAnimator = EnemyGFXObj.GetComponent<Animator>();
         enemyCollider = GetComponent<Collider2D>();
         enemyScript = GetComponent<Enemy>();
-        enemyAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        if (GetComponent<TextMeshProUGUI>() != null)
+            DebugText = GetComponent<TextMeshProUGUI>();
     }
 
     protected void UpdateLoop()
@@ -105,12 +119,29 @@ public class EnemyAI : MonoBehaviour
             currentWaypoint++;
         
         if (rb.velocity.x >= 0.01f && force.x > 0f)         // Enemy is moving right
-            EnemyGFX.flipX = false;
+            enemyGFX.flipX = false;
         else if (rb.velocity.x <= -0.01f && force.x < 0f)   // Enemy is moving left
-            EnemyGFX.flipX = true;
+            enemyGFX.flipX = true;
     }
 
-    virtual public void Attack()
+    // General script to flip the enemy. Can be overrided if necessary.
+    virtual protected void FlipEnemy()
+    {
+        //enemyGFX.flipX = movementDirection == 1 ? false : true;
+        enemyCollider.transform.localScale = new Vector3(movementDirection, enemyCollider.transform.localScale.y, 1);
+    }
+
+    protected void SetIdleTime()
+    {
+        setIdleTime = Random.Range(idleTimeRange.x, idleTimeRange.y);
+    }
+
+    protected void SetScoutRange()
+    {
+        setScoutRange = Random.Range(scoutRange.x, scoutRange.y);
+    }
+
+    virtual public void DetectPlayer()
     {
 
     }

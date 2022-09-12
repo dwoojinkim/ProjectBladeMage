@@ -213,6 +213,7 @@ public class Wave : MonoBehaviour
                 {
                     enemy = Instantiate(enemyPrefabList[j]);
                     enemy.transform.parent = this.transform;
+                    enemy.GetComponent<Enemy>().InitializeEnemy();
                     enemy.SetActive(false);
                     enemyList.Add(enemy);
                 }

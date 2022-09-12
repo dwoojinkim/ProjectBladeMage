@@ -15,9 +15,14 @@ public class Enemy : MonoBehaviour
     public bool IsAlive { get; private set;}
     public int Damage { get; private set;}
 
-    public SpriteRenderer EnemySprite {get; private set;}
-    public Collider2D EnemyCollider {get; private set;}
+    //public SpriteRenderer EnemySprite {get; private set;}
+    //public Collider2D EnemyCollider {get; private set;}
     public AIPath AIPathScript {get; private set;}
+
+    [SerializeField] protected Slider hpBar;
+    [SerializeField] protected GameObject enemyGFXObj;
+    public SpriteRenderer enemyGFX;
+    public Collider2D enemyCollider;
 
     protected AIDestinationSetter AIDestinationSetterScript;
     protected EnemyAI enemyAIScript;
@@ -26,17 +31,17 @@ public class Enemy : MonoBehaviour
 
     protected int maxHP;
     protected int currentHP;
-    [SerializeField] protected Slider hpBar;
 
     protected Vector3 startingPos;
-
     protected ColoredFlash hitFlash;
- 
+
+    protected bool isInitialized = false;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        InitializeEnemy();
+        if (!isInitialized)
+            InitializeEnemy();
     }
 
     // Update is called once per frame
@@ -55,26 +60,32 @@ public class Enemy : MonoBehaviour
         ActiveEnemiesSet.Remove(this);
     }
 
-    protected void InitializeEnemy()
+    public void InitializeEnemy()
     {
-        EnemySprite = GetComponent<SpriteRenderer>();
-        EnemyCollider = GetComponent<Collider2D>();
-        hitFlash = GetComponent<ColoredFlash>();
-        enemyRB = GetComponent<Rigidbody2D>();
-        //AIPathScript = this.transform.GetComponent<AIPath>();
-        //AIDestinationSetterScript = this.transform.GetComponent<AIDestinationSetter>();
-        if (GetComponent<EnemyAI>() != null)
-            enemyAIScript = GetComponent<EnemyAI>();
+        if (!isInitialized)
+        {
+            enemyGFX = enemyGFXObj.GetComponent<SpriteRenderer>();
+            hitFlash = enemyGFXObj.GetComponent<ColoredFlash>();
+            enemyCollider = GetComponent<Collider2D>();
+            enemyRB = GetComponent<Rigidbody2D>();
+            //AIPathScript = this.transform.GetComponent<AIPath>();
+            //AIDestinationSetterScript = this.transform.GetComponent<AIDestinationSetter>();
+            if (GetComponent<EnemyAI>() != null)
+                enemyAIScript = GetComponent<EnemyAI>();
 
-        startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
+            startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
 
-        maxHP = enemyData.maxHP;
-        currentHP = maxHP;
-        Damage = enemyData.damage;
-        hpBar.gameObject.SetActive(false);
-        IsAlive = false;
+            maxHP = enemyData.maxHP;
+            currentHP = maxHP;
+            Damage = enemyData.damage;
+            hpBar.gameObject.SetActive(false);
+            IsAlive = false;
 
-        playerTransform = playerObject.GetTransform();
+            playerTransform = playerObject.GetTransform();
+
+            isInitialized = true;
+        }
+
     }
 
     // void OnTriggerEnter2D(Collider2D obj)
@@ -133,8 +144,8 @@ public class Enemy : MonoBehaviour
     {
         IsAlive = false;
 
-        EnemySprite.enabled = false;
-        EnemyCollider.enabled = false;
+        enemyGFX.enabled = false;
+        enemyCollider.enabled = false;
         enemyAIScript.enabled = false;
         //AIPathScript.enabled = false;
 
@@ -156,8 +167,8 @@ public class Enemy : MonoBehaviour
         transform.position = spawnPos;
 
         IsAlive = true;
-        EnemySprite.enabled = true;
-        EnemyCollider.enabled = true;   // This will work for ALL 2d Colliders since the variable is a generic Collider2D type
+        enemyGFX.enabled = true;
+        enemyCollider.enabled = true;   // This will work for ALL 2d Colliders since the variable is a generic Collider2D type
         //AIPathScript.enabled = true;
         //AIDestinationSetterScript.target = LevelManager.LMinstance.Player.transform;
 

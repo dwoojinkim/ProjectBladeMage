@@ -30,6 +30,9 @@ public class KnightAI : AttackEnemyAI
     // Update is called once per frame
     void Update()
     {
+        // Debug text stuff
+        DebugText.text = currentState.ToString();
+
         if (currentState == EnemyState.Idle)
         {
             idleTimer += Time.deltaTime;
@@ -44,8 +47,7 @@ public class KnightAI : AttackEnemyAI
                 currentState = EnemyState.Scout;
                 startPositionX = transform.position.x;
                 movementDirection = Random.Range(-1, 1) < 0 ? -1 : 1;
-                //EnemyGFX.flipX = movementDirection == 1 ? false : true;
-                transform.localScale = new Vector3(movementDirection, 1, 1);
+                FlipAttackEnemy();
             }
         }
         else if (currentState == EnemyState.Scout)
@@ -84,11 +86,10 @@ public class KnightAI : AttackEnemyAI
 
     override public void Attack()
     {
-        if (currentState != EnemyState.Attack && canAttack)
+        if (currentState != EnemyState.Attack && canAttack && !enemyAnimator.GetCurrentAnimatorStateInfo(0).IsName("Knight_Attack"))
         {
             movementDirection = enemyScript.playerObject.GetTransform().position.x - transform.position.x < 0 ? -1 : 1;
-            //EnemyGFX.flipX = movementDirection == 1 ? false : true;
-            transform.localScale = new Vector3(movementDirection, 1, 1);
+            FlipAttackEnemy();
 
             // Add in delay before attacking
             enemyAnimator.SetTrigger("WindUpTrigger");
@@ -98,6 +99,7 @@ public class KnightAI : AttackEnemyAI
             startPositionX = transform.position.x;
 
             canAttack = false;
+
         }
     }
     override protected void MoveEnemy()
@@ -110,6 +112,12 @@ public class KnightAI : AttackEnemyAI
 
             SetIdleTime();
         }
+    }
+
+    private void FlipKnight()
+    {
+        FlipEnemy();
+
     }
 
     private void AttackDash()

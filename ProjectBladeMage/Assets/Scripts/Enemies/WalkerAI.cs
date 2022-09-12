@@ -60,9 +60,9 @@ public class WalkerAI : EnemyAI
 
         
         if (movementDirection > 0)              // Enemy is moving right
-            EnemyGFX.flipX = false;
+            enemyGFX.flipX = false;
         else                            // Enemy is moving left
-            EnemyGFX.flipX = true;
+            enemyGFX.flipX = true;
     }
 
     // Returns updated velocity after accelerating relative to previous frame

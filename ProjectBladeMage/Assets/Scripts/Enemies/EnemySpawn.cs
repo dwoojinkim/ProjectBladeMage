@@ -16,8 +16,8 @@ public class EnemySpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemySprite = this.transform.GetComponent<Enemy>().EnemySprite;
-        enemyCollider = this.transform.GetComponent<Enemy>().EnemyCollider;
+        enemySprite = this.transform.GetComponent<Enemy>().enemyGFX;
+        enemyCollider = this.transform.GetComponent<Enemy>().enemyCollider;
         aiPathScript = this.transform.GetComponent<Enemy>().AIPathScript;
 
         startingPos = transform.position;   // This will need to change to be starting at a general area outside of screen pos instead of a specific position.
@@ -32,7 +32,7 @@ public class EnemySpawn : MonoBehaviour
     public void SpawnEnemy()
     {
         //Spawn logic
-        // - Basically just enable the enemy so other scriptes are running and sprite is visible
+        // - Basically just enable the enemy so other scripts are running and sprite is visible
         // = Can add more logic for spawning effects if necessary
         // - Script will be attached to all enemies.
 
@@ -41,7 +41,7 @@ public class EnemySpawn : MonoBehaviour
         if (enemySprite != null)
             enemySprite.enabled = true;
         if (enemyCollider != null)
-            enemyCollider.enabled = true;   // I have to change this, since obviously not all enemies will have circle colliders
+            enemyCollider.enabled = true;
         if (aiPathScript != null)
             aiPathScript.enabled = true;
 

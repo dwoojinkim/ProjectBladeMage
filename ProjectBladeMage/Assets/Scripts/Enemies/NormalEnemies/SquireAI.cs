@@ -45,8 +45,7 @@ public class SquireAI : AttackEnemyAI
                 currentState = EnemyState.Scout;
                 startPositionX = transform.position.x;
                 movementDirection = Random.Range(-1, 1) < 0 ? -1 : 1;
-                //EnemyGFX.flipX = movementDirection == 1 ? false : true;
-                transform.localScale = new Vector3(movementDirection, 1, 1);
+                FlipAttackEnemy();
             }
         }
         else if (currentState == EnemyState.Scout)
@@ -101,15 +100,17 @@ public class SquireAI : AttackEnemyAI
         }
     }
 
-    public void DetectPlayer()
+    override public void DetectPlayer()
     {
         if (currentState !=EnemyState.Attack)
         {
-            currentState = EnemyState.Attack;
+            currentState = EnemyState.Aggro;
             idleTimer = 0;
 
             SetIdleTime();
             SetScoutRange();
+
+            Debug.Log("Player Dectected!");
         }
     }
 
@@ -118,8 +119,7 @@ public class SquireAI : AttackEnemyAI
         if (currentState != EnemyState.Attack && canAttack)
         {
             movementDirection = enemyScript.playerObject.GetTransform().position.x - transform.position.x < 0 ? -1 : 1;
-            //EnemyGFX.flipX = movementDirection == 1 ? false : true;
-            transform.localScale = new Vector3(movementDirection, 1, 1);
+            FlipAttackEnemy();
 
             // Add in delay before attacking
             enemyAnimator.SetTrigger("WindUpTrigger");

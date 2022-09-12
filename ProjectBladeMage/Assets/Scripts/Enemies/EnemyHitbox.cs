@@ -9,8 +9,7 @@ public class EnemyHitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyScript = transform.parent.GetComponent<Enemy>();
-
+        enemyScript = transform.parent.parent.GetComponent<Enemy>();
     }
 
     // Update is called once per frame

@@ -50,6 +50,9 @@ TextureImporter:
   - first:
       213: 6585558835922912261
     second: Knight_Attack_7
+  - first:
+      213: 1286961300266217133
+    second: Knight_Attack_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -298,6 +301,27 @@ TextureImporter:
       bones: []
       spriteID: 504ce969eda946b50800000000000000
       internalID: 6585558835922912261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Attack_8
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 150
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: daeea06eb743cd110800000000000000
+      internalID: 1286961300266217133
       vertices: []
       indices: 
       edges: []
