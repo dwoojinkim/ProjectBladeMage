@@ -25,13 +25,13 @@ MonoBehaviour:
   spawns:
   - width: 2
     height: 2
-    position: {x: -94.6, y: -0.2}
+    position: {x: -103.4, y: -0.2}
   - width: 2
     height: 2
-    position: {x: -103.57, y: -0.2}
+    position: {x: -83.9, y: 9.4}
   - width: 2
     height: 2
-    position: {x: -85.6, y: -0.2}
+    position: {x: -64.87, y: 18.2}
   spawnBoxPosX: 0
   spawnBoxPosY: 0
   spawnBoxWidth: 0

@@ -18,6 +18,7 @@ public class Wave : MonoBehaviour
 
     public WaveState CurrentWaveState {get; private set;}
     public event Notify WaveStart;      // event
+    public event Notify WaveComplete;   // Wave complettion event
 
     [SerializeField] private WaveSO waveData;
     [SerializeField] private WaveRuntimeSet activeWaveSet;
@@ -322,6 +323,8 @@ public class Wave : MonoBehaviour
     {
         foreach(GameObject enemy in spawnEnemies)
             enemy.GetComponent<Enemy>().DestroyEnemy();
+
+        WaveComplete?.Invoke();
     }
 
 

@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Platform")
         {
             if (transform.position.y > col.transform.position.y)
             {
@@ -151,7 +151,7 @@ public class Player : MonoBehaviour
     {
         if (!hitInvulnerability && obj.gameObject.tag == "EnemyHitbox" && obj.enabled)
         {
-            Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
+            //Debug.Log("PLAYER HAS BEEN HIT BY ENEMY");
             DamagePlayer(obj.gameObject.GetComponent<EnemyHitbox>().DoDamage()); // GetComponent call is bad okay? Find another method to extract this data?
             PlayerKnockback(obj.transform.position);
         }
