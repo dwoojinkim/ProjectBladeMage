@@ -104,7 +104,7 @@ public class WalkerAI : EnemyAI
         Debug.DrawRay(checkStartPos, Vector2.down, Color.green, 0, false);
         if (onGround && !Physics2D.Raycast(checkStartPos, Vector3.down, 1f, unpassableMask))
         {
-            Debug.Log("CheckFloor clipping direction");
+            //Debug.Log("CheckFloor clipping direction");
             FlipDirection();
         }
     }

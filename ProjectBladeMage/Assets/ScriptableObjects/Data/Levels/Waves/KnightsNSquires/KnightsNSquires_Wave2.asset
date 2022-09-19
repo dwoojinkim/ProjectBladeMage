@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72da7b63663d9574c9c27f0e8d9afea4, type: 3}
   m_Name: KnightsNSquires_Wave2
   m_EditorClassIdentifier: 
-  waveSpawnType: 0
+  waveSpawnType: 3
   spawnLocationType: 0
   enemyWaveType: 0
   enemySpawnOrder: 0
