@@ -54,6 +54,7 @@ public class Player : MonoBehaviour
     private bool smashing = false;
     private bool inPortal = false;
     private bool hitInvulnerability = false;
+    private bool disableMovement = false;
     private float hitInvulnerabilityDuration = 1f;
     private float hitInvulnerabilityTimer = 0f;
     private float hitboxStartup = 0.05f;
@@ -66,6 +67,9 @@ public class Player : MonoBehaviour
     private float timeToIncreaseSpeed = 1.0f;
     private float speedIncreaseTimer = 0.0f;
     private float increaseSpeedAmount = 1.0f;
+
+    private float enableMovementTimer = 0;      // Time until movement can be re-enabled after getting knocked back
+    private float enableMovementDuration = .2f;
 
     private Ricochet ricochetAbility;
 
@@ -122,6 +126,12 @@ public class Player : MonoBehaviour
             jumping = false;
             onGround = true;
             playerAnimator.SetBool("OnGround", true);
+
+            if(enableMovementTimer >= enableMovementDuration)
+            {
+                disableMovement = false;
+                enableMovementTimer = 0;
+            }
         }
         else
         {
@@ -337,10 +347,12 @@ public class Player : MonoBehaviour
         if (!hitInvulnerability)
         {
             float forceY = 40f;
-            float forceX = 20f;
+            float forceX = 10f;
             int direction = transform.position.x - sourcePosition.x < 0 ? -1 : 1;
 
             playerRigidbody.velocity = new Vector3(forceX * direction, forceY, 0);
+
+            disableMovement = true;
         }
     }
 
@@ -359,7 +371,9 @@ public class Player : MonoBehaviour
         if ((TouchingWallLeft() && playerMovespeed < 0) || (TouchingWallRight() && playerMovespeed > 0))
             currentMovespeed = 0;
 
-        transform.position += transform.right * currentMovespeed * Time.fixedDeltaTime;
+
+        if (!disableMovement)
+            transform.position += transform.right * currentMovespeed * Time.fixedDeltaTime;
 
         if (playerRigidbody.velocity.y < MAX_FALLING_SPEED)
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, MAX_FALLING_SPEED);
@@ -443,11 +457,13 @@ public class Player : MonoBehaviour
         if (hitInvulnerability && hitInvulnerabilityTimer < hitInvulnerabilityDuration)
         {
             hitInvulnerabilityTimer += Time.deltaTime;
+            enableMovementTimer += Time.deltaTime;
 
             if (hitInvulnerabilityTimer >= hitInvulnerabilityDuration)
             {
                 hitInvulnerabilityTimer = 0;
                 hitInvulnerability = false;
+                disableMovement = false;
             }
 
         }
