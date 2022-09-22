@@ -740,7 +740,7 @@ GameObject:
   - component: {fileID: 169454233}
   m_Layer: 9
   m_Name: MovingPlatform
-  m_TagString: Platform
+  m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 338236929}
   m_Layer: 9
   m_Name: HelperPlatform1
-  m_TagString: Platform
+  m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9208,7 +9208,7 @@ GameObject:
   - component: {fileID: 1404099471}
   m_Layer: 9
   m_Name: HelperPlatform2
-  m_TagString: Platform
+  m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

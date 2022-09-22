@@ -17,6 +17,7 @@ TagManager:
   - Barrier
   - EnemyHitbox
   - Platform
+  - OneWayPlatform
   layers:
   - Default
   - TransparentFX

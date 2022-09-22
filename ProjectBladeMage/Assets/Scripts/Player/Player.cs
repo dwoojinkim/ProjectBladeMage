@@ -273,6 +273,54 @@ public class Player : MonoBehaviour
         return groundHit.collider != null;
     }
 
+    private bool TouchingWallLeft()
+    {
+        float extraDistanceCheck = 0.5f;
+
+        RaycastHit2D wallHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.left, extraDistanceCheck, groundLayerMask);
+
+        Color rayColor;
+
+        if (wallHit.collider != null)
+            rayColor = Color.green;
+        else
+            rayColor = Color.red;
+
+        Debug.DrawRay(playerCollider.bounds.center + new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, playerCollider.bounds.extents.y + extraDistanceCheck), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
+
+        if (wallHit.collider != null && wallHit.collider.gameObject.tag == "OneWayPlatform")
+            return false;
+
+        return wallHit.collider != null;
+    }
+
+    private bool TouchingWallRight()
+    {
+        float extraDistanceCheck = 0.5f;
+
+        RaycastHit2D wallHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.right, extraDistanceCheck, groundLayerMask);
+
+        Color rayColor;
+
+        if (wallHit.collider != null)
+            rayColor = Color.green;
+        else
+            rayColor = Color.red;
+
+        Debug.DrawRay(playerCollider.bounds.center + new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, playerCollider.bounds.extents.y + extraDistanceCheck), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
+
+
+        if (wallHit.collider != null && wallHit.collider.gameObject.tag == "OneWayPlatform")
+            return false;
+
+        return wallHit.collider != null;
+    }
+
+
     //Old Knockback
     //private void PlayerKnockback(Vector3 sourcePosition)
     //{
@@ -305,7 +353,13 @@ public class Player : MonoBehaviour
     //Calculates the total movement for the player (Global stage movement + local stage movement)
     public void MovePlayer()
     {
-        transform.position += transform.right * playerMovespeed * Time.fixedDeltaTime;
+        float currentMovespeed = playerMovespeed;       // using this intermediary variable to fix issue of player not moving after touch edge of thin platform
+
+        // If player is at the wall to the left of the player, player can't keep moving left and vice versa
+        if ((TouchingWallLeft() && playerMovespeed < 0) || (TouchingWallRight() && playerMovespeed > 0))
+            currentMovespeed = 0;
+
+        transform.position += transform.right * currentMovespeed * Time.fixedDeltaTime;
 
         if (playerRigidbody.velocity.y < MAX_FALLING_SPEED)
             playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, MAX_FALLING_SPEED);
