@@ -286,9 +286,9 @@ public class Player : MonoBehaviour
         else
             rayColor = Color.red;
 
-        Debug.DrawRay(playerCollider.bounds.center + new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
-        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
-        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, playerCollider.bounds.extents.y + extraDistanceCheck), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center + new Vector3(0, playerCollider.bounds.extents.y - 0.1f), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(0, playerCollider.bounds.extents.y - 0.1f), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y + extraDistanceCheck, playerCollider.bounds.extents.y - 0.1f), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
 
         if (wallHit.collider != null && wallHit.collider.gameObject.tag == "OneWayPlatform")
             return false;
@@ -309,9 +309,9 @@ public class Player : MonoBehaviour
         else
             rayColor = Color.red;
 
-        Debug.DrawRay(playerCollider.bounds.center + new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
-        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, 0), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
-        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y - 0.1f, playerCollider.bounds.extents.y + extraDistanceCheck), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center + new Vector3(0, playerCollider.bounds.extents.y - 0.1f), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(0, playerCollider.bounds.extents.y - 0.1f), Vector2.right * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(-(playerCollider.bounds.extents.y + extraDistanceCheck), playerCollider.bounds.extents.y - 0.1f), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
 
 
         if (wallHit.collider != null && wallHit.collider.gameObject.tag == "OneWayPlatform")

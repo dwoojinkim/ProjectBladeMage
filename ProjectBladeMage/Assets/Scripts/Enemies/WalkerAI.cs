@@ -12,7 +12,6 @@ public class WalkerAI : EnemyAI
     private bool onGround = false;
     private ColoredFlash flashFeedback;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +26,12 @@ public class WalkerAI : EnemyAI
         MoveEnemy();
         //CheckFront();
         CheckFloor();
+
+        if (HitWall())
+        {
+            FlipDirection();
+            Debug.Log("Hit Wall");
+        }
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -35,18 +40,25 @@ public class WalkerAI : EnemyAI
         // https://answers.unity.com/questions/422472/how-can-i-compare-colliders-layer-to-my-layermask.html
         if (((1 << col.gameObject.layer) & unpassableMask) != 0)
         {
-            if (!onGround && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
-                onGround = true;    // Change to a method that uses a boxcast to check if the enemy is touching the ground
+            //if (!onGround && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
+            //    onGround = true;    // Change to a method that uses a boxcast to check if the enemy is touching the ground
 
-            if (col.collider.bounds.max.y > enemyCollider.bounds.min.y)
-                FlipDirection();
+            if (IsGrounded())
+                onGround = true;
+
+            //if (col.collider.bounds.max.y > enemyCollider.bounds.min.y)
+            //    FlipDirection();
+
 
         }
     }
 
     void OnCollisionExit2D(Collision2D col)
     {
-        if (onGround && ((1 << col.gameObject.layer) & unpassableMask) != 0 && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
+        //if (onGround && ((1 << col.gameObject.layer) & unpassableMask) != 0 && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
+        //    onGround = false;
+
+        if (!IsGrounded())
             onGround = false;
     }
 
@@ -95,6 +107,8 @@ public class WalkerAI : EnemyAI
 
     }
 
+
+    // Checks to see if the enemy is about to run off of a platform. Changes direction before it does.
     private void CheckFloor()
     {
         float verticalOffset = enemyCollider.bounds.min.y - transform.position.y;
@@ -107,5 +121,25 @@ public class WalkerAI : EnemyAI
             //Debug.Log("CheckFloor clipping direction");
             FlipDirection();
         }
+    }
+
+    private bool IsGrounded()
+    {
+        float extraHeightCheck = 0.5f;
+
+        RaycastHit2D groundHit = Physics2D.BoxCast(enemyCollider.bounds.center, enemyCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.down, extraHeightCheck, unpassableMask);
+
+        return groundHit.collider != null;
+    }
+
+    private bool HitWall()
+    {
+        float extraDistanceCheck = 0.5f;
+
+        RaycastHit2D leftWallHit = Physics2D.BoxCast(enemyCollider.bounds.center, enemyCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.left, extraDistanceCheck, unpassableMask);
+        RaycastHit2D rightWallHit = Physics2D.BoxCast(enemyCollider.bounds.center, enemyCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.right, extraDistanceCheck, unpassableMask);
+
+
+        return ((leftWallHit.collider != null && movementDirection == -1) || (rightWallHit.collider != null && movementDirection == 1));
     }
 }
