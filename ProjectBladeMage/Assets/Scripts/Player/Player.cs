@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSprite;
     private Collider2D playerCollider;
+    private LayerMask groundLayerMask;
 
     private int baseMaxHP = 100;    // Base Max HP before any mods to it via additional levels, upgrades, etc.
     private int baseMaxMP = 100;
@@ -75,13 +76,13 @@ public class Player : MonoBehaviour
         DOTween.Init();
 
         if (DebugTextObj != null)
-        {
             debugText = DebugTextObj.GetComponent<TextMeshPro>();
-        }
         
         playerRigidbody = this.GetComponent<Rigidbody2D>();
         playerSprite = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<Collider2D>();
+
+        groundLayerMask = LayerMask.GetMask("UnpassableEnvironment");
 
         playerRigidbody.gravityScale = normalGravity;
         playerObject.SetGameObject(this.gameObject);
@@ -106,6 +107,8 @@ public class Player : MonoBehaviour
 
         playerAnimator.SetFloat("Speed", Mathf.Abs(playerMovespeed));
         playerAnimator.SetFloat("FallSpeed", playerRigidbody.velocity.y);
+
+        SetDebugText(playerRigidbody.velocity.y.ToString());
         
         SlashCheck();
         SmashCheck();
@@ -113,6 +116,18 @@ public class Player : MonoBehaviour
         PlayerRegen();
 
         CheckPlayerInvulnerability();
+
+        if (IsGrounded())
+        {
+            jumping = false;
+            onGround = true;
+            playerAnimator.SetBool("OnGround", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("OnGround", false);
+            onGround = false;
+        }
 
         //Debug.DrawLine(transform.position, Vector3.zero, Color.white, 2f, false);
     }
@@ -154,20 +169,20 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Platform")
         {
-            float leftPlayerColliderPos = transform.position.x - playerCollider.bounds.extents.x;
-            float rightPlayerColliderPos = transform.position.x + playerCollider.bounds.extents.x;
-            float leftGroundColliderPos = col.transform.position.x - col.collider.bounds.extents.x;
-            float rightGroundColliderPos = col.transform.position.x + col.collider.bounds.extents.x;
-            float topGroundColliderPos = col.transform.position.y + col.collider.bounds.extents.y;
+            //float leftPlayerColliderPos = transform.position.x - playerCollider.bounds.extents.x;
+            //float rightPlayerColliderPos = transform.position.x + playerCollider.bounds.extents.x;
+            //float leftGroundColliderPos = col.transform.position.x - col.collider.bounds.extents.x;
+            //float rightGroundColliderPos = col.transform.position.x + col.collider.bounds.extents.x;
+            //float topGroundColliderPos = col.transform.position.y + col.collider.bounds.extents.y;
 
 
-            if (transform.position.y > topGroundColliderPos && (leftPlayerColliderPos < rightGroundColliderPos || rightPlayerColliderPos > leftGroundColliderPos))
-            {
-                jumping = false;
-                onGround = true;
-                playerAnimator.SetBool("OnGround", true);
-                SetDebugText("On Ground");
-            }
+            //if (transform.position.y > topGroundColliderPos && (leftPlayerColliderPos < rightGroundColliderPos || rightPlayerColliderPos > leftGroundColliderPos))
+            //{
+            //jumping = false;
+            //onGround = true;
+            //playerAnimator.SetBool("OnGround", true);
+            //SetDebugText("On Ground");
+            //}
         }
     }
 
@@ -200,11 +215,11 @@ public class Player : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground" || col.gameObject.tag == "Platform")
         {
-            if (transform.position.y > col.transform.position.y)
-            {
-                playerAnimator.SetBool("OnGround", false);
-                onGround = false;
-            }
+            // if (transform.position.y > col.transform.position.y)
+            // {
+            //    playerAnimator.SetBool("OnGround", false);
+            //    onGround = false;
+            // }
         }
     }
 
@@ -236,6 +251,26 @@ public class Player : MonoBehaviour
             // Kill Player
             Debug.Log("Player has died!");
         }
+    }
+
+    private bool IsGrounded()
+    {
+        float extraHeightCheck = 0.5f;
+
+        RaycastHit2D groundHit = Physics2D.BoxCast(playerCollider.bounds.center, playerCollider.bounds.size - new Vector3(0.2f, 0f, 0f), 0f, Vector2.down, extraHeightCheck, groundLayerMask);
+
+        Color rayColor;
+
+        if (groundHit.collider != null)
+            rayColor = Color.green;
+        else
+            rayColor = Color.red;
+
+        Debug.DrawRay(playerCollider.bounds.center + new Vector3(playerCollider.bounds.extents.x - 0.1f, 0), Vector2.down * (playerCollider.bounds.extents.y + extraHeightCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.x - 0.1f, 0), Vector2.down * (playerCollider.bounds.extents.y + extraHeightCheck), rayColor);
+        Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.x - 0.1f, playerCollider.bounds.extents.y + extraHeightCheck), Vector2.right * (playerCollider.bounds.extents.x * 2 - 0.2f), rayColor);
+
+        return groundHit.collider != null;
     }
 
     //Old Knockback
@@ -298,7 +333,7 @@ public class Player : MonoBehaviour
     // Use Hollow Knight as a reference.
     public void Jump()
     {
-        SetDebugText("Jumping");
+        //SetDebugText("Jumping");
 
         //If not already in a jumping state, then do below
         if (!jumping && onGround)

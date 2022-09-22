@@ -39,6 +39,7 @@ public class ElvenRapier : MonoBehaviour, Weapon
 
 
     private bool hitEnemy = false;
+    private bool hitApex = false;                           // When weapon hits apex of the arc, then it can collide with the ground.
 
 
     // Start is called before the first frame update
@@ -64,28 +65,31 @@ public class ElvenRapier : MonoBehaviour, Weapon
         {
             RicochetMovement();
             RotateElvenRapier();
+
+            if (ricochetVelocityY < 0)
+                hitApex = true;
         }
 
     }
 
-     void OnTriggerEnter2D(Collider2D obj)
+     void OnTriggerEnter2D(Collider2D col)
     {
         if (elvenRapierState == ElvenRapierState.Thrown)
         {
-            if (obj.tag == "Enemy")
+            if (col.tag == "Enemy")
             {
-                obj.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
+                col.gameObject.GetComponent<Enemy>().DamageEnemy(baseDamage + playerObj.gameObject.GetComponent<Player>().BuffStacks);   // Using GetComponent for the sake of prototype. Need to eventually change it from just using baseDamage as well
                 hitEnemy = true;
             }
         }
         else if (elvenRapierState == ElvenRapierState.Ricocheted)
         {
-            if (obj.tag == "Player")
+            if (col.tag == "Player")
             {
-                obj.GetComponent<Player>().CatchWeapon(elvenRapierManaCost.Value);
+                col.GetComponent<Player>().CatchWeapon(elvenRapierManaCost.Value);
                 Reset();
             }
-            else if (obj.tag == "Ground")
+            else if (col.tag == "Ground" && hitApex)
             {
                 playerObj.gameObject.GetComponent<Player>().ResetBuffStack();
                 Reset();
@@ -153,49 +157,20 @@ public class ElvenRapier : MonoBehaviour, Weapon
     // Launches elvenRapier towards player
     private void RicochetElvenRapier()
     {
+        float hangTime = 0.85f;
+
         distanceDiff = playerObj.gameObject.transform.position.x - transform.position.x;
 
-        //ricochetVelocityX = Mathf.Cos(CalculateAngle(distanceDiff)) * initRicochetVelocity * (distanceDiff / Mathf.Abs(distanceDiff));
-        //ricochetVelocityY = Mathf.Sin(CalculateAngle(distanceDiff)) * initRicochetVelocity;
-
-        //ricochetVelocityX = Mathf.Cos(CalculateFakeAngle(distanceDiff)) * initRicochetVelocity * (distanceDiff / Mathf.Abs(distanceDiff));
-        //ricochetVelocityY = Mathf.Sin(CalculateFakeAngle(distanceDiff)) * initRicochetVelocity;
-
-        Vector2 initVel = CalculateVelocity(distanceDiff, 0.85f);
+        Vector2 initVel = CalculateVelocity(distanceDiff, hangTime);
 
         ricochetVelocityX = initVel.x;
         ricochetVelocityY = initVel.y;
 
-        //Debug.Log("Angle = " + CalculateAngle(distanceDiff));
-        
         elvenRapierState = ElvenRapierState.Ricocheted;
         
         hitEnemy = false;
 
         SetRotation(distanceDiff);
-    }
-
-    private float CalculateAngle(float range)
-    {
-        float time = 2f;
-        float insideASin = gravity * Mathf.Abs(range) / Mathf.Pow(initRicochetVelocity, 2);
-        float offset = 150;
-        float angleInDegrees = insideASin / 2f * offset;
-
-        //Debug.Log("Inside Arc Sin = " + insideASin);
-
-        return angleInDegrees * Mathf.Deg2Rad;
-        //return Mathf.Asin((time * gravity) / (2f * initRicochetVelocity));
-    }
-
-    private float CalculateFakeAngle(float range)
-    {
-        int minAngle = 45;
-        int maxAngle = 90;
-
-        Debug.Log("Range: " + range);
-
-        return 45f;
     }
 
     private Vector2 CalculateVelocity(float range, float time)
@@ -236,6 +211,8 @@ public class ElvenRapier : MonoBehaviour, Weapon
         elvenRapierState = ElvenRapierState.Idle;
         SetRightRotation();
         currentDistance = 0;
+
+        hitApex = false;
 
         if (ricochetAbility != null)
             ricochetAbility.ReturnWeapon(this.gameObject);

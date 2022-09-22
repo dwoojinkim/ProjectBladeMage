@@ -36,7 +36,7 @@ public class WalkerAI : EnemyAI
         if (((1 << col.gameObject.layer) & unpassableMask) != 0)
         {
             if (!onGround && col.collider.bounds.max.y <= enemyCollider.bounds.min.y)
-                onGround = true;
+                onGround = true;    // Change to a method that uses a boxcast to check if the enemy is touching the ground
 
             if (col.collider.bounds.max.y > enemyCollider.bounds.min.y)
                 FlipDirection();
@@ -59,7 +59,7 @@ public class WalkerAI : EnemyAI
         transform.position += Vector3.right * force;
 
         
-        if (movementDirection > 0)              // Enemy is moving right
+        if (movementDirection > 0)      // Enemy is moving right
             enemyGFX.flipX = false;
         else                            // Enemy is moving left
             enemyGFX.flipX = true;
