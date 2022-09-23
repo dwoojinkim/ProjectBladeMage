@@ -300,7 +300,7 @@ public class Player : MonoBehaviour
         Debug.DrawRay(playerCollider.bounds.center - new Vector3(0, playerCollider.bounds.extents.y - 0.1f), Vector2.left * (playerCollider.bounds.extents.x + extraDistanceCheck), rayColor);
         Debug.DrawRay(playerCollider.bounds.center - new Vector3(playerCollider.bounds.extents.y + extraDistanceCheck, playerCollider.bounds.extents.y - 0.1f), Vector2.up * (playerCollider.bounds.extents.y * 2 - 0.2f), rayColor);
 
-        if (wallHit.collider != null && wallHit.collider.gameObject.tag == "OneWayPlatform")
+        if (wallHit.collider != null && (wallHit.collider.gameObject.tag == "OneWayPlatform" || wallHit.collider.gameObject.tag == "Hazard"))
             return false;
 
         return wallHit.collider != null;

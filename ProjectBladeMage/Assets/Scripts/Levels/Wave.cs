@@ -126,6 +126,9 @@ public class Wave : MonoBehaviour
             CurrentWaveState = WaveState.WaveComplete;
             timer = 0;
             this.gameObject.SetActive(false);
+
+            WaveComplete?.Invoke();
+
         }
     }
 
@@ -289,7 +292,7 @@ public class Wave : MonoBehaviour
             
     }
 
-
+    // Are all enemies defeated in the wave?
     private bool IsWaveOver()
     {
         foreach (List<GameObject> spawnList in enemies)
@@ -323,8 +326,6 @@ public class Wave : MonoBehaviour
     {
         foreach(GameObject enemy in spawnEnemies)
             enemy.GetComponent<Enemy>().DestroyEnemy();
-
-        WaveComplete?.Invoke();
     }
 
 

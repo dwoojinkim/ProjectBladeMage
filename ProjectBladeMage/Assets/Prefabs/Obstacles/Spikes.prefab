@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7563657032987251466}
   m_Layer: 9
   m_Name: Spike1 (2)
-  m_TagString: Ground
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 5890545263746255029}
   m_Layer: 9
   m_Name: Spike1 (1)
-  m_TagString: Ground
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 1688637679160350846}
   m_Layer: 9
   m_Name: Spike1
-  m_TagString: Ground
+  m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

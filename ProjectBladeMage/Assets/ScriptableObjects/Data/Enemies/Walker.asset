@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Walker
   m_EditorClassIdentifier: 
   enemyName: Walker
-  maxHP: 25
+  maxHP: 20
   damage: 5
   animController: {fileID: 9100000, guid: 49ec6b692e7c00746a642fbc60f1ed98, type: 2}

@@ -18,6 +18,7 @@ TagManager:
   - EnemyHitbox
   - Platform
   - OneWayPlatform
+  - Hazard
   layers:
   - Default
   - TransparentFX
