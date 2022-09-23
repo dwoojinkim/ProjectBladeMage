@@ -122,14 +122,31 @@ public class KnightAI : AttackEnemyAI
 
     private void AttackDash()
     {
-        transform.position += Vector3.right * attackDashSpeed * movementDirection * Time.deltaTime;
+        if (!atGroundEdge)
+            transform.position += Vector3.right * attackDashSpeed * movementDirection * Time.deltaTime;
 
-        if (Mathf.Abs(transform.position.x - startPositionX) >= attackDashDistance)
+        attackDashTimer += Time.deltaTime;
+
+        if (attackDashTimer >= attackDashDuration)
         {
             currentState = EnemyState.Idle;
 
             idleTimer = 0;
             SetIdleTime();
+
+            atGroundEdge = false;
+        }
+    }
+    private void CheckFloor()
+    {
+        float verticalOffset = enemyCollider.bounds.min.y - transform.position.y;
+        float horizontalOffset = movementDirection * (1f + enemyCollider.bounds.max.x - transform.position.x);
+        Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);
+
+        Debug.DrawRay(checkStartPos, Vector2.down, Color.green, 0, false);
+        if (onGround && !Physics2D.Raycast(checkStartPos, Vector3.down, 1f, unpassableMask))
+        {
+            atGroundEdge = true;
         }
     }
 

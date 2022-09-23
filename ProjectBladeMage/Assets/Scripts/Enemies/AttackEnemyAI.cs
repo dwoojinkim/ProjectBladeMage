@@ -5,7 +5,7 @@ using UnityEngine;
 public class AttackEnemyAI : EnemyAI
 {
 
-    [SerializeField] protected float attackDashDistance;
+    [SerializeField] protected float attackDashDuration;
     [SerializeField] protected float attackDashSpeed;
     [SerializeField] protected float attackCooldown;
     [SerializeField] protected float attackWindUpDuration;
@@ -13,8 +13,11 @@ public class AttackEnemyAI : EnemyAI
 
     protected float attackCooldownTimer;
     protected float attackWindUpTimer;
+    protected float attackDashTimer;
 
     protected bool canAttack = true;
+    protected bool atGroundEdge = false;            // To prevent enemy from flying off stage when attacking
+
 
 
 

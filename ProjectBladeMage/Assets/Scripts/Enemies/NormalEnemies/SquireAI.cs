@@ -19,6 +19,7 @@ public class SquireAI : AttackEnemyAI
     //private bool canAttack = true;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,9 +83,9 @@ public class SquireAI : AttackEnemyAI
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (collision.collider.tag == "Wall")
+        if (col.collider.tag == "Wall")
         {
             Debug.Log("Collision on Wall");
 
@@ -94,10 +95,19 @@ public class SquireAI : AttackEnemyAI
 
                 idleTimer = 0;
                 SetIdleTime();
-
-                
             }
         }
+
+        if (((1 << col.gameObject.layer) & unpassableMask) != 0)
+        {
+            if (IsGrounded())
+                onGround = true;
+        }
+    }
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (!IsGrounded())
+            onGround = false;
     }
 
     override public void DetectPlayer()
@@ -134,11 +144,27 @@ public class SquireAI : AttackEnemyAI
 
     override protected void MoveEnemy()
     {
-        transform.position += Vector3.right * moveSpeed * movementDirection * Time.deltaTime;
+        CheckFloor();
+        if (atGroundEdge)
+        {
+            atGroundEdge = false;
+            movementDirection *= -1;
+            FlipAttackEnemy();
+        }
+        else if (TouchingWallRight() || TouchingWallLeft())
+        {
+            movementDirection *= -1;
+            FlipAttackEnemy();
+        }
 
-        if (Mathf.Abs(transform.position.x - startPositionX) >= setScoutRange)
+
+        transform.position += Vector3.right * moveSpeed * movementDirection * Time.deltaTime;
+        distanceScouted += moveSpeed * Time.deltaTime;
+
+        if (distanceScouted >= setScoutRange)
         {
             currentState = EnemyState.Idle;
+            distanceScouted = 0;
 
             SetIdleTime();
         }
@@ -146,14 +172,37 @@ public class SquireAI : AttackEnemyAI
 
     private void AttackDash()
     {
-        transform.position += Vector3.right * attackDashSpeed * movementDirection * Time.deltaTime;
+        CheckFloor();
 
-        if (Mathf.Abs(transform.position.x - startPositionX) >= attackDashDistance)
+        if (!atGroundEdge && !TouchingWallRight() && !TouchingWallLeft())
+            transform.position += Vector3.right * attackDashSpeed * movementDirection * Time.deltaTime;
+
+        attackDashTimer += Time.deltaTime;
+
+
+        if (attackDashTimer >= attackDashDuration)
         {
             currentState = EnemyState.Idle;
 
             idleTimer = 0;
+            attackDashTimer = 0;
             SetIdleTime();
+
+            atGroundEdge = false;
+        }
+    }
+
+    // Checks to see if the enemy is about to run off of a platform
+    private void CheckFloor()
+    {
+        float verticalOffset = enemyCollider.bounds.min.y - transform.position.y;
+        float horizontalOffset = movementDirection * (0.5f + enemyCollider.bounds.max.x - transform.position.x);
+        Vector2 checkStartPos = new Vector2(transform.position.x + horizontalOffset, transform.position.y + verticalOffset);
+
+        Debug.DrawRay(checkStartPos, Vector2.down, Color.green, 0, false);
+        if (onGround && !Physics2D.Raycast(checkStartPos, Vector3.down, 1f, unpassableMask))
+        {
+            atGroundEdge = true;
         }
     }
 

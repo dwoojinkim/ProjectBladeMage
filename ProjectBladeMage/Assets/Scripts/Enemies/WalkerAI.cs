@@ -8,15 +8,15 @@ public class WalkerAI : EnemyAI
     [SerializeField] private GameObjectReference playerObject;
     private float acceleration = 20f;
     private float currentSpeed = 0f;
-    private LayerMask unpassableMask;
-    private bool onGround = false;
+    //private LayerMask unpassableMask;                                     // No longer necessary as I moved it to EnemyAI class
+    //private bool onGround = false;                                        // No longer necessary as I moved it to EnemyAI class
     private ColoredFlash flashFeedback;
 
     // Start is called before the first frame update
     void Start()
     {
         OnStart();
-        unpassableMask = LayerMask.GetMask("UnpassableEnvironment");
+        //unpassableMask = LayerMask.GetMask("UnpassableEnvironment");      // No longer necessary as I moved it to EnemyAI class
         flashFeedback = GetComponent<ColoredFlash>();
     }
 

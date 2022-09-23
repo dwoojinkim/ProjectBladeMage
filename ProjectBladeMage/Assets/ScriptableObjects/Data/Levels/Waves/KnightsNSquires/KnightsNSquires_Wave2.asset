@@ -16,10 +16,21 @@ MonoBehaviour:
   spawnLocationType: 0
   enemyWaveType: 0
   enemySpawnOrder: 0
-  TimeUntilSpawn: 0
-  SuccessiveUnitDelay: 0
-  enemies: []
-  spawns: []
+  TimeUntilSpawn: 2
+  SuccessiveUnitDelay: 5
+  enemies:
+  - {fileID: 2110705594903882521, guid: ca84f27c3d479fa4b9925c2d4e2a5fd3, type: 3}
+  - {fileID: 2110705594903882521, guid: ca84f27c3d479fa4b9925c2d4e2a5fd3, type: 3}
+  spawns:
+  - width: 1
+    height: 1
+    position: {x: -196.5, y: 26}
+  - width: 1
+    height: 1
+    position: {x: -146.3, y: 26}
+  - width: 1
+    height: 1
+    position: {x: -107.3, y: 26}
   spawnBoxPosX: 0
   spawnBoxPosY: 0
   spawnBoxWidth: 0

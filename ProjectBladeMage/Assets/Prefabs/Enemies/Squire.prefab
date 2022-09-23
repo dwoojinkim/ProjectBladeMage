@@ -79,7 +79,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2110705594903882518}
-  - component: {fileID: 2110705594903882517}
+  - component: {fileID: 5068250310322901919}
   - component: {fileID: 2110705594903882516}
   - component: {fileID: 2110705594903882515}
   - component: {fileID: 2110705594903882513}
@@ -109,8 +109,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &2110705594903882517
-CapsuleCollider2D:
+--- !u!61 &5068250310322901919
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,9 +122,19 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.32}
-  m_Size: {x: 1.1230392, y: 1.602139}
-  m_Direction: 0
+  m_Offset: {x: 0.09547043, y: -0.36200047}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.80905914, y: 1.5012317}
+  m_EdgeRadius: 0
 --- !u!50 &2110705594903882516
 Rigidbody2D:
   serializedVersion: 4
@@ -184,7 +194,7 @@ MonoBehaviour:
   DebugText: {fileID: 0}
   target: {fileID: 0}
   nextWaypointDistance: 3
-  attackDashDistance: 7
+  attackDashDuration: 0.5
   attackDashSpeed: 20
   attackCooldown: 2
   attackWindUpDuration: 0.5
