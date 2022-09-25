@@ -15,6 +15,7 @@ public class Level : MonoBehaviour
 
     [SerializeField] private LevelSO levelData;
     [SerializeField] private GameObject nextLevelPortals;
+    [SerializeField] private Vector2 playerSpawnPos;
     [SerializeField] private Wave[] waves;  // I probably can get rid of this once I get the LevelSO data working.
     [SerializeField] private GameObjectReference currentStage;
     [SerializeField] private FloatVariable currentStageSpeed;
@@ -59,6 +60,26 @@ public class Level : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos()
+    {
+        float boxWidth = 1f;
+        float boxHeight = 1f;
+        Vector2 boxPos = playerSpawnPos;
+
+        Gizmos.color = Color.magenta;
+        float wHalf = (boxWidth * .5f);
+        float hHalf = (boxHeight * .5f);
+        Vector3 topLeftCorner = new Vector3(boxPos.x - wHalf, boxPos.y + hHalf, 1f);
+        Vector3 topRightCorner = new Vector3(boxPos.x + wHalf, boxPos.y + hHalf, 1f);
+        Vector3 bottomLeftCorner = new Vector3(boxPos.x - wHalf, boxPos.y - hHalf, 1f);
+        Vector3 bottomRightCorner = new Vector3(boxPos.x + wHalf, boxPos.y - hHalf, 1f);
+        Gizmos.DrawLine(topLeftCorner, topRightCorner);
+        Gizmos.DrawLine(topRightCorner, bottomRightCorner);
+        Gizmos.DrawLine(bottomRightCorner, bottomLeftCorner);
+        Gizmos.DrawLine(bottomLeftCorner, topLeftCorner);
+    }
+
+
     // 'Wave' class also uses the same method. Maybe it can eventually be moved to a static
     // class or something.
     private List<GameObject> InstantiateWaves(GameObject[] wavePrefabList)
@@ -96,7 +117,7 @@ public class Level : MonoBehaviour
             wave.CompleteWave();
 
         LevelComplete?.Invoke();
-        nextLevelPortals.transform.position = new Vector3(0, 0, 0);
+        nextLevelPortals.SetActive(true);
         //Destroy(this.gameObject);
     }
 

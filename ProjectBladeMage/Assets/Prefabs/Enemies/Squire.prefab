@@ -194,7 +194,7 @@ MonoBehaviour:
   DebugText: {fileID: 0}
   target: {fileID: 0}
   nextWaypointDistance: 3
-  attackDashDuration: 0.5
+  attackDashDuration: 0.25
   attackDashSpeed: 20
   attackCooldown: 2
   attackWindUpDuration: 0.5

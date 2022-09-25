@@ -48,7 +48,7 @@ public class ElvenRapier : MonoBehaviour, Weapon
         ricochetAbility = playerObj.gameObject.GetComponent<Ricochet>();
         rotationSpeed = -2500f;     // >0 = Spins Right ; <0 = Spins Left
         movementSpeed = 50f;
-        baseDamage = 1;
+        baseDamage = 100;
     }
 
     // Update is called once per frame

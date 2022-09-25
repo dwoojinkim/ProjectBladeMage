@@ -12,14 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72da7b63663d9574c9c27f0e8d9afea4, type: 3}
   m_Name: KnightsNSquires_Wave3
   m_EditorClassIdentifier: 
-  waveSpawnType: 0
+  waveSpawnType: 3
   spawnLocationType: 0
   enemyWaveType: 0
   enemySpawnOrder: 0
-  TimeUntilSpawn: 0
+  TimeUntilSpawn: 2
   SuccessiveUnitDelay: 0
-  enemies: []
-  spawns: []
+  enemies:
+  - {fileID: 327471732308931392, guid: f68bdb650a09d6543bfc53f8179eeee0, type: 3}
+  spawns:
+  - width: 1
+    height: 1
+    position: {x: -241.1, y: -24.2}
+  - width: 1
+    height: 1
+    position: {x: -225.8, y: -24.2}
   spawnBoxPosX: 0
   spawnBoxPosY: 0
   spawnBoxWidth: 0
