@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class CharacterSelectManager : MonoBehaviour
 {
-    public GameObject CharacterHoverIndicator;
-    public List<GameObject> Characters;
+    [SerializeField] private GameObject _characterHoverIndicator;
+    [SerializeField] private TextMeshProUGUI _characterNameText;
+    [SerializeField] private List<GameObject> _characters;
 
 
     private RectTransform _hoverIndicator;
@@ -14,7 +17,7 @@ public class CharacterSelectManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _hoverIndicator = CharacterHoverIndicator.GetComponent<RectTransform>();
+        _hoverIndicator = _characterHoverIndicator.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class CharacterSelectManager : MonoBehaviour
         CheckPlayerInput();
 
         UpdateIndicatorPosition();
+
+        UpdateCharacterNameText();
     }
 
     // Temporary function for player input in the character select screen. Going to change when I'm past the prototype stage
@@ -33,16 +38,23 @@ public class CharacterSelectManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A))
             _characterSelectIndex--;
 
-        if (_characterSelectIndex >= Characters.Count)
+        if (_characterSelectIndex >= _characters.Count)
             _characterSelectIndex = 0;
         else if (_characterSelectIndex < 0)
-            _characterSelectIndex = Characters.Count - 1;
+            _characterSelectIndex = _characters.Count - 1;
 
-
+        if (Input.GetKeyDown(KeyCode.Space))
+            SceneManager.LoadScene("KnightsNSquires");
     }
 
     private void UpdateIndicatorPosition()
     {
-        _hoverIndicator.anchoredPosition = new Vector2(-700 + (200 * _characterSelectIndex), _hoverIndicator.anchoredPosition.y);
+        _hoverIndicator.anchoredPosition = _characters[_characterSelectIndex].GetComponent<RectTransform>().anchoredPosition;
+    }
+
+    private void UpdateCharacterNameText()
+    {
+        if (_characterNameText != null)
+            _characterNameText.text = _characters[_characterSelectIndex].GetComponent<CharacterSelectButton>().GetCharacterName();            
     }
 }

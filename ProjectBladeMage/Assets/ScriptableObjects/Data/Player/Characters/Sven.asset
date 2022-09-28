@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e87ede9dc6606c4b9b40579c519f071, type: 3}
+  m_Name: Sven
+  m_EditorClassIdentifier: 
+  characterName: Sven
+  maxHealth: 0
+  movementSpeed: 0
+  jumpPower: 0
+  fallSpeed: 0
