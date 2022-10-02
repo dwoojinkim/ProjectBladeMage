@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GMinstance = null;
 
-    private Menu currentMenu;
+    private Menu _currentMenu;
+    private GameObject _selectedCharacer;
 
     void Awake()
     {
@@ -30,19 +31,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            currentMenu = Menu.PressAnyButton;
+            _currentMenu = Menu.PressAnyButton;
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetButtonDown("Up"))
-        {
-            //move up on menu
-        }
-        else if (Input.GetButtonDown("Down"))
-        {
-            //move down on menu
-        }*/
+        if (_selectedCharacer != null)
+            Debug.Log("Character selected!");
+    }
+
+    public void SetSelectedCharacter(GameObject characterPrefab)
+    {
+        _selectedCharacer = characterPrefab;
     }
 }

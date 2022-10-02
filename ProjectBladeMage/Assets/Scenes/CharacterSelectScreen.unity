@@ -427,6 +427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 11400000, guid: 2afb737000ccac840b60243867eb9f1e, type: 2}
+  _characterPrefab: {fileID: 1227493295315930007, guid: de0987316c801534593b2e89dee7df68,
+    type: 3}
 --- !u!1 &455396972
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &973527137
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &1130080963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,6 +1295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &1175996631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,6 +1384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &1211767005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 11400000, guid: e3fe0602306aaa449bd46c2e0d8bc230, type: 2}
+  _characterPrefab: {fileID: 1227493295315930007, guid: f06b617901c10604c8b1992a21969e28,
+    type: 3}
 --- !u!1 &1604651497
 GameObject:
   m_ObjectHideFlags: 0
@@ -1556,6 +1564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &1663780967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterInfo: {fileID: 0}
+  _characterPrefab: {fileID: 0}
 --- !u!1 &2014309742
 GameObject:
   m_ObjectHideFlags: 0

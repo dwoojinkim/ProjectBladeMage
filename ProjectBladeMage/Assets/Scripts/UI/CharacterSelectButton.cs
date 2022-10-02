@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterSelectButton : MonoBehaviour
 {
     [SerializeField] private CharacterSO _characterInfo;
+    [SerializeField] private GameObject _characterPrefab;
 
     private string _characterName = "Unavailable";
 
@@ -26,5 +27,10 @@ public class CharacterSelectButton : MonoBehaviour
     public string GetCharacterName()
     {
         return _characterName;
+    }
+
+    public GameObject GetCharacterPrefab()
+    {
+        return _characterPrefab;
     }
 }

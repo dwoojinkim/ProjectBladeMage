@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 142874149}
   - component: {fileID: 458032487}
   m_Layer: 15
-  m_Name: Player
+  m_Name: Hektor
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

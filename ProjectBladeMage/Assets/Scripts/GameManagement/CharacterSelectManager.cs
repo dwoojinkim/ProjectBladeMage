@@ -10,6 +10,7 @@ public class CharacterSelectManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _characterNameText;
     [SerializeField] private List<GameObject> _characters;
 
+    private List<CharacterSelectButton> _charSelectButtons;
 
     private RectTransform _hoverIndicator;
     private int _characterSelectIndex = 0;
@@ -18,6 +19,12 @@ public class CharacterSelectManager : MonoBehaviour
     void Start()
     {
         _hoverIndicator = _characterHoverIndicator.GetComponent<RectTransform>();
+
+        _charSelectButtons = new List<CharacterSelectButton>();
+        for (int i = 0; i < _characters.Count; i++)
+        {
+            _charSelectButtons.Add(_characters[i].GetComponent<CharacterSelectButton>());
+        }
     }
 
     // Update is called once per frame
@@ -44,7 +51,10 @@ public class CharacterSelectManager : MonoBehaviour
             _characterSelectIndex = _characters.Count - 1;
 
         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GameManager.GMinstance.SetSelectedCharacter(_charSelectButtons[_characterSelectIndex].GetCharacterPrefab());
             SceneManager.LoadScene("KnightsNSquires");
+        }
     }
 
     private void UpdateIndicatorPosition()
@@ -55,6 +65,6 @@ public class CharacterSelectManager : MonoBehaviour
     private void UpdateCharacterNameText()
     {
         if (_characterNameText != null)
-            _characterNameText.text = _characters[_characterSelectIndex].GetComponent<CharacterSelectButton>().GetCharacterName();            
+            _characterNameText.text = _charSelectButtons[_characterSelectIndex].GetCharacterName();            
     }
 }
